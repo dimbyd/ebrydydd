@@ -1,0 +1,452 @@
+/*
+base.css for csm project
+*/
+
+
+/* COLOURS */
+
+/* SETUP */
+
+body {
+    margin:0;
+    padding:0;
+}
+
+body, th, td {
+    font:12px/1.4em Verdana,sans-serif;
+}
+
+#container {
+    position:relative;
+    min-width:55em;
+    max-width:100em;
+}
+
+/* LINKS 
+a { text-decoration: none; }
+a img { border: none; }
+a:link, a:visited { color:#a60514; }
+
+#content-main a:link, #content-main a:visited {
+    color:#a60514;
+    text-decoration:underline;
+}
+#browse-horizontal a:link, #browse-horizontal a:visited {
+    color:orange;
+    text-decoration:none;
+}
+#content-secondary a:link, #content-secondary a:visited {
+    color:#a60514;
+    text-decoration:none;
+}
+#content-related a:link, #content-related a:visited {
+    color:orange;
+    text-decoration:none;
+}
+
+/* HOVER 
+a:hover { color:#ffe761; }
+
+#content-main a:hover {
+    background-color:4c50cb;
+    color:#eee;
+    text-decoration:none;
+}
+#content-related a:hover, #content-secondary a:hover, #browse-horizontal a:hover {
+    color:gold;
+    background:none;
+}
+#footer a:hover {
+    color:#4c50cb;
+    text-decoration:none;
+}
+
+/* HEADER */
+#header {
+    position:relative;
+    height:6.5em;
+}
+
+#header h1#logo {
+    margin:0;
+    width:111px;
+    height:41px;
+    position:absolute;
+    bottom:20px;
+    left:25px;
+}
+
+/* GLOBAL NAVIGATION */
+#nav-global {
+    position:absolute;
+    margin:0;
+    bottom:0;
+    right:0;
+    font-family:"Trebuchet MS",sans-serif;
+    white-space:nowrap;
+}
+#nav-global li {
+    display:block;
+    float:left;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+#nav-global a {
+    display:block;
+    float:left;
+    padding:5em 16px 10px 16px;
+   background:d7d9f7;
+}
+
+/* COLUMNS */
+#columnwrap {
+    background:#4c50cb;
+    padding-bottom:10px;
+}
+
+#content-main {
+    float:left;
+    width:70%;
+    padding-bottom:10px;
+}
+
+#content-main * {
+    margin-left:22px;
+    margin-right:24px;
+}
+
+#content-main * * {
+    margin-left:0;
+    margin-right:0;
+}
+
+.sidebar {
+    font-size:92%;
+}
+.sidebar * {
+    margin-left:14px;
+    margin-right:14px;
+}
+.sidebar * * {
+    margin-left:0;
+    margin-right:0;
+}
+
+#content-related {
+    float:right;
+    width:30%;
+}
+#content-secondary {
+    clear:both;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:-10px;
+    padding:10px 24px;
+}
+#browse-horizontal {
+    margin:1.5em 0 0 0;
+    padding:1em 24px 1em 22px;
+    overflow:hidden;
+    line-height:1;
+}
+#browse-horizontal .left {
+    float:left;
+}
+#browse-horizontal .right {
+    float:right;
+}
+
+/* CONTENT */
+
+h1,h2,h3,h4 {
+    margin-top:.8em;
+    font-family:"Trebuchet MS",sans-serif;
+    font-weight:normal;
+}
+h1 {
+    font-size:218%;
+    margin-top:.6em;
+    margin-bottom:.6em;
+    line-height:1.1em;
+}
+h2 {
+    font-size:150%;
+    margin-top:1em;
+    margin-bottom:.2em;
+    line-height:1.2em;
+}
+h3 {
+    font-size:125%;
+    font-weight:bold;
+    margin-bottom:.2em;
+}
+h4 {
+    font-size:110%;
+    font-weight:bold;
+    margin-bottom:-2px;
+    margin-top:1.2em;
+}
+h5 {
+    font-size:1em;
+    font-weight:bold;
+    margin-top:1.5em;
+    margin-bottom:3px;
+}
+p, ul, dl {
+    margin-top:.6em;
+    margin-bottom:.8em;
+}
+hr {
+    height:1px;
+    border:0;
+}
+
+#content-main h2, #content-main h3 {
+    margin-top:1.2em;
+}
+
+/* LISTS */
+ul {
+    padding-left:2em;
+}
+ol {
+    padding-left:30px;
+}
+ul li {
+    list-style-type:square;
+    margin-bottom:.4em;
+}
+ul ul {
+    padding-left:1.2em;
+}
+ul ul ul {
+    padding-left:1em;
+}
+ul.linklist, ul.toc {
+    padding-left:0;
+}
+ul.toc ul {
+    margin-left:.6em;
+}
+ul.toc ul li {
+    list-style-type:square;
+}
+ul.toc ul ul li {
+    list-style-type:disc;
+}
+ul.linklist li, ul.toc li {
+    list-style-type:none;
+}
+dt {
+    font-weight:bold;
+    margin-top:.5em;
+    font-size:1.1em;
+}
+dd {
+    margin-bottom:.8em;
+}
+dl.index dt {
+    font-weight: normal;
+}
+
+/* BLOCKQUOTES */
+
+.sidebar blockquote {
+    margin-top:1.5em;
+    margin-bottom:1.5em;
+}
+.sidebar blockquote p {
+    font:italic 175%/1.2em "Trebuchet MS",sans-serif;
+}
+.sidebar blockquote cite {
+    display:block;
+    font-style:normal;
+    line-height:1.2em;
+    margin-top:-.8em;
+}
+
+
+/* BILLBOARD */
+
+#billboard {
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+}
+#billboard h2 {
+    margin:0;
+    margin-left:20px;
+    height: 40px;
+    line-height:40px;
+}
+
+/* FOOTER */
+
+#footer {
+    clear:both;
+    padding:10px 20px;
+    font-size:90%;
+}
+
+/*  COLUMNWRAP */
+
+#columnwrap {
+    display: block;
+}
+
+#columnwrap:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/**************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+
+CU COLOURS
+
+#A60514     red
+#D7D9F7     lilac
+#4C50CB     puce
+
+#E9F9ED		palegreen
+#FFFFE0		paleyellow
+#E6EDF5		palemauve
+
+#6AA7EA     nice blue
+
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************
+***************************************************/
+
+body {
+    background:#25066E;
+    color:white;
+}
+
+/* LINK: VISTED & UNVISITED */
+
+a:link, a:visited { 
+    color:#a60514; 
+    text-decoration: none;
+}
+#nav-global a {
+    background:#25066E; /* same as header background */
+}
+#content-main a:link, #content-main a:visited {
+    color:#a60514;
+    text-decoration:underline;
+}
+#content-secondary a:link, #content-secondary a:visited {
+    color:#a60514;
+    text-decoration:none;
+}
+#browse-horizontal a:link, #browse-horizontal a:visited, 
+#content-related a:link, #content-related a:visited {
+    color:orange;
+    text-decoration:none;
+}
+
+/* LINK: HOVER */
+
+a:hover {
+    color:#ffe761; 
+    text-decoration: none;
+}
+#nav-global a:hover {
+    background:#4c50cb;
+    color:white;
+}
+#content-main a:hover {
+    background-color:4c50cb;
+    color:#eee;
+    text-decoration:none;
+}
+#content-secondary a:hover {
+    background:none;
+    color:gold;
+}
+#content-related a:hover, #browse-horizontal a:hover {
+    background:none;
+    color:gold;
+}
+#footer a:hover {
+    color:#4c50cb;
+    text-decoration:none;
+}
+
+
+/* COLUMNS */
+#columnwrap {
+    background:#4c50cb;
+}
+
+#content-main {
+    background:#fff;
+    color:black;
+}
+
+.sidebar {
+    background-color:#4c50cb;
+}
+
+#content-secondary {
+    background:#D7D9F7;
+    color:black;
+}
+#browse-horizontal {
+    background:#4c50cb;
+    color:white;
+}
+
+/* CONTENT */
+
+h1,h2,h3,h4 {
+    color:black;
+}
+#content-secondary h2, #content-secondary h3 {
+    color:black;
+}
+.sidebar h2, .sidebar h3 {
+    color:white;
+}
+
+
+/* BLOCKQUOTES */
+
+.sidebar blockquote p {
+    color:#94da3a;
+}
+.sidebar blockquote cite {
+    color:#94da3a;
+}
+
+
+/* BILLBOARD */
+
+#billboard {
+    background:#D7D9F7;
+}
+#billboard h2 {
+    color: #333;
+}
+
+/* FOOTER */
+
+#footer {
+    color:#487858;
+}
+
+
+

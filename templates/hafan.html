@@ -1,0 +1,50 @@
+<!--
+    index.html for root site
+-->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Yr eBrydydd
+{% endblock %}
+
+{% block billboard %}
+<h2>Yr eBrydydd</h2>
+{% endblock %}
+
+{% block login %}
+    {% if uname %}
+        <!--p>Hello <strong>{{ uname }}</strong>.</p-->
+    {% endif %}
+{% endblock %}
+
+{% block content-main %}
+<h1>Hafan yr eBrydydd</h1>
+<p>Croeso i safle'r eBrydydd.</p>
+
+<ul>
+    <li><a href="/rheolau/">rheolau</a></li>
+    <li><a href="/dadansoddwr/">dadansoddwr</a></li>
+    <li><a href="/mesurau/">mesurau</a></li>
+</ul>
+
+{% endblock %}
+
+{% block content-secondary %}
+<h2>Adborth</h2>
+Croesewir awgrymiadau ar sut i wella'r safle.
+{% endblock %}
+
+{% block sidebar %}
+<h2>Doleni defnyddiol</h2>
+<ul>
+    <li><a href="/">barddas</a>.</li>
+    <li><a href="/">annedd y cynganeddwyr</a>.</li>
+</ul>
+<h2>Ndiadau</h2>
+<ul>
+    <li>Llawer o waith i wneud.</li>
+</ul>
+{% endblock %}
+
+
