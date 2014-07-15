@@ -1,72 +1,70 @@
 /*
-base.css for csm project
+base.css for ebrydydd project
 */
 
+.mono {
+	text-align:		left;
+  		font-family: 	monospace;
+  		white-space: 	pre;
+  		font-size: 		125%;
+	letter-spacing:	4px;
+	visibility: 	visible;
+    position: absolute;
+}
+.gorffwysfa {
+	color:red;
+}
+.odl {
+	color:blue;
+}
 
-/* COLOURS */
 
-/* SETUP */
+ul.llyfr {
+    list-style-type: none;
+}
 
+/* tabl dadansoddiadau */
+table.dad {
+	border:1px solid #000;
+	width:90%;
+	text-align:center;
+	border-collapse:collapse;
+	table-layout:fixed;
+}
+
+th.dad {
+	font-weight:bold;
+ 	border: solid 1px black;
+}
+td.dad {
+ 	border: solid 1px black;
+}
+
+/* body */
 body {
     margin:0;
     padding:0;
 }
-
 body, th, td {
     font:12px/1.4em Verdana,sans-serif;
 }
 
+/* container */
 #container {
     position:relative;
     min-width:55em;
     max-width:100em;
 }
 
-/* LINKS 
-a { text-decoration: none; }
-a img { border: none; }
-a:link, a:visited { color:#a60514; }
+/**************************************************
+	TOP 
+**************************************************/
 
-#content-main a:link, #content-main a:visited {
-    color:#a60514;
-    text-decoration:underline;
-}
-#browse-horizontal a:link, #browse-horizontal a:visited {
-    color:orange;
-    text-decoration:none;
-}
-#content-secondary a:link, #content-secondary a:visited {
-    color:#a60514;
-    text-decoration:none;
-}
-#content-related a:link, #content-related a:visited {
-    color:orange;
-    text-decoration:none;
-}
-
-/* HOVER 
-a:hover { color:#ffe761; }
-
-#content-main a:hover {
-    background-color:4c50cb;
-    color:#eee;
-    text-decoration:none;
-}
-#content-related a:hover, #content-secondary a:hover, #browse-horizontal a:hover {
-    color:gold;
-    background:none;
-}
-#footer a:hover {
-    color:#4c50cb;
-    text-decoration:none;
-}
-
-/* HEADER */
+/* header */
 #header {
     position:relative;
     height:6.5em;
 }
-
 #header h1#logo {
     margin:0;
     width:111px;
@@ -75,8 +73,14 @@ a:hover { color:#ffe761; }
     bottom:20px;
     left:25px;
 }
+#header h1#banner {
+    margin:10;
+    position:absolute;
+    bottom:10px;
+    left:100px;
+}
 
-/* GLOBAL NAVIGATION */
+/* global navigation */
 #nav-global {
     position:absolute;
     margin:0;
@@ -96,33 +100,78 @@ a:hover { color:#ffe761; }
     display:block;
     float:left;
     padding:5em 16px 10px 16px;
-   background:d7d9f7;
+	background:d7d9f7;
 }
 
-/* COLUMNS */
+
+/* billboard */
+#billboard {
+	font:italic 90%/1.2em "Trebuchet MS",sans-serif;
+    height: 20px;
+    line-height:20px;
+	text-align:right;
+    border-top:1px solid #000;
+    border-right:1px solid #000;
+    border-bottom:1px solid #000;
+}
+/* breadcrumbs */
+#breadcrumbs {
+	font:italic 90%/1.2em "Trebuchet MS",sans-serif;
+    height: 20px;
+    line-height:20px;
+}
+
+
+/**************************************************
+	MAIN
+**************************************************/
+
+/* columnwrap: contains content-main & content-related columns */
 #columnwrap {
     background:#4c50cb;
     padding-bottom:10px;
+    display: block;
+    border-top:1px solid #000;
+    border-right:1px solid #000;
+    border-bottom:1px solid #000;
+}
+#columnwrap:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
+/* column: content-main */
 #content-main {
+    width:75%;
     float:left;
-    width:70%;
     padding-bottom:10px;
+    border-bottom:1px solid #000;
 }
 
+/* indentation */
 #content-main * {
     margin-left:22px;
     margin-right:24px;
-}
 
+}
 #content-main * * {
     margin-left:0;
     margin-right:0;
 }
 
+/* column: content-related */
+#content-related {
+    width:25%;
+    float:right;
+}
+
+/* column: sidebar class */
 .sidebar {
     font-size:92%;
+
 }
 .sidebar * {
     margin-left:14px;
@@ -133,45 +182,70 @@ a:hover { color:#ffe761; }
     margin-right:0;
 }
 
-#content-related {
-    float:right;
-    width:30%;
-}
+/* row: content-secondary */
 #content-secondary {
     clear:both;
     margin-left:0;
     margin-right:0;
     margin-bottom:-10px;
     padding:10px 24px;
+    border-right:1px solid #000;
+    border-top:1px solid #000;
+
 }
+
+/**************************************************
+	BOTTOM
+**************************************************/
+
+/* row: horizontal browse */
 #browse-horizontal {
     margin:1.5em 0 0 0;
-    padding:1em 24px 1em 22px;
+    padding:0em 10px 1em 10px;
     overflow:hidden;
-    line-height:1;
+	font:italic 90%/1.2em "Trebuchet MS",sans-serif;
+    height: 20px;
+    line-height:20px;
+    border-top:1px solid #000;
 }
 #browse-horizontal .left {
-    float:left;
+	float:left;
+}
+#browse-horizontal .middle {
+	float: right;
+	position: relative;
+ 	right: 50%;
+ 	text-align: left;
 }
 #browse-horizontal .right {
     float:right;
 }
 
-/* CONTENT */
+/* footer */
+#footer {
+    clear:both;
+    padding:10px 20px;
+    font-size:90%;
+}
 
+/**************************************************
+	STYLES
+**************************************************/
+
+/* headings */
 h1,h2,h3,h4 {
     margin-top:.8em;
     font-family:"Trebuchet MS",sans-serif;
     font-weight:normal;
 }
 h1 {
-    font-size:218%;
+    font-size:220%;
     margin-top:.6em;
     margin-bottom:.6em;
     line-height:1.1em;
 }
 h2 {
-    font-size:150%;
+    font-size:175%;
     margin-top:1em;
     margin-bottom:.2em;
     line-height:1.2em;
@@ -198,60 +272,23 @@ p, ul, dl {
     margin-bottom:.8em;
 }
 hr {
-    height:1px;
+	color:black;
+    height:2px;
     border:0;
 }
-
 #content-main h2, #content-main h3 {
     margin-top:1.2em;
 }
 
-/* LISTS */
+/* lists */
 ul {
     padding-left:2em;
 }
 ol {
     padding-left:30px;
 }
-ul li {
-    list-style-type:square;
-    margin-bottom:.4em;
-}
-ul ul {
-    padding-left:1.2em;
-}
-ul ul ul {
-    padding-left:1em;
-}
-ul.linklist, ul.toc {
-    padding-left:0;
-}
-ul.toc ul {
-    margin-left:.6em;
-}
-ul.toc ul li {
-    list-style-type:square;
-}
-ul.toc ul ul li {
-    list-style-type:disc;
-}
-ul.linklist li, ul.toc li {
-    list-style-type:none;
-}
-dt {
-    font-weight:bold;
-    margin-top:.5em;
-    font-size:1.1em;
-}
-dd {
-    margin-bottom:.8em;
-}
-dl.index dt {
-    font-weight: normal;
-}
 
-/* BLOCKQUOTES */
-
+/* blockquotes */
 .sidebar blockquote {
     margin-top:1.5em;
     margin-bottom:1.5em;
@@ -267,49 +304,14 @@ dl.index dt {
 }
 
 
-/* BILLBOARD */
-
-#billboard {
-    border-top:1px solid #000;
-    border-bottom:1px solid #000;
-}
-#billboard h2 {
-    margin:0;
-    margin-left:20px;
-    height: 40px;
-    line-height:40px;
-}
-
-/* FOOTER */
-
-#footer {
-    clear:both;
-    padding:10px 20px;
-    font-size:90%;
-}
-
-/*  COLUMNWRAP */
-
-#columnwrap {
-    display: block;
-}
-
-#columnwrap:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
 /**************************************************
 ***************************************************
+	COLOURS
 ***************************************************
-***************************************************
-***************************************************
-***************************************************
-***************************************************
+**************************************************/
 
+
+/**************************************************
 CU COLOURS
 
 #A60514     red
@@ -322,27 +324,40 @@ CU COLOURS
 
 #6AA7EA     nice blue
 
-***************************************************
-***************************************************
-***************************************************
-***************************************************
-***************************************************
-***************************************************
 ***************************************************/
 
+
+/* content blocks */
 body {
-    background:#25066E;
-    color:white;
+	background:#FFFFE0;
+}
+#columnwrap {
+    background:#e9f9ed;
+}
+#content-main {
+	background:white; 
+    color:black;
+}
+.sidebar {
+    background-color:#e9f9ed;
+	color:black;
+}
+#content-secondary {
+    background:#D7D9F7;
+    color:black;
+}
+#browse-horizontal {
+    background:#e9f9ed;
+    color:black;
 }
 
-/* LINK: VISTED & UNVISITED */
-
+/* links: unvisited & visited  */
 a:link, a:visited { 
     color:#a60514; 
     text-decoration: none;
 }
 #nav-global a {
-    background:#25066E; /* same as header background */
+    background:#FFFFE0; /* same as header background */
 }
 #content-main a:link, #content-main a:visited {
     color:#a60514;
@@ -352,34 +367,31 @@ a:link, a:visited {
     color:#a60514;
     text-decoration:none;
 }
-#browse-horizontal a:link, #browse-horizontal a:visited, 
-#content-related a:link, #content-related a:visited {
-    color:orange;
+#browse-horizontal a:link, #browse-horizontal a:visited, #content-related a:link, #content-related a:visited {
+    color:#a60514;
     text-decoration:none;
 }
 
-/* LINK: HOVER */
-
+/* links: hover */
 a:hover {
-    color:#ffe761; 
+    color:#4c50cb; 
     text-decoration: none;
 }
 #nav-global a:hover {
-    background:#4c50cb;
-    color:white;
+    color:#4c50cb;
 }
 #content-main a:hover {
-    background-color:4c50cb;
+    background-color:#4c50cb;
     color:#eee;
     text-decoration:none;
 }
 #content-secondary a:hover {
     background:none;
-    color:gold;
+    color:#4c50cb;
 }
 #content-related a:hover, #browse-horizontal a:hover {
     background:none;
-    color:gold;
+    color:#4c50cb;
 }
 #footer a:hover {
     color:#4c50cb;
@@ -387,41 +399,34 @@ a:hover {
 }
 
 
-/* COLUMNS */
-#columnwrap {
-    background:#4c50cb;
-}
-
-#content-main {
-    background:#fff;
-    color:black;
-}
-
-.sidebar {
-    background-color:#4c50cb;
-}
-
-#content-secondary {
-    background:#D7D9F7;
-    color:black;
-}
-#browse-horizontal {
-    background:#4c50cb;
-    color:white;
-}
-
-/* CONTENT */
-
+/* html elements */
 h1,h2,h3,h4 {
+    color:black;
+}
+#content-main h3 {
+/*	background:#E6EDF5; /* palemauve */
+    color:black;
+}
+#content-main h2 {
+/*	background:#E9F9ED; /* palegreen */
+    color:black;
+}
+#content-main h1 {
+/*	background:#FFFFE0; /* paleyellow */
     color:black;
 }
 #content-secondary h2, #content-secondary h3 {
     color:black;
 }
 .sidebar h2, .sidebar h3 {
-    color:white;
+    color:black;
 }
 
+hr {
+	color:black;
+    height:2px;
+    border:0;
+}
 
 /* BLOCKQUOTES */
 

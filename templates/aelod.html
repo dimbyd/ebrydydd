@@ -1,0 +1,15 @@
+{% extends "rhestr_aelodau.html" %}
+
+{% block title %} 
+	Aelod
+{% endblock %}
+
+{% block content-main %}
+<h2>Aelod: {{ object.user.username }} </h2>
+<br/ >	
+
+{{ object.as_p }}
+
+<br/>
+<a href="{% url "rhestr-aelodau" %}">Nol i'r rhestr aelodau</a>
+{% endblock %}

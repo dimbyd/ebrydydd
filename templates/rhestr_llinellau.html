@@ -1,0 +1,66 @@
+{% extends "cronfa.html" %}
+
+{% block title %} 
+	Llinellau 
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > <a href="{% url 'ebrydydd.views.cronfa' %}">Llinellau</a>
+{% endblock %}
+
+{% block content-main %}
+<h1>Llinellau</h1>
+
+<form action="{% url "create-llinell" %}">
+    <input type="submit" value="Creu Llinell Newydd">
+</form>
+
+{% if object_list %}
+	<table cellpadding=2>
+	  {% for object in object_list %}
+		<tr class="llinell">
+			<td><a href="{{ object.get_absolute_url }}">{{ object.llinyn }}</a></td>
+		  	<td><a href="{% url "update-llinell" pk=object.id %}"> (golygu)</a></td>
+		</tr>
+	  {% endfor %}
+	</table>
+    {# .... **Now the pagination section** .... #}
+    {% if is_paginated %}
+		<br>
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/llinellau?page={{ page_obj.previous_page_number }}">&lt;&lt;</a>
+				{% else %}
+                    <a style="visibility:hidden;">&lt;&lt;</a>
+                {% endif %}
+                <span class="page-current">
+                    Tudalen {{ page_obj.number }} o {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/llinellau?page={{ page_obj.next_page_number }}">&gt;&gt;</a>
+				{% else %}
+                    <a style="visibility:hidden;">&gt;&gt;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+{% else %}
+    <h3>My Cars</h3>
+    <p>Dim llinellau yn y gronfa.</p>
+{% endif %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+<h2>Cymorth</h2>
+<ul>
+    <li>Cliciwch ar y linell ... </li>
+    <li>... neu ar y ddolen golygu.</li>
+</ul>
+{% endblock %}
+
+
+

@@ -8,11 +8,11 @@ created: 28/06/2013
 '''
 
 import unittest
-import gair
+from ebrydydd.peiriant.gair import Gair
 
-class TestGairFunctions(unittest.TestCase):
+class TestCroes(unittest.TestCase):
     def setUp(self):
-        self.w = Gair('chwaethus')
+        Llinell.objects.create(llinyn="Am eu hawr yn ymaros", awdur="Dic Jones")
     
     def test_nifer_sillau(self):
         self.assertEquals(self.w.nifer_sillau(),7)

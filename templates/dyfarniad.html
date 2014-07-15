@@ -1,0 +1,98 @@
+<!--
+template: dyfarniad.html
+-->
+{% extends "cwis.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Dyfarniad
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > <a href="{% url 'ebrydydd.views.dyfarniad' %}">Dyfarniad</a>
+{% endblock %}
+
+{% block styles %}
+	{{ block.super }}
+	<style type='text/css' media="all">
+		table.atebion {
+			border:0px solid #000;
+			/*padding:2px 10px 2px 10px;*/
+			text-align:left;
+		}
+		td {
+			padding: 4px;
+		}
+
+	</style>
+{% endblock %}
+
+{% block content-main %}
+
+{{dadansoddiad_form.as_p }}
+
+
+{% if llinyn %}
+	<h1><u>Cwis</u></h1>
+	<h2 align="center"> {{ llinyn }}</h2>
+{% endif %}	
+
+<br/>
+<table class="atebion">
+{% if dad_defnyddiwr %}
+<tr>
+	<td><u>Gosodwyd</u>:</td>
+	<td>{{ dad_defnyddiwr.cynghanedd }}</td>
+	<!--td>{{ dad_defnyddiwr.aceniad }}<td>
+	<td>{{ dad_defnyddiwr.bai }}</td>
+	<td></td>
+	<td>({{ dad_defnyddiwr.sylwadau }})</td-->
+</tr>
+{% endif %}
+{% if dad_peiriant %}
+<tr>
+	<td><u>Ateb y peiriant</u>:&nbsp;</td>
+	<td>{{ dad_peiriant.cynghanedd }}</td>
+	<!--td>{{ dad_peiriant.aceniad }}</td>
+	<td>{{ dad_peiriant.bai }}</td>
+	<td></td>
+	<td>({{ dad_peiriant.sylwadau }})</td-->
+</tr>
+{% endif %}
+</table>
+
+{% if dyfarniad %}
+<h3>Dyfarniad: <span style="color:red">{{ dyfarniad }}</span></h3>
+{% endif %}
+
+{% if html_strings %}
+	<!--
+	angen: 
+	dad.manylion.acenion
+	html_strings.acenion 
+	llinyn }}</div>
+				<div id="llinyn_gorffwysfa" class="mono" style="visibility:hidden">{{ html_strings.gorffwysfa | safe }}</div>
+				<div id="llinyn_odl" class="mono" style="visibility:hidden">{{ html_strings.odl | safe }}</div>
+		</td>
+		<td><input type="checkbox" id="checkbox_llinyn_gorffwysfa" onclick="showhide('llinyn_gorffwysfa');"/> Gorffwysfa</td>
+		<td><input type="checkbox" id="checkbox_llinyn_odl" onclick="showhide('llinyn_odl');"/> Odl</td>
+	</tr>
+	{% if dad.manylion.llinyn_cytseiniaid %} 
+	<tr>
+		<td style="width:50%"><div id="llinyn_cyfatebiaeth" class='mono' style="visibility:hidden">{{ dad.manylion.llinyn_cytseiniaid }}</div></td>
+		<td><input type="checkbox" id="checkbox_llinyn_cytfatebiaeth" onclick="showhide('llinyn_cyfatebiaeth');"/> Cyfatebiaeth</td>
+	</tr>
+	{% endif %}
+</table>
+	-->
+	{% include "bloc_dadansoddiad.html" %}
+{% endif %}
+
+{% if neges %}
+	<p>{{ neges }}</p>
+{% endif %}
+
+{% endblock %}
+
+
+

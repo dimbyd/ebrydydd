@@ -4,47 +4,115 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block styles %}
+	{{ block.super }}
+	<style type='text/css' media="all">
+		.teitl {
+    		font-style: italic;
+		}
+		.awdur {
+    		font-style: bold;
+		}
+	</style>
+{% endblock %}
+
 {% block title %}
-	Yr eBrydydd
+	Hafan yr eBrydydd
 {% endblock %}
 
-{% block billboard %}
-<h2>Yr eBrydydd</h2>
-{% endblock %}
-
-{% block login %}
-    {% if uname %}
-        <!--p>Hello <strong>{{ uname }}</strong>.</p-->
-    {% endif %}
+{% block breadcrumbs %}
+    {{ block.super }} <a href="{% url 'ebrydydd.views.hafan' %}">Hafan</a>
 {% endblock %}
 
 {% block content-main %}
-<h1>Hafan yr eBrydydd</h1>
-<p>Croeso i safle'r eBrydydd.</p>
+<h1>Peiriant Dadansoddi Cynghanedd</h1>
 
-<ul>
-    <li><a href="/rheolau/">rheolau</a></li>
-    <li><a href="/dadansoddwr/">dadansoddwr</a></li>
-    <li><a href="/mesurau/">mesurau</a></li>
-</ul>
+<!--p><i>Cynghanedd</i>, prif ogoniant y diwylliant Ewropeaidd etc.</p-->
+
+<!--h3>Teipiwch linell yn y bocs ...</h3>
+<form action="{% url 'dadansoddiad' %}" method="POST"> {% csrf_token %}
+	<p> 
+		{{ llinell_newydd_form.llinyn }}
+ 		<input id="dadansoddiad_llinell_newydd" type="submit" value="eBrydydd" />
+	</p>
+</form>
+
+<h3>... neu dewiswch linell o'r gronfa:</h3> 
+<form action="{% url 'dadansoddiad' %}" method="POST"> {% csrf_token %}
+	<p>
+		{{ llinell_cronfa_form.llinell }}
+ 		<input id="dadansoddiad_llinell_cronfa" type="submit" value="eBrydydd" />
+	</p>
+</form-->
+
+<form action="{% url 'dadansoddiad' %}" method="POST"> {% csrf_token %}
+<h3>Teipiwch linell yn y bocs ...</h3>
+	<p>	{{ llinell_form.llinyn }} </p>
+<h3>... neu dewiswch linell o'r gronfa:</h3> 
+	<p>	{{ llinell_form.llinell_ddewis }} </p>
+ 	<p> <input id="dadansoddiad_llinell" type="submit" value="eBrydydd" /> </p>
+</form>
 
 {% endblock %}
 
 {% block content-secondary %}
-<h2>Adborth</h2>
-Croesewir awgrymiadau ar sut i wella'r safle.
+
+<h3>Cysylltiadau</h3>
+<ul>
+    <li>ebost:  tec@ebrydydd.org</li>
+    <li>trydar: @ebrydydd</li>
+</ul>
+
 {% endblock %}
 
 {% block sidebar %}
-<h2>Doleni defnyddiol</h2>
+
+<br/ >
+
+<h3>Gwefannau</h3>
 <ul>
-    <li><a href="/">barddas</a>.</li>
-    <li><a href="/">annedd y cynganeddwyr</a>.</li>
+    <li><a href="http://www.barddas.com">Barddas</a></li>
+    <li><a href="http://www.cynghanedd.com/">yr Annedd</a></li>
 </ul>
-<h2>Ndiadau</h2>
+
+<br/ >
+
+<h3>Llyfryddiaeth</h3>
+<ul class="llyfr">
+    <li class="awdur">Alan Llwyd</li>
+    <li class="teitl">Anghenion y Gynghanedd</li>
+    <li class="cyhoeddwr">Cyhoeddiadau Barddas</li>
+    <li class="blwyddyn">2007</li>
+</ul>
+<ul class="llyfr">
+    <li class="awdur">Myrddin ap Dafydd</li>
+    <li class="teitl">Clywed Cynghanedd</li>
+    <li class="cyhoeddwr">Gwasg Carreg Gwalch</li>
+    <li class="blwyddyn">1994</li>
+</ul>
+<ul class="llyfr">
+    <li class="awdur">John Morris-Jones</li>
+    <li class="teitl">Cerdd Dafod</li>
+    <li class="cyhoeddwr">Gwasg Clarendon, Rhydychen</li>
+    <li class="blwyddyn">1925</li>
+</ul>
+<!--ul>
+    <li class="awdur">Roy Stephens</li>
+    <li class="teitl">Yr Odliadur</li>
+    <li class="cyhoeddwr">Gwasg Gomer, Llandysul</li>
+    <li class="blwyddyn">1978</li>
+</ul-->
+
+<br/>
+
+<h3>Cyfrannwyr</h3>
 <ul>
-    <li>Llawer o waith i wneud.</li>
+    <li>Elen Thomas, Pontarddulais.</li>
+    <li>Dafydd Evans, Caerdydd.</li>
 </ul>
+
+
+
 {% endblock %}
 
 

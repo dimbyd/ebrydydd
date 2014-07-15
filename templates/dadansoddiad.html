@@ -1,0 +1,107 @@
+<!--
+patrymlun: dadansoddiad
+-->
+{% extends "hafan.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+	{{ block.super }}
+	<style type='text/css' media="all">
+		.mono {
+			text-align:		left;
+    		font-family: 	monospace;
+    		white-space: 	pre;
+    		font-size: 		125%;
+			letter-spacing:	4px;
+			visibility: 	visible;
+		    position: absolute;
+		}
+		.gorffwysfa {
+			color:red;
+		}
+		.odl {
+			color:blue;
+		}
+	</style>
+{% endblock %}
+
+{% block scripts %}
+	{{ block.super }} 
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<!-- showhide -->
+	<script language="javascript" type="text/javascript">
+	function showhide(showhide_id) {
+		if(document.getElementById('checkbox_'+showhide_id).checked) {
+			document.getElementById(showhide_id).style.visibility = 'visible';
+		}
+  		else {
+			document.getElementById(showhide_id).style.visibility = 'hidden';
+		}
+}
+	</script>
+{% endblock %}
+
+{% block title %}
+	Dadansoddiadau
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > <a href="{% url 'ebrydydd.views.dadansoddiad' %}">Dadansoddiad</a>
+{% endblock %}
+
+{% block content-main %}
+
+<!--p style="font-family:monospace; font-size:120%;line-height:125%;letter-spacing:2px">
+{{ html_strings }}
+</p-->
+
+{% if llinyn %}
+	{% if dad %}
+	<h1><u>Dadansoddiad</u></h1>
+	<h2> {{ llinyn }}</h2>
+	<br/ >	
+	{% include "bloc_dadansoddiad.html" %}
+
+	<!--p style="font-family:monospace; font-size:250%;line-height:125%;letter-spacing:2px"-->
+	<!--table style="border:2px solid #000; padding:10px; width:90%; table-layout:fixed;">
+		{% if dad.manylion.acenion %} 
+		<tr>
+			<td style="width:70%"><div id="llinyn_acenion" class='mono' style="visibility:visible">{{ html_strings.acenion }}</div></td>
+			<td><input type="checkbox" id="checkbox_llinyn_acenion" onclick="showhide('llinyn_acenion');" checked/> Acenion</td>
+		</tr>
+		{% endif %}
+		<tr>
+			<td style="width:50%">
+					<div id="llinyn" class="mono">{{ llinyn }}</div>
+					<div id="llinyn_gorffwysfa" class="mono" style="visibility:hidden">{{ html_strings.gorffwysfa | safe }}</div>
+					<div id="llinyn_odl" class="mono" style="visibility:hidden">{{ html_strings.odl | safe }}</div>
+			</td>
+			<td><input type="checkbox" id="checkbox_llinyn_gorffwysfa" onclick="showhide('llinyn_gorffwysfa');"/> Gorffwysfa</td>
+			<td><input type="checkbox" id="checkbox_llinyn_odl" onclick="showhide('llinyn_odl');"/> Odl</td>
+		</tr>
+		{% if dad.manylion.llinyn_cytseiniaid %} 
+		<tr>
+			<td style="width:50%"><div id="llinyn_cyfatebiaeth" class='mono' style="visibility:hidden">{{ dad.manylion.llinyn_cytseiniaid }}</div></td>
+			<td><input type="checkbox" id="checkbox_llinyn_cytfatebiaeth" onclick="showhide('llinyn_cyfatebiaeth');"/> Cyfatebiaeth</td>
+		</tr>
+		{% endif %}
+	</table-->
+	<!--/p-->
+	{% endif %}
+{% endif %}
+
+<br/ >
+<br/ >
+
+{% if dads %}
+	{% include "rhestr_dadansoddiadau.html" %}
+{% endif %}
+
+{% if neges %}
+	<p>{{ neges }}</p>
+{% endif %}
+
+{% endblock %}
+
+
+

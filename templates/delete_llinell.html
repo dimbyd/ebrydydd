@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} 
+	Dileu Llinell 
+{% endblock %}
+
+{% block content-main %}
+
+<h1>Dileu Llinell</h1>
+
+<p>Ydych chi'n siwr ({{ llinell }})?</p>
+
+<form action="{% url 'delete-llinell' pk=llinell.id %}" method="POST"> {% csrf_token %}
+	
+ 	<input type="submit" value="Dileu" />
+ 	<a href="{% url "rhestr-llinellau" %}"><button type="button">Cadw</button></a>
+</form>
+
+{% endblock %}

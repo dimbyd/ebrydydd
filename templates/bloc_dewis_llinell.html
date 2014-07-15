@@ -1,0 +1,29 @@
+
+
+
+<h3>Dewiswch linell o'r gronfa:</h3> 
+<form action="{% url 'dadansoddiad' %}" method="POST"> {% csrf_token %}
+	<p>
+		{{ llinell_cronfa_form.llinell }}
+ 		<input id="dadansoddiad_llinell_cronfa" type="submit" value="Dadansoddiad" />
+	</p>
+</form>
+
+<table class="dad">
+	<tr class="dad">
+		<th class="dad">Dadansoddwr</th>
+		<th class="dad">Cynghanedd</th>
+		<th class="dad">Aceniad</th>
+		<th class="dad">Bai</th>
+		<th class="dad">Sylwadau</th>
+		</tr>
+  {% for dad in dads %}
+	<tr>
+		<td class="dad">{{ dad.dadansoddwr | default:"" }}</td>
+		<td class="dad">{{ dad.cynghanedd }}</td>
+		<td class="dad">{{ dad.aceniad | default:"" }}</td>
+		<td class="dad">{{ dad.bai | default:"" }}</td>
+		<td class="dad">{{ dad.sylwadau | default:"" }}</td>
+	</tr>
+  {% endfor %}
+</table>

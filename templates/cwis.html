@@ -1,0 +1,54 @@
+{% extends "hafan.html" %}
+
+{% block title %} 
+	Cwis
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > <a href="{% url 'ebrydydd.views.cwis' %}">Cwis</a>
+{% endblock %}
+
+{% block content-main %}
+
+<h1>Cwis</h1>
+
+{% if llinell_cwestiwn %}
+	<p>Dadansoddwch:</p>
+	<div style="width=80%;margin-left:100px;"><span style="font-family: monospace; font-size: 150%;">{{ llinell_cwestiwn }}</span></div>
+	<br/>
+	<br/>
+	<div style="border:1px solid #000; width:75%">
+	
+	<form action="{% url 'dyfarniad' %}" method="POST"> {% csrf_token %}
+		{{ dadansoddiad_form.llinell }}
+		<br/>	
+		<table>
+			<tr>
+				<td> Cynghanedd:</td>
+				<td> {{ dadansoddiad_form.cynghanedd }} </td>
+			</tr>
+			<tr>
+				<td> Aceniad:</td>
+				<td> {{ dadansoddiad_form.aceniad }} </td>
+			</tr>
+			<!--tr>
+				<td> Enw:</td>
+				<td> {{ dadansoddiad_form.dadansoddwr }} </td>
+			</tr>
+			<tr>
+				<td> Sylwadau:</td>
+				<td> {{ dadansoddiad_form.sylwadau }} </td-->
+			</tr>
+	   </table>
+
+	<p align="center"><input id="dyrfarniad" type="submit" value="Dyfarniad" /></p>
+	 </form>
+	</div>
+	
+{% else %}
+	<p>Dim llinell.</p>
+{% endif %}
+
+{% endblock %}
+
+

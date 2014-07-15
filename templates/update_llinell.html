@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} 
+	{% if object.id %}
+		Golygydd
+	{% else %}
+		Llinell Newydd
+	{% endif %}
+{% endblock %}
+
+{% block content-main %}
+
+{% if object.id %}
+	<h1>Golygydd</h1>
+{% else %}
+	<h1>Llinell Newydd</h1>
+{% endif %}
+
+<form action="{{ action }}" method="POST"> {% csrf_token %}
+	<table>
+		{{ form.as_table }}
+	</table>
+ 	<p><input id="cadw" type="submit" value="Cadw" />
+
+</form>
+
+
+{% if llinell.id %}
+<a href="{% url "delete-llinell" pk=object.id %}">Dileu</a>
+{% endif %}
+
+
+
+
+<a href="{% url "rhestr-llinellau" %}">Nol i'r rhestr</a>
+{% endblock %}

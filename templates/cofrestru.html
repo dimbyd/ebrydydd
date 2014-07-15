@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} 
+	Cofrestru
+{% endblock %}
+
+{% block content-main %}
+<h1>Cofrestru</h1>
+
+{% if cofrestrwyd %}
+	<strong>Diolch am gofrestru gyda'r eBrydydd</strong>
+	<br />
+	<a href="/">Nôl i'r hafan.</a>
+	<br />
+{% else %}
+	<strong>Cofrestrwch fan hyn.</strong>
+	<br />
+	<form id="user_form" method="post" action="/cofrestru/" enctype="multipart/form-data"> {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ ffurflen_defnyddiwr.as_p }}
+    <input type="submit" name="submit" value="Cofrestrwch" />
+</form>
+{% endif %}
+
+{% endblock %}

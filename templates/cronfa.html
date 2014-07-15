@@ -1,0 +1,23 @@
+{% extends "hafan.html" %}
+
+{% block title %} 
+	Cronfa yr eBrydydd 
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > <a href="{% url 'ebrydydd.views.cronfa' %}">Cronfa</a>
+{% endblock %}
+
+
+
+{% block content-main %}
+<h1>Cronfa</h1>
+
+<ul>
+	<li><a href="{% url 'rhestr-llinellau' %}">Llinellau</a></li>
+	<li><a href="{% url 'rhestr-aelodau' %}">Aelodau</a></li>
+</ul>
+
+{% endblock %}
+
+

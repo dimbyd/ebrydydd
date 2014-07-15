@@ -1,0 +1,63 @@
+Django commands
+    - command line arguments to manage.py
+    - depends on settings.py
+
+$ python managae.py cmd
+
+----------
+# projects & apps
+----------
+manage.py startproject
+manage.py startapp
+
+----------
+# static files
+----------
+manage.py collectstatic
+
+----------
+# data
+----------
+manage.py dumpdata
+manage.py syncdb
+
+
+=======================
+# tricks
+=======================
+To save contents of database as json file
+./manage.py dumpdata APP --indent=4 > APP/fixtures/APP.json
+
+To initialize the contents of a database
+./manage.py loaddata FIXTURE
+
+
+=======================
+# custom commands
+=======================
+create directory SITE_ROOT/APP/management/commands
+touch  file __init__.py
+create file cmd_name.py
+
+example:
+-----------
+import os, time, logging
+
+from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
+
+SITE_ROOT = getattr(settings, 'SITE_ROOT')
+
+log = logging.getLogger(__name__)
+
+class Command(BaseCommand):
+    args = ''
+    help = 'update pdf files from tex source'
+
+    def handle(self, *args, **options): 	
+		
+        ** code goes here **
+		log.info('SITE_ROOT = %s' % SITE_ROOT)        
+
+		timestr = time.strftime("%Y.%m.%d.%H.%M.%S")
+		out.info('Logging ended at %s', timestr)

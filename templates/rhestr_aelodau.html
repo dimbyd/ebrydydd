@@ -1,0 +1,64 @@
+{% extends "cronfa.html" %}
+
+{% block title %} 
+	Defnyddwyr 
+{% endblock %}
+
+{% block styles %}
+	{{ block.super }}
+	<style type='text/css' media="all">
+		table.aelodau {
+			border:1px solid #000;
+			width:80%;
+			text-align:left;
+			border-collapse:collapse;
+		}
+		th.aelod {
+			font-weight:bold;
+		 	border: solid 1px black;
+		}
+		td.aelod {
+		 	border: solid 1px black;
+		}
+	</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }} > Aelodau
+{% endblock %}
+
+{% block content-main %}
+<h1>Aelodau</h1>
+<br/>
+<table class="aelodau">
+	<tr>
+		<th class="aelod">enw defnyddiwr</th>
+		<th class="aelod">ffugenw</th>
+		<th class="aelod">statws</th>
+		<th class="aelod">rhagenw</th>
+		<th class="aelod">cyfenw</th>
+	</tr>
+	{% for object in object_list %}
+		<tr>
+			<td class="aelod"><a href="{{ object.get_absolute_url }}">{{ object.user.username }}</a></td>
+			<!--td class="aelod">{{ object.user.username }}</td-->
+			<td class="aelod">{{ object.ffugenw }}</td>
+			<td class="aelod">{{ object.statws }}</td>
+			<td class="aelod">{{ object.user.first_name }}</td>
+			<td class="aelod">{{ object.user.last_name }}</td>
+		</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}
+
+{% block sidebar %}
+
+<h2>Cymorth</h2>
+<ul>
+    <li>Cliciwch ar yr enw defnyddiwr ... </li>
+</ul>
+{% endblock %}
+
+
+

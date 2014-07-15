@@ -1,10 +1,16 @@
 # Django settings for ebrydydd project.
 
+import os
+import django
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.dirname(__file__))
+DATA_ROOT  = os.path.join(SITE_ROOT, 'data')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('penbwl', 'penbwl@ebrydydd.org'),
+     ('scmde', 'evansd8@cf.ac.uk'),
 )
 
 MANAGERS = ADMINS
@@ -12,7 +18,8 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': '/Users/scmde/Dropbox/django/ebrydydd/data/ebrydydd.db',                      
+        # 'NAME': '/Users/scmde/ebrydydd/data/ebrydydd.db',                      
+        'NAME': os.path.join(SITE_ROOT, 'data') + '/ebrydydd.db',
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -50,7 +57,8 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
+# '/Users/scmde/ebrydydd/media',
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -69,7 +77,8 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/Users/scmde/Dropbox/django/ebrydydd/static',
+	'/Users/scmde/ebrydydd/static',
+	os.path.join(SITE_ROOT, 'staticfiles')
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -108,7 +117,8 @@ ROOT_URLCONF = 'ebrydydd.urls'
 WSGI_APPLICATION = 'ebrydydd.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/Users/scmde/Dropbox/django/ebrydydd/templates",
+	os.path.join(SITE_ROOT, 'templates'),
+    # "/Users/scmde/ebrydydd/templates",
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -123,9 +133,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'ebrydydd.sylfaen',
-    'ebrydydd.rheolau',
-    'ebrydydd.dadansoddwr',
+    'ebrydydd',
+    # 'ebrydydd.dadansoddwr',
+    # 'ebrydydd.cyfansoddwr',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -135,24 +145,51 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+	},
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+	    'mail_admins': {
+	        'level': 'ERROR',
+	        'filters': ['require_debug_false'],
+	        'class': 'django.utils.log.AdminEmailHandler'
+	    },
+		'file': {
+			'level': 'DEBUG',
+			'class': 'logging.FileHandler',
+			'filename': 'ebrydydd.log',
+			'formatter': 'verbose'
+	    },
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
         }
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
+	     'django.request': {
+	         'handlers': ['mail_admins'],
+	         'level': 'ERROR',
+	         'propagate': True,
+	     },
+	    'ebrydydd': {
+	        'handlers': ['file'],
+	        'level': 'DEBUG',
+	    },
+	    'django': {
+	        'handlers': ['null'],
+	        'level': 'INFO',
+	        'propagate': True,
+	    }
     }
 }

@@ -22,7 +22,7 @@ class Cwpled:
         if self.cyntaf.nifer_sillau() != 7 or self.ail.nifer_sillau() != 7:
             print 'cwpled_cywydd: torr_mesur: llinell heb fod yn seithsill'
             return False
-        if self.cyntaf.ybrifodl.pwyslais == self.ail.ybrifodl.pwyslais:
+        if self.cyntaf.ybrifodl.sillaf_pwyslais == self.ail.ybrifodl.sillaf_pwyslais:
             print 'cwpled_cywydd: torr_mesur: acenion o\'r un fath'
             return False
         return True
@@ -38,9 +38,13 @@ if True:
     print cwpled.cyntaf.llinyn_acenion()
     print cwpled.cyntaf.llinyn
     print cwpled.cyntaf.nifer_sillau()
+    print cwpled.cyntaf.ybrifodl.safleoedd_acenion
+    print cwpled.cyntaf.ybrifodl.sillaf_pwyslais
     print cwpled.ail.llinyn_acenion()
     print cwpled.ail.llinyn
     print cwpled.ail.nifer_sillau()
+    print cwpled.ail.ybrifodl.safleoedd_acenion
+    print cwpled.ail.ybrifodl.sillaf_pwyslais
     
     print 'Test <cwpled_cywydd>:' 
     print cwpled.is_cwpled_cywydd()
