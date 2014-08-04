@@ -1,0 +1,549 @@
+INFO 2014-07-26 10:31:17,682 peiriant prawf cynghanedd: Aderyn llwyd ar un llaw
+INFO 2014-07-26 10:31:17,682 peiriant prawf sain
+INFO 2014-07-26 10:31:17,683 peiriant prawf croes
+INFO 2014-07-26 10:31:17,683 peiriant prawf llusg
+INFO 2014-07-26 10:31:17,684 peiriant prawf traws
+INFO 2014-07-26 10:32:20,176 peiriant prawf cynghanedd: Aderyn llwyd ar un llaw
+INFO 2014-07-26 10:32:20,176 peiriant prawf sain
+INFO 2014-07-26 10:32:20,176 peiriant prawf croes
+INFO 2014-07-26 10:32:20,177 peiriant prawf llusg
+INFO 2014-07-26 10:32:20,177 peiriant prawf traws
+INFO 2014-07-26 10:32:38,201 peiriant prawf cynghanedd: Aderyn llwyd ar un llaw
+INFO 2014-07-26 10:32:38,201 peiriant prawf sain
+INFO 2014-07-26 10:32:38,202 peiriant prawf croes
+INFO 2014-07-26 10:32:38,202 peiriant prawf llusg
+INFO 2014-07-26 10:32:38,202 peiriant prawf traws
+INFO 2014-07-26 10:33:32,471 peiriant prawf cynghanedd: A dyri un aderyn
+INFO 2014-07-26 10:33:32,471 peiriant prawf sain
+INFO 2014-07-26 10:33:32,472 peiriant prawf croes
+INFO 2014-07-26 10:33:32,472 peiriant prawf llusg
+INFO 2014-07-26 10:33:32,473 peiriant prawf traws
+INFO 2014-07-26 10:34:05,187 peiriant prawf cynghanedd: Brwd yw aderyn brig,
+INFO 2014-07-26 10:34:05,188 peiriant prawf sain
+INFO 2014-07-26 10:34:05,188 peiriant prawf croes
+INFO 2014-07-26 10:34:05,189 peiriant prawf llusg
+INFO 2014-07-26 10:34:05,189 peiriant prawf traws
+INFO 2014-08-01 10:44:04,066 peiriant prawf cynghanedd: Aderyn llwyd ar un llaw
+INFO 2014-08-01 10:44:04,082 peiriant prawf sain
+INFO 2014-08-01 10:44:04,084 peiriant prawf croes
+INFO 2014-08-01 10:44:04,084 cytseinedd oes_cytseinedd: Aderyn/llwyd ar un llaw
+DEBUG 2014-08-01 10:44:04,084 cytseinedd Ad:er:yn
+DEBUG 2014-08-01 10:44:04,084 cytseinedd llwydarunll::aw
+DEBUG 2014-08-01 10:44:04,084 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:04,084 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,084 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x105089090>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050894d0>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089550>, <ebrydydd.peiriant.nodau.Nod object at 0x105089350>]), (<ebrydydd.peiriant.nodau.Nod object at 0x105089110>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089310>])]
+DEBUG 2014-08-01 10:44:04,085 cytseinedd pen_ch: d
+DEBUG 2014-08-01 10:44:04,085 cytseinedd pen_dd: ll r d ll
+DEBUG 2014-08-01 10:44:04,085 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:04,085 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:44:04,085 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:44:04,085 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:04,085 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:04,085 cytseinedd oes_cytseinedd: Aderyn llwyd/ar un llaw
+DEBUG 2014-08-01 10:44:04,085 cytseinedd Aderynll::wyd
+DEBUG 2014-08-01 10:44:04,085 cytseinedd arunll::aw
+DEBUG 2014-08-01 10:44:04,085 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:04,085 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,085 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:44:04,085 cytseinedd pen_ch: d
+DEBUG 2014-08-01 10:44:04,086 cytseinedd pen_dd: 
+DEBUG 2014-08-01 10:44:04,086 cytseinedd parau  : r/r n/n ll/ll
+DEBUG 2014-08-01 10:44:04,086 cytseinedd cwt_ch: d
+DEBUG 2014-08-01 10:44:04,086 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:44:04,086 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:04,086 cytseinedd cysylltben: 
+DEBUG 2014-08-01 10:44:04,086 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,086 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x105064750>, [<ebrydydd.peiriant.nodau.Nod object at 0x105064e90>]), (<ebrydydd.peiriant.nodau.Nod object at 0x105089250>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050648d0>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050896d0>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089750>])]
+INFO 2014-08-01 10:44:04,086 peiriant prawf traws
+INFO 2014-08-01 10:44:04,086 cytseinedd oes_cytseinedd: Aderyn/llwyd ar un llaw
+DEBUG 2014-08-01 10:44:04,086 cytseinedd Ad:er:yn
+DEBUG 2014-08-01 10:44:04,086 cytseinedd llwydarunll::aw
+DEBUG 2014-08-01 10:44:04,087 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:04,087 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,087 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x105089090>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050894d0>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089550>, <ebrydydd.peiriant.nodau.Nod object at 0x105089350>]), (<ebrydydd.peiriant.nodau.Nod object at 0x105089110>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089310>])]
+DEBUG 2014-08-01 10:44:04,087 cytseinedd pen_ch: d
+DEBUG 2014-08-01 10:44:04,087 cytseinedd pen_dd: ll r d ll
+DEBUG 2014-08-01 10:44:04,087 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:04,087 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:44:04,087 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:44:04,087 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:04,088 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:04,088 cytseinedd oes_cytseinedd: Aderyn llwyd/ar un llaw
+DEBUG 2014-08-01 10:44:04,088 cytseinedd Aderynll::wyd
+DEBUG 2014-08-01 10:44:04,088 cytseinedd arunll::aw
+DEBUG 2014-08-01 10:44:04,088 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:04,088 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,088 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:44:04,088 cytseinedd pen_ch: d
+DEBUG 2014-08-01 10:44:04,088 cytseinedd pen_dd: 
+DEBUG 2014-08-01 10:44:04,088 cytseinedd parau  : r/r n/n ll/ll
+DEBUG 2014-08-01 10:44:04,088 cytseinedd cwt_ch: d
+DEBUG 2014-08-01 10:44:04,089 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:44:04,089 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:04,089 cytseinedd cysylltben: 
+DEBUG 2014-08-01 10:44:04,089 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:04,089 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x105064750>, [<ebrydydd.peiriant.nodau.Nod object at 0x105064e90>]), (<ebrydydd.peiriant.nodau.Nod object at 0x105089250>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050648d0>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050896d0>, [<ebrydydd.peiriant.nodau.Nod object at 0x105089750>])]
+INFO 2014-08-01 10:44:27,225 peiriant prawf cynghanedd: Beiddgar yw geiriau cariad
+INFO 2014-08-01 10:44:27,226 peiriant prawf sain
+INFO 2014-08-01 10:44:27,226 peiriant prawf croes
+INFO 2014-08-01 10:44:27,226 cytseinedd oes_cytseinedd: Beiddgar/yw geiriau cariad
+DEBUG 2014-08-01 10:44:27,227 cytseinedd B:eiddg:ar
+DEBUG 2014-08-01 10:44:27,227 cytseinedd ywgeiriauc:ar:iad
+DEBUG 2014-08-01 10:44:27,227 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:27,227 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:44:27,227 cytseinedd oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb
+INFO 2014-08-01 10:44:27,227 peiriant prawf traws
+INFO 2014-08-01 10:44:27,227 cytseinedd oes_cytseinedd: Beiddgar/yw geiriau cariad
+DEBUG 2014-08-01 10:44:27,227 cytseinedd B:eiddg:ar
+DEBUG 2014-08-01 10:44:27,228 cytseinedd ywgeiriauc:ar:iad
+DEBUG 2014-08-01 10:44:27,228 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:27,228 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:44:27,228 cytseinedd oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb
+INFO 2014-08-01 10:44:42,752 peiriant prawf cynghanedd: Hen linell bell nad yw'n bod,
+INFO 2014-08-01 10:44:42,752 peiriant prawf sain
+INFO 2014-08-01 10:44:42,754 cytseinedd oes_cytseinedd: bell/nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,754 cytseinedd b::ell
+DEBUG 2014-08-01 10:44:42,755 cytseinedd nadyw'nb::od
+DEBUG 2014-08-01 10:44:42,755 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,755 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:42,755 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0750>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0d10>])]
+DEBUG 2014-08-01 10:44:42,755 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:44:42,755 cytseinedd pen_dd: n d n
+DEBUG 2014-08-01 10:44:42,755 cytseinedd parau  : b/b
+DEBUG 2014-08-01 10:44:42,755 cytseinedd cwt_ch: ll
+DEBUG 2014-08-01 10:44:42,755 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,755 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,755 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,755 peiriant prawf croes
+INFO 2014-08-01 10:44:42,755 cytseinedd oes_cytseinedd: Hen/linell bell nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,756 cytseinedd H::en
+DEBUG 2014-08-01 10:44:42,756 cytseinedd linellbellnadyw'nb::od
+DEBUG 2014-08-01 10:44:42,756 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,756 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:42,756 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0f10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e90>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0b50>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0b90>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0710>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0790>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0bd0>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e10>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0750>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0d10>])]
+DEBUG 2014-08-01 10:44:42,756 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:44:42,756 cytseinedd pen_dd: b d n ll b ll n l
+DEBUG 2014-08-01 10:44:42,756 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:42,756 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:44:42,756 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,756 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,756 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,756 cytseinedd oes_cytseinedd: Hen linell/bell nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,757 cytseinedd Henl:in:ell
+DEBUG 2014-08-01 10:44:42,757 cytseinedd bellnadyw'nb::od
+DEBUG 2014-08-01 10:44:42,757 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,757 cytseinedd x_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0550>, [])]
+DEBUG 2014-08-01 10:44:42,757 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0790>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0bd0>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e10>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0750>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0d10>])]
+DEBUG 2014-08-01 10:44:42,757 cytseinedd pen_ch: l
+DEBUG 2014-08-01 10:44:42,757 cytseinedd pen_dd: b d n ll b
+DEBUG 2014-08-01 10:44:42,757 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:42,757 cytseinedd cwt_ch: ll
+DEBUG 2014-08-01 10:44:42,757 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,757 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,757 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,757 cytseinedd oes_cytseinedd: Hen linell bell/nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,758 cytseinedd Henlinellb::ell
+DEBUG 2014-08-01 10:44:42,758 cytseinedd nadyw'nb::od
+DEBUG 2014-08-01 10:44:42,758 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,758 cytseinedd x_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0550>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0810>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a05d0>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0f10>, [])]
+DEBUG 2014-08-01 10:44:42,758 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, [])]
+DEBUG 2014-08-01 10:44:42,758 cytseinedd pen_ch: ll l n
+DEBUG 2014-08-01 10:44:42,758 cytseinedd pen_dd: n n
+DEBUG 2014-08-01 10:44:42,758 cytseinedd parau  : b/b
+DEBUG 2014-08-01 10:44:42,758 cytseinedd cwt_ch: ll
+DEBUG 2014-08-01 10:44:42,758 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,758 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,758 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,758 peiriant prawf traws
+INFO 2014-08-01 10:44:42,759 cytseinedd oes_cytseinedd: Hen/linell bell nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,759 cytseinedd H::en
+DEBUG 2014-08-01 10:44:42,759 cytseinedd linellbellnadyw'nb::od
+DEBUG 2014-08-01 10:44:42,759 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,759 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:44:42,759 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0f10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e90>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0b50>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0b90>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0710>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0790>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0bd0>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e10>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0750>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0d10>])]
+DEBUG 2014-08-01 10:44:42,759 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:44:42,759 cytseinedd pen_dd: b d n ll b ll n l
+DEBUG 2014-08-01 10:44:42,759 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:42,759 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:44:42,759 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,759 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,759 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,760 cytseinedd oes_cytseinedd: Hen linell/bell nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,760 cytseinedd Henl:in:ell
+DEBUG 2014-08-01 10:44:42,760 cytseinedd bellnadyw'nb::od
+DEBUG 2014-08-01 10:44:42,760 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,760 cytseinedd x_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0550>, [])]
+DEBUG 2014-08-01 10:44:42,760 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0790>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0bd0>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0e10>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0750>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a0d10>])]
+DEBUG 2014-08-01 10:44:42,760 cytseinedd pen_ch: l
+DEBUG 2014-08-01 10:44:42,760 cytseinedd pen_dd: b d n ll b
+DEBUG 2014-08-01 10:44:42,760 cytseinedd parau  : 
+DEBUG 2014-08-01 10:44:42,760 cytseinedd cwt_ch: ll
+DEBUG 2014-08-01 10:44:42,760 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,760 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,760 cytseinedd cysylltben: 
+INFO 2014-08-01 10:44:42,761 cytseinedd oes_cytseinedd: Hen linell bell/nad yw'n bod,
+DEBUG 2014-08-01 10:44:42,761 cytseinedd Henlinellb::ell
+DEBUG 2014-08-01 10:44:42,761 cytseinedd nadyw'nb::od
+DEBUG 2014-08-01 10:44:42,761 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:44:42,761 cytseinedd x_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0550>, []), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0810>, [<ebrydydd.peiriant.nodau.Nod object at 0x1050a05d0>]), (<ebrydydd.peiriant.nodau.Nod object at 0x1050a0f10>, [])]
+DEBUG 2014-08-01 10:44:42,761 cytseinedd y_list:[(<ebrydydd.peiriant.nodau.Nod object at 0x1050a0c10>, [])]
+DEBUG 2014-08-01 10:44:42,761 cytseinedd pen_ch: ll l n
+DEBUG 2014-08-01 10:44:42,761 cytseinedd pen_dd: n n
+DEBUG 2014-08-01 10:44:42,761 cytseinedd parau  : b/b
+DEBUG 2014-08-01 10:44:42,761 cytseinedd cwt_ch: ll
+DEBUG 2014-08-01 10:44:42,761 cytseinedd cwt_dd: d
+DEBUG 2014-08-01 10:44:42,761 cytseinedd trychben: 
+DEBUG 2014-08-01 10:44:42,761 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,766 peiriant prawf cynghanedd: Ei awen brudd dan ein bro
+INFO 2014-08-01 10:45:04,766 peiriant prawf sain
+DEBUG 2014-08-01 10:45:04,767 odl methu adnabod y ddeusain Ei
+INFO 2014-08-01 10:45:04,769 peiriant prawf croes
+INFO 2014-08-01 10:45:04,769 cytseinedd oes_cytseinedd: Ei/awen brudd dan ein bro
+DEBUG 2014-08-01 10:45:04,770 cytseinedd ::Ei
+DEBUG 2014-08-01 10:45:04,770 cytseinedd awenbrudddaneinbr::o
+DEBUG 2014-08-01 10:45:04,770 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,770 cytseinedd pen_ch: phantom
+DEBUG 2014-08-01 10:45:04,770 cytseinedd pen_dd: phantom
+DEBUG 2014-08-01 10:45:04,770 cytseinedd parau  : 
+DEBUG 2014-08-01 10:45:04,770 cytseinedd cwt_ch: 
+DEBUG 2014-08-01 10:45:04,770 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,770 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,770 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,770 cytseinedd oes_cytseinedd: Ei awen/brudd dan ein bro
+DEBUG 2014-08-01 10:45:04,770 cytseinedd Ei:aw:en
+DEBUG 2014-08-01 10:45:04,770 cytseinedd brudddaneinbr::o
+DEBUG 2014-08-01 10:45:04,770 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd pen_dd: b r dd d n n b r
+DEBUG 2014-08-01 10:45:04,771 cytseinedd parau  : 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:45:04,771 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,771 cytseinedd oes_cytseinedd: Ei awen brudd/dan ein bro
+DEBUG 2014-08-01 10:45:04,771 cytseinedd Eiawenbr::udd
+DEBUG 2014-08-01 10:45:04,771 cytseinedd daneinbr::o
+DEBUG 2014-08-01 10:45:04,771 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:04,771 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:04,771 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:04,771 cytseinedd pen_dd: d
+DEBUG 2014-08-01 10:45:04,772 cytseinedd parau  : n/n n/n b/b r/r
+DEBUG 2014-08-01 10:45:04,772 cytseinedd cwt_ch: dd
+DEBUG 2014-08-01 10:45:04,772 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,772 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,772 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,772 peiriant prawf traws
+INFO 2014-08-01 10:45:04,772 cytseinedd oes_cytseinedd: Ei/awen brudd dan ein bro
+DEBUG 2014-08-01 10:45:04,772 cytseinedd ::Ei
+DEBUG 2014-08-01 10:45:04,772 cytseinedd awenbrudddaneinbr::o
+DEBUG 2014-08-01 10:45:04,772 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,772 cytseinedd pen_ch: phantom
+DEBUG 2014-08-01 10:45:04,772 cytseinedd pen_dd: phantom
+DEBUG 2014-08-01 10:45:04,772 cytseinedd parau  : 
+DEBUG 2014-08-01 10:45:04,772 cytseinedd cwt_ch: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,773 cytseinedd oes_cytseinedd: Ei awen/brudd dan ein bro
+DEBUG 2014-08-01 10:45:04,773 cytseinedd Ei:aw:en
+DEBUG 2014-08-01 10:45:04,773 cytseinedd brudddaneinbr::o
+DEBUG 2014-08-01 10:45:04,773 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd pen_dd: b r dd d n n b r
+DEBUG 2014-08-01 10:45:04,773 cytseinedd parau  : 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd cwt_ch: n
+DEBUG 2014-08-01 10:45:04,773 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,773 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:04,773 cytseinedd oes_cytseinedd: Ei awen brudd/dan ein bro
+DEBUG 2014-08-01 10:45:04,774 cytseinedd Eiawenbr::udd
+DEBUG 2014-08-01 10:45:04,774 cytseinedd daneinbr::o
+DEBUG 2014-08-01 10:45:04,774 cytseinedd parau_canol: 
+DEBUG 2014-08-01 10:45:04,774 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:04,774 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:04,774 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:04,774 cytseinedd pen_dd: d
+DEBUG 2014-08-01 10:45:04,774 cytseinedd parau  : n/n n/n b/b r/r
+DEBUG 2014-08-01 10:45:04,774 cytseinedd cwt_ch: dd
+DEBUG 2014-08-01 10:45:04,774 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:04,774 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:04,774 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:24,092 peiriant prawf cynghanedd: Gŵr o Fôn ger y Fenai
+INFO 2014-08-01 10:45:24,092 peiriant prawf sain
+INFO 2014-08-01 10:45:24,094 peiriant prawf croes
+INFO 2014-08-01 10:45:24,094 cytseinedd oes_cytseinedd: Gŵr/o Fôn ger y Fenai
+DEBUG 2014-08-01 10:45:24,094 cytseinedd G::ŵr
+DEBUG 2014-08-01 10:45:24,094 cytseinedd oFôngeryF:en:ai
+DEBUG 2014-08-01 10:45:24,094 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 10:45:24,095 cytseinedd oes_cytseinedd: Gŵr o/Fôn ger y Fenai
+DEBUG 2014-08-01 10:45:24,095 cytseinedd Gŵr::o
+DEBUG 2014-08-01 10:45:24,095 cytseinedd FôngeryF:en:ai
+DEBUG 2014-08-01 10:45:24,095 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,095 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 10:45:24,095 cytseinedd oes_cytseinedd: Gŵr o Fôn/ger y Fenai
+DEBUG 2014-08-01 10:45:24,096 cytseinedd GŵroF::ôn
+DEBUG 2014-08-01 10:45:24,096 cytseinedd geryF:en:ai
+DEBUG 2014-08-01 10:45:24,096 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,096 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,096 cytseinedd parau_canol: n/n
+DEBUG 2014-08-01 10:45:24,096 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,096 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,096 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:24,096 cytseinedd pen_dd: 
+DEBUG 2014-08-01 10:45:24,096 cytseinedd parau  : G/g r/r F/F n/n
+DEBUG 2014-08-01 10:45:24,096 cytseinedd cwt_ch: 
+DEBUG 2014-08-01 10:45:24,096 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:24,096 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:24,097 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:24,097 peiriant prawf traws
+INFO 2014-08-01 10:45:24,097 cytseinedd oes_cytseinedd: Gŵr/o Fôn ger y Fenai
+DEBUG 2014-08-01 10:45:24,097 cytseinedd G::ŵr
+DEBUG 2014-08-01 10:45:24,097 cytseinedd oFôngeryF:en:ai
+DEBUG 2014-08-01 10:45:24,097 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,097 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,097 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,097 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,097 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 10:45:24,097 cytseinedd oes_cytseinedd: Gŵr o/Fôn ger y Fenai
+DEBUG 2014-08-01 10:45:24,098 cytseinedd Gŵr::o
+DEBUG 2014-08-01 10:45:24,098 cytseinedd FôngeryF:en:ai
+DEBUG 2014-08-01 10:45:24,098 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,098 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,098 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 10:45:24,098 cytseinedd oes_cytseinedd: Gŵr o Fôn/ger y Fenai
+DEBUG 2014-08-01 10:45:24,098 cytseinedd GŵroF::ôn
+DEBUG 2014-08-01 10:45:24,098 cytseinedd geryF:en:ai
+DEBUG 2014-08-01 10:45:24,098 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,098 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,098 cytseinedd parau_canol: n/n
+DEBUG 2014-08-01 10:45:24,099 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,099 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,099 cytseinedd pen_ch: 
+DEBUG 2014-08-01 10:45:24,099 cytseinedd pen_dd: 
+DEBUG 2014-08-01 10:45:24,099 cytseinedd parau  : G/g r/r F/F n/n
+DEBUG 2014-08-01 10:45:24,099 cytseinedd cwt_ch: 
+DEBUG 2014-08-01 10:45:24,099 cytseinedd cwt_dd: 
+DEBUG 2014-08-01 10:45:24,099 cytseinedd trychben: 
+DEBUG 2014-08-01 10:45:24,099 cytseinedd cysylltben: 
+INFO 2014-08-01 10:45:24,099 cytseinedd oes_cytseinedd: Gŵr o Fôn ger/y Fenai
+DEBUG 2014-08-01 10:45:24,099 cytseinedd GŵroFông::er
+DEBUG 2014-08-01 10:45:24,099 cytseinedd yF:en:ai
+DEBUG 2014-08-01 10:45:24,099 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,099 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,100 cytseinedd x_list:[]
+DEBUG 2014-08-01 10:45:24,100 cytseinedd y_list:[]
+DEBUG 2014-08-01 10:45:24,100 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 11:02:44,449 peiriant prawf cynghanedd: Y mae Morfudd yn cuddio
+INFO 2014-08-01 11:02:44,449 peiriant prawf sain
+INFO 2014-08-01 11:02:44,451 peiriant prawf croes
+INFO 2014-08-01 11:02:44,451 cytseinedd oes_cytseinedd: Y/mae Morfudd yn cuddio
+DEBUG 2014-08-01 11:02:44,451 cytseinedd ::Y
+DEBUG 2014-08-01 11:02:44,451 cytseinedd maeMorfuddync:udd:io
+DEBUG 2014-08-01 11:02:44,452 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,452 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,452 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 11:02:44,452 cytseinedd oes_cytseinedd: Y mae/Morfudd yn cuddio
+DEBUG 2014-08-01 11:02:44,452 cytseinedd Ym::ae
+DEBUG 2014-08-01 11:02:44,452 cytseinedd Morfuddync:udd:io
+DEBUG 2014-08-01 11:02:44,452 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,452 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,452 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 11:02:44,452 cytseinedd oes_cytseinedd: Y mae Morfudd/yn cuddio
+DEBUG 2014-08-01 11:02:44,453 cytseinedd YmaeM:orf:udd
+DEBUG 2014-08-01 11:02:44,453 cytseinedd ync:udd:io
+DEBUG 2014-08-01 11:02:44,453 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,453 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,453 cytseinedd oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb
+INFO 2014-08-01 11:02:44,453 peiriant prawf llusg
+INFO 2014-08-01 11:02:44,454 peiriant prawf traws
+INFO 2014-08-01 11:02:44,454 cytseinedd oes_cytseinedd: Y/mae Morfudd yn cuddio
+DEBUG 2014-08-01 11:02:44,454 cytseinedd ::Y
+DEBUG 2014-08-01 11:02:44,454 cytseinedd maeMorfuddync:udd:io
+DEBUG 2014-08-01 11:02:44,455 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,455 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,455 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 11:02:44,455 cytseinedd oes_cytseinedd: Y mae/Morfudd yn cuddio
+DEBUG 2014-08-01 11:02:44,455 cytseinedd Ym::ae
+DEBUG 2014-08-01 11:02:44,455 cytseinedd Morfuddync:udd:io
+DEBUG 2014-08-01 11:02:44,455 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,455 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,455 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-01 11:02:44,455 cytseinedd oes_cytseinedd: Y mae Morfudd/yn cuddio
+DEBUG 2014-08-01 11:02:44,455 cytseinedd YmaeM:orf:udd
+DEBUG 2014-08-01 11:02:44,456 cytseinedd ync:udd:io
+DEBUG 2014-08-01 11:02:44,456 cytseinedd x_list:[]
+DEBUG 2014-08-01 11:02:44,456 cytseinedd y_list:[]
+DEBUG 2014-08-01 11:02:44,456 cytseinedd oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb
+INFO 2014-08-04 23:45:00,992 peiriant prawf cynghanedd: Awen Duw yw ein Dewi
+INFO 2014-08-04 23:45:00,992 peiriant prawf sain
+INFO 2014-08-04 23:45:00,993 peiriant prawf croes
+INFO 2014-08-04 23:45:00,993 cytseinedd oes_cytseinedd: Awen/Duw yw ein Dewi
+DEBUG 2014-08-04 23:45:00,993 cytseinedd :Aw:en
+DEBUG 2014-08-04 23:45:00,993 cytseinedd DuwyweinD:ew:i
+DEBUG 2014-08-04 23:45:00,994 cytseinedd parau_canol: 
+DEBUG 2014-08-04 23:45:00,994 cytseinedd pen_ch: phantom
+DEBUG 2014-08-04 23:45:00,994 cytseinedd pen_dd: phantom
+DEBUG 2014-08-04 23:45:00,994 cytseinedd parau  : 
+DEBUG 2014-08-04 23:45:00,994 cytseinedd cwt_ch: n
+DEBUG 2014-08-04 23:45:00,994 cytseinedd cwt_dd: 
+DEBUG 2014-08-04 23:45:00,994 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:00,994 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:00,994 cytseinedd oes_cytseinedd: Awen Duw/yw ein Dewi
+DEBUG 2014-08-04 23:45:00,995 cytseinedd AwenD::uw
+DEBUG 2014-08-04 23:45:00,995 cytseinedd yweinD:ew:i
+DEBUG 2014-08-04 23:45:00,995 cytseinedd parau_canol: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:00,995 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:00,995 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd pen_dd: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd parau  : n/n D/D
+DEBUG 2014-08-04 23:45:00,995 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd cwt_dd: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:00,995 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:00,996 peiriant prawf llusg
+INFO 2014-08-04 23:45:00,997 peiriant prawf traws
+INFO 2014-08-04 23:45:00,997 cytseinedd oes_cytseinedd: Awen/Duw yw ein Dewi
+DEBUG 2014-08-04 23:45:00,997 cytseinedd :Aw:en
+DEBUG 2014-08-04 23:45:00,997 cytseinedd DuwyweinD:ew:i
+DEBUG 2014-08-04 23:45:00,997 cytseinedd parau_canol: 
+DEBUG 2014-08-04 23:45:00,997 cytseinedd pen_ch: phantom
+DEBUG 2014-08-04 23:45:00,997 cytseinedd pen_dd: phantom
+DEBUG 2014-08-04 23:45:00,997 cytseinedd parau  : 
+DEBUG 2014-08-04 23:45:00,997 cytseinedd cwt_ch: n
+DEBUG 2014-08-04 23:45:00,997 cytseinedd cwt_dd: 
+DEBUG 2014-08-04 23:45:00,997 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:00,997 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:00,998 cytseinedd oes_cytseinedd: Awen Duw/yw ein Dewi
+DEBUG 2014-08-04 23:45:00,998 cytseinedd AwenD::uw
+DEBUG 2014-08-04 23:45:00,998 cytseinedd yweinD:ew:i
+DEBUG 2014-08-04 23:45:00,998 cytseinedd parau_canol: 
+DEBUG 2014-08-04 23:45:00,998 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:00,998 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:00,998 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:00,998 cytseinedd pen_dd: 
+DEBUG 2014-08-04 23:45:00,998 cytseinedd parau  : n/n D/D
+DEBUG 2014-08-04 23:45:00,998 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:00,998 cytseinedd cwt_dd: 
+DEBUG 2014-08-04 23:45:00,998 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:00,999 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:21,314 peiriant prawf cynghanedd: A dyri un aderyn
+INFO 2014-08-04 23:45:21,314 peiriant prawf sain
+DEBUG 2014-08-04 23:45:21,314 odl methu adnabod y ddeusain iu
+DEBUG 2014-08-04 23:45:21,315 odl methu adnabod y ddeusain iu
+INFO 2014-08-04 23:45:21,315 peiriant prawf croes
+INFO 2014-08-04 23:45:21,315 cytseinedd oes_cytseinedd: A/dyri un aderyn
+DEBUG 2014-08-04 23:45:21,315 cytseinedd ::A
+DEBUG 2014-08-04 23:45:21,316 cytseinedd dyriunad:er:yn
+DEBUG 2014-08-04 23:45:21,316 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-04 23:45:21,316 cytseinedd oes_cytseinedd: A dyri/un aderyn
+DEBUG 2014-08-04 23:45:21,316 cytseinedd Ad:yr:i
+DEBUG 2014-08-04 23:45:21,316 cytseinedd unad:er:yn
+DEBUG 2014-08-04 23:45:21,316 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd parau_canol: r/r
+DEBUG 2014-08-04 23:45:21,316 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,316 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:21,317 cytseinedd pen_dd: n
+DEBUG 2014-08-04 23:45:21,317 cytseinedd parau  : d/d r/r
+DEBUG 2014-08-04 23:45:21,317 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:21,317 cytseinedd cwt_dd: n
+DEBUG 2014-08-04 23:45:21,317 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:21,317 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:21,317 peiriant prawf llusg
+INFO 2014-08-04 23:45:21,318 peiriant prawf traws
+INFO 2014-08-04 23:45:21,318 cytseinedd oes_cytseinedd: A/dyri un aderyn
+DEBUG 2014-08-04 23:45:21,318 cytseinedd ::A
+DEBUG 2014-08-04 23:45:21,318 cytseinedd dyriunad:er:yn
+DEBUG 2014-08-04 23:45:21,318 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,318 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,318 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-04 23:45:21,318 cytseinedd oes_cytseinedd: A dyri/un aderyn
+DEBUG 2014-08-04 23:45:21,319 cytseinedd Ad:yr:i
+DEBUG 2014-08-04 23:45:21,319 cytseinedd unad:er:yn
+DEBUG 2014-08-04 23:45:21,319 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,319 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,319 cytseinedd parau_canol: r/r
+DEBUG 2014-08-04 23:45:21,319 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,319 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,319 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:21,319 cytseinedd pen_dd: n
+DEBUG 2014-08-04 23:45:21,319 cytseinedd parau  : d/d r/r
+DEBUG 2014-08-04 23:45:21,319 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:21,319 cytseinedd cwt_dd: n
+DEBUG 2014-08-04 23:45:21,319 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:21,319 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:21,319 cytseinedd oes_cytseinedd: A dyri un/aderyn
+DEBUG 2014-08-04 23:45:21,320 cytseinedd Adyri::un
+DEBUG 2014-08-04 23:45:21,320 cytseinedd ad:er:yn
+DEBUG 2014-08-04 23:45:21,320 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,320 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,320 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:21,320 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:21,320 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-04 23:45:51,132 peiriant prawf cynghanedd: A dyri un aderyn
+INFO 2014-08-04 23:45:51,132 peiriant prawf sain
+DEBUG 2014-08-04 23:45:51,133 odl methu adnabod y ddeusain iu
+DEBUG 2014-08-04 23:45:51,134 odl methu adnabod y ddeusain iu
+INFO 2014-08-04 23:45:51,135 peiriant prawf croes
+INFO 2014-08-04 23:45:51,135 cytseinedd oes_cytseinedd: A/dyri un aderyn
+DEBUG 2014-08-04 23:45:51,135 cytseinedd ::A
+DEBUG 2014-08-04 23:45:51,135 cytseinedd dyriunad:er:yn
+DEBUG 2014-08-04 23:45:51,136 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,136 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,136 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-04 23:45:51,136 cytseinedd oes_cytseinedd: A dyri/un aderyn
+DEBUG 2014-08-04 23:45:51,136 cytseinedd Ad:yr:i
+DEBUG 2014-08-04 23:45:51,136 cytseinedd unad:er:yn
+DEBUG 2014-08-04 23:45:51,137 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,137 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,137 cytseinedd parau_canol: r/r
+DEBUG 2014-08-04 23:45:51,137 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,137 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,137 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:51,137 cytseinedd pen_dd: n
+DEBUG 2014-08-04 23:45:51,137 cytseinedd parau  : d/d r/r
+DEBUG 2014-08-04 23:45:51,138 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:51,138 cytseinedd cwt_dd: n
+DEBUG 2014-08-04 23:45:51,138 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:51,138 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:51,138 peiriant prawf llusg
+INFO 2014-08-04 23:45:51,139 peiriant prawf traws
+INFO 2014-08-04 23:45:51,139 cytseinedd oes_cytseinedd: A/dyri un aderyn
+DEBUG 2014-08-04 23:45:51,139 cytseinedd ::A
+DEBUG 2014-08-04 23:45:51,139 cytseinedd dyriunad:er:yn
+DEBUG 2014-08-04 23:45:51,139 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,139 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,139 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb
+INFO 2014-08-04 23:45:51,139 cytseinedd oes_cytseinedd: A dyri/un aderyn
+DEBUG 2014-08-04 23:45:51,140 cytseinedd Ad:yr:i
+DEBUG 2014-08-04 23:45:51,140 cytseinedd unad:er:yn
+DEBUG 2014-08-04 23:45:51,140 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,140 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,140 cytseinedd parau_canol: r/r
+DEBUG 2014-08-04 23:45:51,140 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,140 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,140 cytseinedd pen_ch: 
+DEBUG 2014-08-04 23:45:51,140 cytseinedd pen_dd: n
+DEBUG 2014-08-04 23:45:51,140 cytseinedd parau  : d/d r/r
+DEBUG 2014-08-04 23:45:51,140 cytseinedd cwt_ch: 
+DEBUG 2014-08-04 23:45:51,140 cytseinedd cwt_dd: n
+DEBUG 2014-08-04 23:45:51,140 cytseinedd trychben: 
+DEBUG 2014-08-04 23:45:51,140 cytseinedd cysylltben: 
+INFO 2014-08-04 23:45:51,140 cytseinedd oes_cytseinedd: A dyri un/aderyn
+DEBUG 2014-08-04 23:45:51,141 cytseinedd Adyri::un
+DEBUG 2014-08-04 23:45:51,141 cytseinedd ad:er:yn
+DEBUG 2014-08-04 23:45:51,141 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,141 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,141 cytseinedd x_list:[]
+DEBUG 2014-08-04 23:45:51,141 cytseinedd y_list:[]
+DEBUG 2014-08-04 23:45:51,141 cytseinedd oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb

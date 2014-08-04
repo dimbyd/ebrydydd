@@ -1,47 +1,70 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
 llinell.py
-	craidd: rhestr o wrthrychau gair
+	Llinell class: rhestr o wrthrychau Gair
 '''
 
 import sys
-import cysonion as cy
-import llinyn as ll
-from lliwiau import coch
 from gair import Gair
 
 global debug
+debug = False
 
-class Llinell:
+class Llinell(object):
 	'''
 	class Llinell:
 	'''
 	def __init__(self, s, awdur=None): 
-		# self.llinyn = s.decode('utf-8')
-		self.llinyn = s
-		self.awdur = awdur
-		self.nodau = ll.nodau(self.llinyn)
-		self.geiriau = [Gair(w) for w in s.split(' ')]
-		self.ybrifodl = self.geiriau[-1]
+
+		# gwirio am restr geiriau
+		if type(s) == list and all( [type(x)==Gair for x in s] ):
+			self.geiriau = s
+		# gwirio am linyn unicode
+		elif type(s) == str or type(s) == unicode:
+			if type(s) != unicode:
+				s = s.decode('utf-8')
+			self.geiriau = [Gair(ss) for ss in s.split(' ')]
+		else:
+			self.geiriau = None
+		
+		if self.geiriau:
+			self.ybrifodl = self.geiriau[-1]
+		else:
+			self.ybrifodl = None
 
 	def __unicode__(self):
-		return self.llinyn
+		return u' '.join( [gair.__unicode__() for gair in self.geiriau] )
 	
-	def awdur(self):
-		return self.awdur
+	def __str__(self):
+		return self.__unicode__().encode('utf-8')
 
+	# manion
 	def nifer_geiriau(self):
 		return len(self.geiriau)
 
 	def nifer_sillau(self):
-		return sum([g.nifer_sillau() for g in self.geiriau])
+		return sum([ g.nifer_sillau() for g in self.geiriau ])
 
+	# rhestri nodau a chlymau
+	def nodau(self):
+		return [g.nodau for g in self.geiriau]
+		
 	def clymau(self):
-		return [g.clymau for g in self.geiriau]
+		return [g.nodau.rhestr_clymau() for g in self.geiriau]
 	
+	def nodau_acenog(self):
+		return [nod for g in self.geiriau for nod in g.nodau_acenog()]
+		
+	# allbwn
+	def llinyn(self):
+		return ' '.join( [gair.llinyn() for gair in self.geiriau] )
+		
 	def llinyn_acenion(self):
 		return ' '.join([g.llinyn_acenion() for g in self.geiriau])
+	
+	def llinyn_acenion_colon(self):
+		return ' '.join([g.llinyn_acenion_colon() for g in self.geiriau])
 	
 	def llinyn_cytseiniaid(self):
 		return ' '.join([g.llinyn_cytseiniaid() for g in self.geiriau])
@@ -49,71 +72,41 @@ class Llinell:
 	def llinyn_llafariaid(self):
 		return ' '.join([g.llinyn_llafariaid() for g in self.geiriau])
 
+	def llinyn_clymau(self):
+		return ' '.join([ unicode(g.clymau) for g in self.geiriau ])
 	
-class CwpledCywydd(object):
-	'''
-	class CwpledCywydd:
-		mewnbwn: dau linyn (yn y drefn gywir)
-	'''
-	def __init__(self, s1, s2):
-		self.cyntaf = Llinell(s1)
-		self.ail =	Llinell(s2)
-		if not self.cyntaf.nifer_sillau == 7 or not self.ail.nifer_sillau() == 7:
-			sys.stderr.write('TORR MESUR: Cwpled Cywydd: llinellau seithsill yn unig')
-			return False
-		if self.cyntaf.prifodl.nifer_sillau() == 1 and self.ail.prifodl.nifer_sillau() == 1:
-			sys.stderr.write('TORR MESUR: Cwpled Cywydd: dau brifodl acenog')
-			return False
-		if self.cyntaf.prifodl.nifer_sillau() > 1 and self.ail.prifodl.nifer_sillau() > 1:
-			sys.stderr.write('TORR MESUR: Cwpled Cywydd: dau brifodl diacen')
-			return False
-
-class ToddaidByr(object):
-	'''
-	class ToddaidByr:
-		mewnbwn: dau linyn (yn y drefn gywir)
-	'''
-	def __init__(self, s1, s2):
-		pass
-
-class Englyn(object):
-	'''
-	class Englyn:
-		mewnbwn: 
-			toddaid byr a chwpled cywydd
-	'''
-	def __init__(self, tb, cc):
-		self.toddaid_byr = ToddaidByr(tb)
-		self.cwpled_cywydd = CwpledCywydd(cc)
-
-class Cywydd(object):
-	'''
-	class Cywydd:
-		mewnbwn: 
-			rhestr cwpledau cywydd
-	'''
-	def __init__(self, rhestr_cc):
-		self.rhestr_cc = [ CwpledCywydd(cc) for cc in rhestr_cc ]
-
 
 #------------------------------------------------
 def main():
 
+	# s = "Ymysg y bedw yn ddedwydd"
+	s = "cloch y ffair ciliwch o'i ffordd."
+	ll = Llinell(s)
+	print ll.nodau()
+	print ll.llinyn_acenion()
+	print ll.llinyn()
+	print ll.llinyn_clymau()
+	return
+
 	rhestr_llinynnau = (
-		u"Taw â'th sôn, gad fi'n llonydd",
-		u"Ochain cloch a chanu clir",
-		u"Si'r oerwynt a sêr araul",
-		u"Awdur mad a dramodydd",
-		u"Ei awen gref yn ei grym",	  	
+		"Taw â'th sôn, gad fi'n llonydd",
+		"Ochain cloch a chanu clir",
+		"Si'r oerwynt a sêr araul",
+		"Awdur mad a dramodydd",
+		"Ei awen gref yn ei grym",	  	
 	)
 	for s in rhestr_llinynnau:
 		ll = Llinell(s)
 
 		print '--------------------'
 		print ll.llinyn_acenion()
-		print ll.llinyn
+		print ll.llinyn()
+		print ll.llinyn_llafariaid()
 		print ll.llinyn_cytseiniaid()
+		print ll.nifer_geiriau()
 		print ll.nifer_sillau()
+		nac = ll.nodau_acenog()
+		print [nod.llinyn for nod in nac]
 
 #	 cwpled = Cwpled(s1,s2)
 

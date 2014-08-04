@@ -6,7 +6,10 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from peiriant.cysonion import LLYTHRENWAU
+# from peiriant.cysonion import LLYTHRENWAU
+
+import peiriant.cysonion as pc
+import ebrydydd.cysonion as ec
 
 class Awdur(models.Model):
 	enw = models.CharField(max_length=140, null=True, blank=True)	   
@@ -57,9 +60,9 @@ class Englyn(models.Model):
 
 class Dadansoddiad(models.Model):
 	llinell		= models.ForeignKey(Llinell)
-	cynghanedd	= models.CharField(max_length=3, choices=LLYTHRENWAU['cynghanedd'], null=True, blank=True)
-	aceniad		= models.CharField(max_length=3, choices=LLYTHRENWAU['aceniad'], null=True, blank=True)
-	bai			= models.CharField(max_length=3, choices=LLYTHRENWAU['bai'], null=True, blank=True) 
+	cynghanedd	= models.CharField(max_length=3, choices=pc.LLYTHRENWAU['cynghanedd'], null=True, blank=True)
+	aceniad		= models.CharField(max_length=3, choices=pc.LLYTHRENWAU['aceniad'], null=True, blank=True)
+	bai			= models.CharField(max_length=3, choices=pc.LLYTHRENWAU['bai'], null=True, blank=True) 
 	dadansoddwr = models.CharField(max_length=140, null=True, blank=True)
 	sylwadau	= models.CharField(max_length=140, null=True, blank=True)
 	
@@ -80,7 +83,7 @@ class Dadansoddiad(models.Model):
 class Aelod(models.Model):
 	user = models.OneToOneField(User)
 	ffugenw = models.CharField(max_length=10)
-	statws = models.CharField(max_length=3, choices=LLYTHRENWAU['statws'])
+	statws = models.CharField(max_length=3, choices=ec.LLYTHRENWAU['statws'])
 	# darlun = models.ImageField(upload_to='darluniau_aelodau', null=True, blank=True)
 	def __unicode__(self):
 		return self.user.username

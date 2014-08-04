@@ -3,38 +3,48 @@
 '''
 lliwiau.py: 
 '''
-class bcolors:
+class lliwiau:
+	DIM 	= '\033[0m'
+	DU	 	= '\033[30m'
 	COCH 	= '\033[31m'
 	GWYRDD 	= '\033[32m'
 	MELYN 	= '\033[33m'
 	GLAS 	= '\033[34m'
-	PIWS 	= '\033[35m'
-	DIM 	= '\033[0m'
+	MAGENTA	= '\033[35m'
+	CYAN 	= '\033[36m'
+	GWYN 	= '\033[37m'
 
 	def disable(self):
-		self.COCH = ''
-		self.GLAS = ''
 		self.DIM = ''
-		self.A = ''
-		self.B = ''
-		self.C = ''
-		self.D = ''
-		self.E = ''
+		self.DU = ''
+		self.COCH = ''
+		self.GWYRDD = ''
+		self.MELYN = ''
+		self.GLAS = ''
+		self.MAGENTA = ''
+		self.CYAN = ''
+		self.GWYN = ''
 
 def coch(s):
-	return bcolors.COCH + s + bcolors.DIM
+	return lliwiau.COCH + s + lliwiau.DIM
 
 def gwyrdd(s):
-	return bcolors.GWYRDD + s + bcolors.DIM
+	return lliwiau.GWYRDD + s + lliwiau.DIM
 
 def melyn(s):
-	return bcolors.MELYN + s + bcolors.DIM
+	return lliwiau.MELYN + s + lliwiau.DIM
 
 def glas(s):
-	return bcolors.GLAS + s + bcolors.DIM
+	return lliwiau.GLAS + s + lliwiau.DIM
 
-def piws(s):
-	return bcolors.PIWS + s + bcolors.DIM
+def magenta(s):
+	return lliwiau.MAGENTA + s + lliwiau.DIM
+
+def cyan(s):
+	return lliwiau.CYAN + s + lliwiau.DIM
+
+def gwyn(s):
+	return lliwiau.GWYN + s + lliwiau.DIM
 
 #------------------------------------------------
 def main():
@@ -43,7 +53,8 @@ def main():
 	print gwyrdd(s)
 	print melyn(s)
 	print glas(s)
-	print piws(s)
+	print magenta(s)
+	print cyan(s)
 	
 if __name__ == '__main__': main()
 

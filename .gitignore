@@ -1,0 +1,5 @@
+.DS_Store
+*.s[a-w][a-z]
+*.pyc
+*.log
+*.tmproj

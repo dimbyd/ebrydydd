@@ -1,8 +1,9 @@
-#!/usr/bin/python
-# coding=utf8
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 adroddiad.py 
+	
+	harddu allbwn y peiriant (ar gyfer y wê)
 '''
 
 # from acen import aceniad, nifer_sillau, pwyslais, traeannu_cytseiniaid
@@ -10,9 +11,9 @@ adroddiad.py
 # from cytseinedd2 import prawf_cytseinedd
 
 # import cysonion as cy
-import llinyn as ll
-import acen as ac
-import odl as od
+# import odl as od
+
+import lliwiau as lliw
 
 global debug
 debug = False
@@ -27,136 +28,242 @@ class Adroddiad(object):
 		Nodiadau:
 			Mae'r mynegrifau yn cyfeirio at rhestr nodau y llinyn
 	'''
-	def __init__(self, llinyn, cynghanedd=None, aceniad=None, bai=None, sylwadau=None, data=dict()): 
-		self.llinyn = llinyn
+	def __init__(self, llinell, cynghanedd=None, aceniad=None, bai=None, sylwadau=None, data=dict()): 
+		self.llinell = llinell
 		self.cynghanedd = cynghanedd
 		self.aceniad = aceniad
 		self.bai = bai
 		self.sylwadau = sylwadau
 		self.data = data
 
-	def __str__(self):
-		# s = '-----\n'
-		# s = '------------------------------\n'
-		s = ''
-		s += self.llinyn + '\n'
-		if self.cynghanedd:
-			s += 'CNG: ' + self.cynghanedd + '\n'
-		# if self.aceniad:
-		# 	s += 'ACE: ' + self.aceniad + '\n'
-		# if self.bai:
-		# 	s += 'BAI: ' + self.bai + '\n'
-		# if self.sylwadau:
-		# 	s += 'SYL: ' + self.sylwadau + '\n'
+	def __unicode__(self):
+		ss = []
+		ss.append( '------------------------------' )
+		# ss.append( 'Adroddiad:' )
+		ss.append( self.llinell.llinyn() )
+		ss.append( self.cynghanedd )
+		# 
+		# if self.cynghanedd:	
+		# 	ss.append( 'CNG: ' + self.cynghanedd )
+		# if self.aceniad:	
+		# 	ss.append( 'ACE: ' + self.aceniad )
+		# if self.bai:		
+		# 	ss.append( 'BAI: ' + self.bai )
+		# if self.sylwadau:	
+		# 	ss.append( 'SYL: ' + self.sylwadau )
 		if self.data:
-			# for kk in self.data.iterkeys():
-			# 	s += kk + '\t' + str(self.data[kk]) + '\n'
-			s += self.llinyn_acenion() + '\n'
-			s += self.llinyn + '\n'
-			s += self.llinyn_gorffwysfa() + '\n'
-			s += self.llinyn_sillau_colon() + '\n'
-			if self.data.has_key('parau'):
-				s += self.llinyn_cytseiniaid_cyfatebol() + '\n'
-				s += self.llinyn_cytseiniaid_traws() + '\n'
-			# s += self.llinyn_cytseiniaid_cynffon() + '\n'
-			if self.data.has_key('odl'):
-				s += self.llinyn_odl() + '\n'
-			if self.data.has_key('sylwadau') and self.data['sylwadau']:
-				s += str(self.data['sylwadau']) + '\n'
-			s += '------------------------------'
-			
-		return s
-	
+			ss.append( self.text_strings() )
+		ss.append( '------------------------------' )
+		return '\n'.join(ss)
+
+	def __str__(self):
+		return self.__unicode__().encode('utf-8')
+
+
+	def text_strings(self, blanksymbol=' '):
+		ss = []
+		ss.append( self.llinell.llinyn_acenion() )
+		ss.append( self.llinyn_ac_odl(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_acenion_colon(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_gwant(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_gorffwysfa(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_odl(blanksymbol=blanksymbol) )
+		# if not all([ c==blanksymbol for c in self.llinyn_odl() ]):
+		# 	ss.append( self.llinyn_ac_odl(blanksymbol=blanksymbol) )
+		if not all([ c==blanksymbol for c in self.llinyn_cytseiniaid_cyfatebol() ]):
+			ss.append( self.llinyn_cytseinedd(blanksymbol=blanksymbol) )
+			# ss.append( self.llinyn_cytseiniaid_traws(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_cytseiniaid_cyfatebol(blanksymbol=blanksymbol) )
+		# ss.append( self.llinyn_cytseiniaid_cynffon(blanksymbol=blanksymbol) )		
+		if self.data.has_key('sylwadau'):
+			ss.append('[' + ':'.join( self.data['sylwadau'] ) + ']' )
+		return '\n'.join(ss)
+
+	def html_strings(self, blanksymbol=' '):
+		hs = dict()
+		hs['llinyn']		= self.llinell.llinyn()
+		hs['acenion'] 		= self.llinell.llinyn_acenion()
+		hs['acenion_colon']	= self.llinyn_acenion_colon(html=True, blanksymbol=blanksymbol)
+		hs['gwant'] 		= self.llinyn_gwant(html=True, blanksymbol=blanksymbol)
+		hs['gorffwysfa'] 	= self.llinyn_gorffwysfa(html=True, blanksymbol=blanksymbol)
+		hs['odl']			= self.llinyn_odl(html=True, blanksymbol=blanksymbol)
+		hs['c_cyfatebol']	= self.llinyn_cytseiniaid_cyfatebol(html=True, blanksymbol=blanksymbol)
+		hs['c_traws']		= self.llinyn_cytseiniaid_traws(html=True, blanksymbol=blanksymbol)
+		hs['c_cwt']			= self.llinyn_cytseiniaid_cynffon(html=True, blanksymbol=blanksymbol)
+
+		if self.data.has_key('sylwadau'):
+			hs['sylwadau']	= u''.join(self.data['sylwadau'])
+
+		return hs
+
 	def llinyn_acenion(self):
-		return ' '.join([ ac.llinyn_acenion(g) for g in self.llinyn.split(' ') ])
+		return self.llinell.llinyn_acenion()
 
+	def llinyn_ac_odl(self, html=False, blanksymbol=' '):
+		ss_lli = list( self.llinell.llinyn() )
+		ss_odl = list( self.llinyn_odl(html=html, blanksymbol=blanksymbol) )
+		ss = []
+		for j in range( len(ss_lli) ):
+			if ss_odl[j] == blanksymbol:
+				ss.append( ss_lli[j] )
+			else:
+				ss.append( lliw.magenta( ss_odl[j] ) )
+		return ''.join( ss )
 
-	# odl
-	def llinyn_odl(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
-		if self.data.has_key('odl'):
-			geiriau = self.llinyn.split(' ')
-			for i,b in self.data['odl']:
-				offset = 0
-				for g in geiriau[:i]: 
-					offset += len( ll.nodau(g) ) + 1
-				for j in range(b[0],b[1]):
-					ss[offset+j] = nodau[offset+j]
-				if html:
-					ss[offset+b[0]] = '<span class="odl">' + ss[ offset+b[0] ]
-					ss[offset+b[1]-1] = ss[offset+b[1]-1] + '</span>'
-		return ''.join(ss)
-		
-	def llinyn_gorffwysfa(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
+	def llinyn_cytseinedd(self, html=False, blanksymbol=' '):
+		ss_gwa = list( self.llinyn_gwant(html=html, blanksymbol=blanksymbol) )
+		ss_par = list( self.llinyn_cytseiniaid_cyfatebol(html=html, blanksymbol=blanksymbol) )
+		ss_tra = list( self.llinyn_cytseiniaid_traws(html=html, blanksymbol=blanksymbol) )
+		ss_cwt = list( self.llinyn_cytseiniaid_cynffon(html=html, blanksymbol=blanksymbol) )
+		ss_col = list( self.llinyn_acenion_colon(html=html, blanksymbol=blanksymbol) )
+		ss = []
+		for j in range( len(ss_col) ):
+			if ss_gwa[j] != blanksymbol:
+				ss.append( ss_gwa[j] )
+			elif ss_par[j] != blanksymbol:
+				ss.append( lliw.cyan( ss_par[j] ) )
+			elif ss_tra[j] != blanksymbol:
+				ss.append( lliw.coch( ss_tra[j] ) )
+			elif ss_cwt[j] != blanksymbol:
+				ss.append( lliw.melyn( ss_cwt[j] ) )
+			elif ss_col[j] != blanksymbol:
+				ss.append( ss_col[j] )
+			else:
+				ss.append( blanksymbol )
+		return ''.join( ss )
+
+	def llinyn_acenion_colon(self, html=False, blanksymbol=' '):
+		geiriau_dethol = []
 		if self.data.has_key('gorffwysfa'):
-			geiriau = self.llinyn.split(' ')
-			for i in self.data['gorffwysfa']:
-				offset = 0
-				for g in geiriau[:i+1]: 
-					offset += len( ll.nodau(g) ) + 1
-				idx = offset - 1
-				if html:
-					ss[idx] = '<span class="gorffwysfa">|</span>'
+			gorff = self.data['gorffwysfa']
+			if len(gorff) < 3: # sain
+				geiriau_dethol.append( gorff[-1] )
+			else: # sain gadwynog	
+				geiriau_dethol.append( gorff[-2] )
+		geiriau_dethol.append(self.llinell.geiriau[-1])
+		ss = []
+		for g in self.llinell.geiriau:
+			if g in geiriau_dethol:
+				if html:	
+					ss.append( '<span class="colon">' + g.llinyn_acenion_colon(blanksymbol=blanksymbol) + '</span>' )
 				else:
-					ss[idx] = '|'
-		return ''.join(ss)
+					ss.append( g.llinyn_acenion_colon(blanksymbol=blanksymbol) )
+			else:
+				ss.append( ''.join([ blanksymbol*len(nod.llinyn) for nod in g.nodau ]) ) 
+		return blanksymbol.join( ss )
 
-	def llinyn_sillau_colon(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
-		# ss = list(blanksymbol*len(nodau))
-		if self.data.has_key('gorffwysfa') and self.data.has_key('acenion'):
-			acenion = self.data['acenion']
-			geiriau = self.llinyn.split(' ')
-			gorff = self.data['gorffwysfa'][-1]	# dewis yr ail orffwysfa yn y gynghanedd sain
-			for i in [gorff, len(geiriau)-1]:
-				offset = 0
-				for g in geiriau[:i]: offset += len( ll.nodau(g) ) + 1
-				ace = acenion[i][0]
-				idx = offset + ace[-1]
-				ss[idx] = ':'
-				if len(ace) > 1:
-					idx = offset + ace[-2]
-					ss[idx] = ':'
-		return ''.join(ss)
+	def llinyn_gwant(self, html=False, blanksymbol=' '):
+		geiriau_dethol = []
+		if self.data.has_key('gorffwysfa'):
+			geiriau_dethol = self.data['gorffwysfa']
+		ss = []
+		for g in self.llinell.geiriau:
+			ss.append( ''.join([ blanksymbol*len(nod.llinyn) for nod in g.nodau ]) ) 
+			if g in geiriau_dethol:
+				if html:	
+					ss.append( '<span class="gwant">|</span>' )
+				else:
+					ss.append( '|' )
+			else:
+				ss.append(' ')
+		return ''.join( ss[:-1] )
+
+	def llinyn_gorffwysfa(self, html=False, blanksymbol=' '):
+		geiriau_dethol = []
+		if self.data.has_key('gorffwysfa'):
+			geiriau_dethol += self.data['gorffwysfa']
+		ss = []
+		for g in self.llinell.geiriau[:-1]:
+			if g in geiriau_dethol:
+				if html:	
+					ss.append( '<span class="gorffwysfa">' + g.llinyn() + '</span>' )
+				else:
+					# ss.append( ''.join([ nod.llinyn.upper() for nod in g.nodau ]) )
+					ss.append( lliw.coch(g.llinyn()) )
+			else:
+				ss.append( ''.join([ blanksymbol*len(nod.llinyn) for nod in g.nodau ]) ) 
+		g = self.llinell.geiriau[-1]
+		if html:
+			ss.append( '<span class="prifodl">' + g.llinyn() + '</span>' )
+		else:
+			# ss.append( ''.join([ nod.llinyn.upper() for nod in g.nodau ]) )		
+			ss.append( lliw.coch(g.llinyn()) )
+
+		return blanksymbol.join( ss )
+
+	def llinyn_odl(self, html=False, blanksymbol=' '):
+		nodau_dethol = []
+		if self.data.has_key('odl'):
+			nodau_dethol += [nod for nodau in self.data['odl'] for nod in nodau]
+		ss = []
+		for g in self.llinell.geiriau:
+			s = []
+			for nod in g.nodau:
+				if nod in nodau_dethol:
+					if html:
+						s.append( '<span class="odl">' + nod.llinyn + '</span>' )
+					else:
+						s.append(nod.llinyn)
+				else:
+					s.append( blanksymbol*len(nod.llinyn) )
+			ss.append( ''.join(s) )
+		return blanksymbol.join(ss)
 
 	def llinyn_cytseiniaid_cyfatebol(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
+		nodau_dethol = []
 		if self.data.has_key('parau'):
-			for i,j in self.data['parau']:
-				ss[i] = nodau[i]
-				ss[j] = nodau[j]
-		return ''.join(ss)
+			nodau_dethol += [nod for par in self.data['parau'] for nod in par]
+		ss = []
+		for g in self.llinell.geiriau:
+			s = []
+			for nod in g.nodau:
+				if nod in nodau_dethol:
+					if html:
+						s.append( '<span class=<cytsain_cyfatebol>' + nod.llinyn + '</span>' )
+					else:
+						s.append(nod.llinyn)
+				else:
+					s.append( blanksymbol*len(nod.llinyn) )
+			ss.append( ''.join(s) )
+		return blanksymbol.join(ss)
 
 	def llinyn_cytseiniaid_traws(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
-		if self.data.has_key('pen_y'):
-			mynegrifau = self.data['pen_y']
-			for i in mynegrifau:
-				ss[i] = nodau[i]
-			# mi = min(mynegrifau)
-			# mx = max(mynegrifau)
-			# ss[mi-1] = '('
-			# ss[mx+1] = ')'
-		return ''.join(ss)
-
+		nodau_dethol = []
+		if self.data.has_key('pengoll_dde'):
+			nodau_dethol += self.data['pengoll_dde']
+		ss = []
+		for g in self.llinell.geiriau:
+			s = []
+			for nod in g.nodau:
+				if nod in nodau_dethol:
+					if html:
+						s.append( '<span class=<cytsain_traws>' + nod.llinyn + '</span>' )
+					else:
+						s.append( nod.llinyn )
+				else:
+					s.append( blanksymbol*len(nod.llinyn) )
+			ss.append( ''.join(s) )
+		return blanksymbol.join(ss)
+	
 	def llinyn_cytseiniaid_cynffon(self, html=False, blanksymbol=' '):
-		nodau = ll.nodau(self.llinyn)
-		ss = [' '*len(nodyn) for nodyn in nodau]
-		if self.data.has_key('cwt_x'):
-			for i in self.data['cwt_x']: 
-				# print 'cwt_x >> ' + str(i)
-				ss[i] = nodau[i]
-		if self.data.has_key('cwt_y'):
-			for i in self.data['cwt_y']: 
-				# print 'cwt_y >> ' + str(i)
-				ss[i] = nodau[i]
-		return ''.join(ss)
+		nodau_dethol = []
+		if self.data.has_key('cwt_chwith'):
+			nodau_dethol += self.data['cwt_chwith']
+		if self.data.has_key('cwt_dde'):
+			nodau_dethol += self.data['cwt_dde']
+		ss = []
+		for g in self.llinell.geiriau:
+			s = []
+			for nod in g.nodau:
+				if nod in nodau_dethol:
+					if html:
+						s.append( '<span class=<cytsain_cwt>' + nod.llinyn + '</span>' )
+					else:
+						s.append(nod.llinyn)
+				else:
+					s.append( blanksymbol*len(nod.llinyn) )
+			ss.append( ''.join(s) )
+		return blanksymbol.join(ss)
 
 #------------------------------------------------
 def main():

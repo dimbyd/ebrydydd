@@ -1,7 +1,8 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 ''' 
 cytseinedd.py
-	darganfod cytseinedd rhwng dau linyn
+	darganfod cytseinedd rhwng dau restr nodau
 
 	TRA: Traws 
 		Rhaid cael o leiaf un gytsain o flaen acen yr orffwysfa
@@ -24,347 +25,542 @@ cytseinedd.py
 	
 	CDI/ADI: os yw acen yr orffwysfa yn llafarog (h.y. heb gytsain o gwbl), rhai i acen y brifodl hefyd fod yn llafarog
 		h.y. dim cytsain rhwng y ddau bwyslais (Cain yw awen cân eos)
-		** gwyliwch am w-gytsain **
-		
-	cytsain-cytsain
-	cytsain-par_cyffelyb (heb gytsain rhyngddynt)
-	c=g/g (heb gytsain na llafariad rhyngddynt)
-	p=b/b
-	t=d/d
-		
 	
 '''
-from llinyn import nodau, clymau
-from acen import traeannu_cytseiniaid, traeannu
-from odl import prawf_odl
-
 import cysonion as cy
-import llinyn as ll
-import acen as ac
-import odl as od
+from nodau import Nod, RhestrNodau
+from gair import Gair
+# from odl import oes_odl
+
+import logging
+out = logging.getLogger(__name__)
 
 global debug
 debug = False
 
-def cyfateb(c1, c2):
-	c1 = c1.lower()
-	c2 = c2.lower()
-	if c1 == c2:
-		return True, ''	
-	elif c1 == 'r' and c2 == 'rh':
+def cyfateb(s1, s2):
+	s1 = s1.lower()
+	s2 = s2.lower()
+
+	if s1 == s2:
+		return True, '' 
+	elif s1 == 'r' and s2 == 'rh':
 		return True, 'r-yn-ateb-rh'
-	elif c1 == 'rh' and c2 == 'r':
+	elif s1 == 'rh' and s2 == 'r':
 		return True, 'rh-yn-ateb-r'
-	elif c1 == 's' and c2 == 'sh':
+	elif s1 == 's' and s2 == 'sh':
 		return True, 's-yn-ateb-sh'
-	elif c1 == 'sh' and c2 == 's':
+	elif s1 == 'sh' and s2 == 's':
 		return True, 'sh-yn-ateb-s'
-	elif c1 == 'ph' and c2 == 'ff':
+	elif s1 == 'ph' and s2 == 'ff':
 		return True, 'ph-yn-ateb-ff'
-	elif c1 == 'ff' and c2 == 'ph':
+	elif s1 == 'ff' and s2 == 'ph':
 		return True, 'ff-yn-ateb-ph'
 	else:
 		return False, ''
 
-
-def cyfatebiaeth(x,y, reverse=False):
+def paru_cytseiniaid(x_nodau, y_nodau):
 	'''
-	ffwythiant: dadansoddi cyfatebiaeth cytseiniaid
-	mewnbwn: dau linyn
-	allbwn: rhestr o barau mynegrifau nodau
-	'''
-	sylwadau = []
-	
-	nodau_x = ll.nodau(x)
-	nodau_y = ll.nodau(y)
-	
-	if reverse:
-		nodau_x.reverse()
-		nodau_y.reverse()
-		
-	# print nodau_x
-	# print nodau_y
-	# print 'len(nodau_x) = ' + str(len(nodau_x))
-	# print 'len(nodau_y) = ' + str(len(nodau_y))
-	
-	parau = []
-	ix = 0
-	iy = 0
-	while ix < len(nodau_x) and nodau_x[ix] not in cy.cytseiniaid: ix = ix + 1
-	while iy < len(nodau_y) and nodau_y[iy] not in cy.cytseiniaid: iy = iy + 1
-		
-	# prif ddolen
-	while ix < len(nodau_x) and iy < len(nodau_y):
-		# if debug:
-		# print '----------'
-		# print 'curr: ' + str((nodau_x[ix],nodau_y[iy]))
-		# print ix
-		# print iy
-			
-		jx = ix + 1
-		while jx < len(nodau_x) and nodau_x[jx] not in cy.cytseiniaid: jx = jx + 1
-		
-		jy = iy + 1
-		while jy < len(nodau_y) and nodau_y[jy] not in cy.cytseiniaid: jy = jy + 1
-		
-		# h-heb-ei-hateb
-		if nodau_x[ix] == 'h' and nodau_y[iy] != 'h':
-			sylwadau.append('h-heb-ei-hateb')
-			ix = jx
-			jx = ix + 1
-			while jx < len(nodau_x) and nodau_x[jx] not in cy.cytseiniaid: jx = jx + 1
-			continue
-		if nodau_x[ix] != 'h' and nodau_y[iy] == 'h':
-			sylwadau.append('h-heb-ei-hateb')
-			iy = jy
-			jy = iy + 1
-			while jy < len(nodau_y) and nodau_y[jy] not in cy.cytseiniaid: jy = jy + 1
-			continue
-		
-		# nodau cyntaf yn cyfateb
-		cyf = cyfateb(nodau_x[ix], nodau_y[iy])
-		if cyf[0]:
-			parau.append((ix,iy))
-			if cyf[1]: sylwadau.extend(cyf[1])
-			
-			# un-yn-ateb-dau
-			if jy < len(nodau_y) and nodau_x[ix] == nodau_y[jy] and all(c not in cy.cytseiniaid for c in nodau_y[iy+1:jy]):
-				if jx < len(nodau_x) and not nodau_x[jx] == nodau_y[jy]:
-					parau.append((ix,jy))
-					sylwadau.append( str(nodau_x[ix]) + '-yn-ateb-' + str(nodau_y[iy]) + '/' + str(nodau_y[jy]) )
-					iy = jy
-					jy = iy + 1
-					while jy < len(nodau_y) and nodau_y[jy] not in cy.cytseiniaid: jy = jy + 1
-					
-			# dau-yn-ateb-un
-			elif jx < len(nodau_x) and nodau_x[jx] == nodau_y[iy] and all(c not in cy.cytseiniaid for c in nodau_x[ix+1:jx]):
-				if jy < len(nodau_y) and not nodau_x[jx] == nodau_y[jy]:
-					parau.append((jx,iy))
-					sylwadau.append( str(nodau_x[ix]) + '/' + str(nodau_x[jx]) + '-yn-ateb-' + str(nodau_y[iy]) )
-					ix = jx
-					jx = ix + 1
-					while jx < len(nodau_x) and nodau_x[jx] not in cy.cytseiniaid: jx = jx + 1
-					
-			# caledu: un yn ateb dau
-			elif jy < len(nodau_y) and all(c not in cy.cytseiniaid for c in nodau_y[iy+1:jy]) and (
-					(nodau_x[ix] == 'p' and nodau_y[iy] == 'p' and nodau_y[jy] == 'b') or 
-					(nodau_x[iy] == 't' and nodau_y[iy] == 't' and nodau_y[jy] == 'd') or
-					(nodau_x[iy] == 'c' and nodau_y[iy] == 'c' and nodau_y[jy] == 'g') or 
-					(nodau_x[ix] == 'ff' and nodau_y[iy] == 'ff' and nodau_y[jy] == 'f') or 
-					(nodau_x[iy] == 'll' and nodau_y[iy] == 'll' and nodau_y[jy] == 'll') or
-					(nodau_x[iy] == 'th' and nodau_y[iy] == 'th' and nodau_y[jy] == 'dd')
-				):
-				sylwadau.append( str(nodau_x[ix]) + '-yn-ateb-' + str(nodau_y[iy]) + '/' + str(nodau_y[jy]) )
-				parau.append((ix,jy))
-				iy = jy
-				jy = iy + 1
-				while jy < len(nodau_y) and nodau_y[jy] not in cy.cytseiniaid: jy = jy + 1
-		
-			elif jx < len(nodau_x) and all(c not in cy.llythrennau for c in nodau_x[ix+1:jx]) and (
-					(nodau_x[ix] == 'p' and nodau_x[jx] == 'b' and nodau_y[iy] == 'p') or
-					(nodau_x[ix] == 't' and nodau_x[jx] == 'd' and nodau_y[iy] == 't') or
-					(nodau_x[ix] == 'c' and nodau_x[jx] == 'g' and nodau_y[iy] == 'c') or
-					(nodau_x[ix] == 'ff' and nodau_x[jx] == 'f' and nodau_y[iy] == 'p') or
-					(nodau_x[ix] == 'll' and nodau_x[jx] == 'l' and nodau_y[iy] == 't') or
-					(nodau_x[ix] == 'th' and nodau_x[jx] == 'dd' and nodau_y[iy] == 'c')				
-				):
-				sylwadau.append( str(nodau_x[ix]) + '/' + str(nodau_x[jx]) + '-yn-ateb-' + str(nodau_y[iy]) )
-				parau.append((jx,iy))
-				ix = jx
-				jx = ix + 1
-				while jx < len(nodau_x) and nodau_x[jx] not in cy.cytseiniaid: jx = jx + 1
-			else:
-				pass
-				
-		# caledu cytseiniaid: dau yn ateb un
-		elif jx < len(nodau_x) and all(c not in cy.llythrennau for c in nodau_x[ix+1:jx]) and (
-				(nodau_x[ix] == 'b' and nodau_x[jx] == 'b' and nodau_y[iy] == 'p') or
-				(nodau_x[ix] == 'd' and nodau_x[jx] == 'd' and nodau_y[iy] == 't') or
-				(nodau_x[ix] == 'g' and nodau_x[jx] == 'g' and nodau_y[iy] == 'c') or
-				(nodau_x[ix] == 'b' and nodau_x[jx] == 'p' and nodau_y[iy] == 'p') or
-				(nodau_x[ix] == 'd' and nodau_x[jx] == 't' and nodau_y[iy] == 't') or
-				(nodau_x[ix] == 'g' and nodau_x[jx] == 'c' and nodau_y[iy] == 'c') or
-				(nodau_x[ix] == 'f' and nodau_x[jx] == 'ff' and nodau_y[iy] == 'ff') or
-				(nodau_x[ix] == 'l' and nodau_x[jx] == 'll' and nodau_y[iy] == 'll') or
-				(nodau_x[ix] == 'dd' and nodau_x[jx] == 'th' and nodau_y[iy] == 'th') 
-			):
-			sylwadau.append( str(nodau_x[ix]) + '/' + str(nodau_x[jx]) + '-yn-ateb-' + str(nodau_y[iy]) )
-			parau.append((ix,iy))
-			parau.append((jx,iy))
-			ix = jx
-			jx = ix + 1
-			while jx < len(nodau_x) and nodau_x[jx] not in cy.cytseiniaid: jx = jx + 1
-					
-		# caledu cytseiniaid: un yn ateb dau
-		elif jy < len(nodau_y) and all(c not in cy.llythrennau for c in nodau_y[iy+1:jy]) and (
-				(nodau_x[ix] == 'p' and nodau_y[iy] == 'b' and nodau_y[jy] == 'b') or 
-				(nodau_x[iy] == 't' and nodau_y[iy] == 'd' and nodau_y[jy] == 'd') or
-				(nodau_x[iy] == 'c' and nodau_y[iy] == 'g' and nodau_y[jy] == 'g') or 
-				(nodau_x[ix] == 'p' and nodau_y[iy] == 'b' and nodau_y[jy] == 'p') or 
-				(nodau_x[iy] == 't' and nodau_y[iy] == 'd' and nodau_y[jy] == 't') or
-				(nodau_x[iy] == 'c' and nodau_y[iy] == 'g' and nodau_y[jy] == 'c') or 
-				(nodau_x[ix] == 'ff' and nodau_y[iy] == 'f' and nodau_y[jy] == 'ff') or 
-				(nodau_x[iy] == 'll' and nodau_y[iy] == 'l' and nodau_y[jy] == 'll') or
-				(nodau_x[iy] == 'th' and nodau_y[iy] == 'dd' and nodau_y[jy] == 'th')
-			):
-			sylwadau.append( str(nodau_x[ix]) + '-yn-ateb-' + str(nodau_y[iy]) + '/' + str(nodau_y[jy]) )
-			parau.append((ix,iy))
-			parau.append((ix,jy))
-			iy = jy
-			jy = iy + 1
-			while jy < len(nodau_y) and nodau_y[jy] not in cy.cytseiniaid: jy = jy + 1
-		else:
-			# print 'dim cyfatebiaeth lawn'
-			break
-		# symud i'r nesaf
-		ix = jx
-		iy = jy
-	# diweddeb		
-	cynffon_x = []
-	while ix < len(nodau_x):
-		if nodau_x[ix] in cy.cytseiniaid: cynffon_x.append(ix)
-		ix = ix + 1
-	cynffon_y = []
-	while iy < len(nodau_y):
-		if nodau_y[iy] in cy.cytseiniaid: cynffon_y.append(iy)
-		iy = iy + 1		
-	
-	if reverse:
-		parau.reverse()
-		cynffon_x.reverse()
-		cynffon_y.reverse()
-		parau = [ (len(nodau_x)-i-1,len(nodau_y)-j-1) for i,j in parau ]
-		cynffon_x = [ len(nodau_x)-i-1 for i in cynffon_x ]
-		cynffon_y = [ len(nodau_y)-j-1 for j in cynffon_y ]
-	return parau, cynffon_x, cynffon_y, sylwadau
-
-
-def prawf_cytseinedd(x,y):
-	'''
-	ffwythiant:	darganfod cytseinedd rhwng dau linyn
-	mewnbwn:	dau linyn
+	ffwythiant: ceisio paru dau restr nodau
+	mewnbwn:	dau restr geiriau
 	allbwn:		dosbarth cytseinedd (neu dosbarth bai)
 	sylwadau:
 	'''
-	data = dict()
-	data['sylwadau'] = []
-	
-	x = x.lower()
-	y = y.lower()
+	if debug:
+		print 'ffwythiant: paru_cytseiniaid'
+		
+	if not x_nodau or not y_nodau:
+		return [],[Nod('phantom')],[Nod('phantom')],['dim nodau']
+		
+	# ffwythiant i echdynnu rhestr cytseiniaid o'r rhestr nodau
+	def rhestr_cytseiniaid(rhestr_nodau):
+		xx = list(rhestr_nodau)
+		xx.reverse()
+		x_list = []
+		while xx:
+			pre = []
+			nod = xx.pop()
+			while xx and not nod.iscytsain():
+				pre.append(nod)
+				nod = xx.pop()
+			if nod.iscytsain():
+				x_list.append( (nod, pre) )
+		return x_list
 
-	nodau_x = ll.nodau(x)
-	nodau_y = ll.nodau(y)
+	x_list = rhestr_cytseiniaid(x_nodau)
+	y_list = rhestr_cytseiniaid(y_nodau)
+
+
+	# info
+	if debug:
+		print '__________________'
+		# for a,b in x_list:
+		#	print a.llinyn + '\t' + str([nod.llinyn for nod in b])
+		print ' '.join([ a.llinyn for a,b in x_list])
+		print '________'
+		# for a,b in y_list:
+		#	print a.llinyn + '\t' + str([nod.llinyn for nod in b])
+		print ' '.join([ a.llinyn for a,b in y_list])
+		print '__________________'
+
+	# pan nad oes cytseiniaid ...
+	if not x_list and not y_list:
+		return [], [], [], ['dim cytseiniaid o gwbl']
+	elif not x_list and y_list:
+		return [], [], [a for a,b in y_list], ['dim cytseiniaid yn y rhestr cyntaf']
+	elif x_list and not y_list:
+		return [], [a for a,b in x_list], [], ['dim cytseiniaid yn yr ail restrs']
+	else:
+		pass
+
 	
-	xx = x.split(' ')
-	yy = y.split(' ')
+	# init
+	sylwadau = []
+	parau = []
+	
+	# mae o leiaf un gytsain yn y ddwy restr erbyn hyn
+	x_curr, x_pre = x_list.pop()
+	y_curr, y_pre = y_list.pop()
+	
+	# prif ddolen
+	while x_curr and y_curr:
+		x_inter = x_pre
+		y_inter = y_pre
+		x_prev, x_pre = x_list.pop() if x_list else (None, None)
+		y_prev, y_pre = y_list.pop() if y_list else (None, None)
+		
+		if debug:
+			print '--------------------'
+			xs = x_prev.llinyn if x_prev else ' '
+			ys = y_prev.llinyn if y_prev else ''
+			print 'x_prev: ' + xs + '\t x_curr: ' + x_curr.llinyn + '\t x_inter:' + ''.join([ nod.llinyn for nod in x_inter ])
+			print 'y_prev: ' + ys + '\t y_curr: ' + y_curr.llinyn + '\t y_inter:' + ''.join([ nod.llinyn for nod in y_inter ])
+
+			print 'x: (%s,%s)' % (xs, x_curr.llinyn)
+			print 'y: (%s,%s)' % (ys, y_curr.llinyn)
+		
+		# ceseiliad yn y nodau chwith
+		x_dosb = None
+		if x_prev and all(nod.isspace() for nod in x_inter) and cy.dosbarth_ceseiliad.has_key( (x_prev.llinyn, x_curr.llinyn) ):
+			x_dosb = cy.dosbarth_ceseiliad[ (x_prev.llinyn, x_curr.llinyn) ]
+			out.debug('paru_cytseiniaid: x_dosb: ' + str(x_dosb))
+
+		# ceseiliad yn y nodau dde
+		y_dosb = None
+		if y_prev and all(nod.isspace() for nod in y_inter) and cy.dosbarth_ceseiliad.has_key( (y_prev.llinyn, y_curr.llinyn) ):
+			y_dosb = cy.dosbarth_ceseiliad[ (y_prev.llinyn, y_curr.llinyn) ]
+			out.debug('paru_cytseiniaid: y_ces: ' + str(y_dosb))
+		
+		# ceseiliad ar y chwith a'r dde
+		if x_dosb and y_dosb and not any(nod.iscytsain() for nod in x_inter) and not any(nod.iscytsain() for nod in y_inter):
+			cyf, syl = cyfateb(x_dosb,y_dosb)
+			if syl: sylwadau.append(syl)
+			if cyf:
+				parau.append([ x_curr, y_curr ])
+				parau.append([ x_curr, y_prev ])
+				parau.append([ x_prev, y_curr ])
+				parau.append([ x_prev, y_prev ])
+				sylwadau.append(x_prev.llinyn + '/'+ x_curr.llinyn + '-yn-ateb-' + y_prev.llinyn + '/' + y_curr.llinyn)
+				x_curr = x_prev
+				x_prev, x_inter = x_list.pop() if x_list else (None, None)
+				y_curr = y_prev
+				y_prev, y_inter = y_list.pop() if y_list else (None, None)
+		
+		# ceseiliad ar y chwith
+		elif x_dosb and not y_dosb and not any(nod.iscytsain() for nod in x_inter):
+			cyf, syl = cyfateb(x_dosb, y_curr.llinyn)
+			if syl: sylwadau.append(syl)
+			if cyf:
+				parau.append([ x_curr, y_curr ])
+				parau.append([ x_prev, y_curr ])
+				sylwadau.append(x_prev.llinyn + '/' + x_curr.llinyn + '-yn-ateb-' + y_curr.llinyn)
+				x_curr = x_prev
+				x_prev, x_inter = x_list.pop() if x_list else (None, None)
+			
+		# ceseiliad ar y dde
+		elif not x_dosb and y_dosb and not any(nod.iscytsain() for nod in y_inter):
+			cyf, syl = cyfateb(x_curr.llinyn, y_dosb)
+			if syl: sylwadau.append(syl)
+			if cyf:
+				parau.append([ x_curr, y_curr ])
+				parau.append([ x_curr, y_prev ])
+				sylwadau.append(x_curr.llinyn + '-yn-ateb-' + y_prev.llinyn + '/' + y_curr.llinyn)
+				y_curr = y_prev
+				y_prev, y_inter = y_list.pop() if y_list else (None, None)
+
+		# dim ceseilio (felly cymharu x_curr a y_curr)
+		else:
+			cyf, syl = cyfateb(x_curr.llinyn, y_curr.llinyn)
+			if syl: sylwadau.append(syl)
+			if cyf:
+				# x_curr a y_curr yn cyfateb
+				parau.append([ x_curr, y_curr ])
+				# un-yn-ateb-dau
+				if y_prev and (x_curr.llinyn == y_prev.llinyn) and not any(nod.iscytsain() for nod in y_inter):
+					if not x_prev or x_prev and not (x_prev.llinyn == y_prev.llinyn):
+						parau.append([ x_curr,y_prev ])
+						sylwadau.append( x_curr.llinyn + '-yn-ateb-' + y_curr.llinyn + '/' + y_prev.llinyn )
+						y_curr = y_prev
+						y_prev, y_inter = y_list.pop() if y_list else (None, None)
+			
+				# dau-yn-ateb-un
+				if x_prev and (x_prev.llinyn == y_curr.llinyn) and not any(nod.iscytsain() for nod in x_inter):
+					if not y_prev or y_prev and not (x_prev.llinyn == y_prev.llinyn):
+						parau.append([ x_prev, y_curr ])
+						sylwadau.append( x_curr.llinyn + '/' + x_prev.llinyn + '-yn-ateb-' + y_curr.llinyn)
+						x_curr = x_prev
+						x_prev, x_inter = x_list.pop() if x_list else (None, None)
+
+			# dim cyfatebiaeth o hyd
+			else:
+				# h-heb-ei-hateb
+				if x_curr and y_curr and x_curr.llinyn == 'h' and y_curr.llinyn != 'h':
+					sylwadau.append('h-heb-ei-hateb')
+					x_curr = x_prev
+					x_prev, x_inter = x_list.pop() if x_list else (None, None)
+					continue
+				elif x_curr and y_curr and x_curr.llinyn != 'h' and y_curr.llinyn == 'h':
+					sylwadau.append('h-heb-ei-hateb')
+					y_curr = y_prev
+					y_prev, y_inter = y_list.pop() if y_list else (None, None)
+					continue
+				else:
+					if debug:
+						print 'dim cyfatebiaeth lawn'
+					# hack: pan nad yw'r ddwy gytsain gyntaf yn cyfateb
+					x_prev = x_curr
+					y_prev = y_curr
+					break
+
+		# meddalu (c+t-> d)
+		if x_prev and len(x_inter) == 0:
+			if x_curr == 't' and y_curr == 'd' and x_prev in cy.cytseiniaid_meddalu:		
+				parau.append([ x_curr, y_curr ])
+				sylwadau.append( x_prev.llinyn + '+' + x_curr.llinyn + '-yn-ateb-' + y_curr.llinyn )
+		
+		elif y_prev and len(y_inter) == 0:
+			if x_curr == 'd' and y_curr == 't' and y_prev in cy.cytseiniaid_meddalu:		
+				parau.append([ x_curr, y_curr ])
+				sylwadau.append( x_curr.llinyn + '-yn-ateb-' + y_prev.llinyn + '+' + y_curr.llinyn	)
+		else:
+			pass # dim meddalu
+
+
+		# symud i'r nesaf
+		x_curr = x_prev
+		y_curr = y_prev
+	
+	
+	# info
+	out.debug( 'x_list:' + str(x_list) )
+	out.debug( 'y_list:' + str(y_list) )
+	
+	# casglu'r gweddill (heb anghofio'r x_prev neu y_prev sydd heb eu prosesu)
+	x_pen = [x_prev] if x_prev and x_prev.llinyn not in ['h','H'] else []
+	while x_list: 
+		par = x_list.pop()
+		if par[0].llinyn not in ['h','H']:
+			x_pen.append( par[0] )
+
+	# if debug:
+	#	print [nod.llinyn for nod in x_pen]
+	# 
+	y_pen = [y_prev] if y_prev and y_prev.llinyn not in ['h','H'] else []
+	while y_list: 
+		par = y_list.pop()
+		if par[0].llinyn not in ['h','H']:
+			y_pen.append( par[0] )
+
+	# if debug:
+	#	print [nod.llinyn for nod in y_pen]
+	# 
+	return parau, x_pen, y_pen, sylwadau
+
+		
+def oes_cytseinedd( x_geiriau, y_geiriau ):
+	'''
+	ffwythiant: darganfod cytseinedd rhwng dau restr geiriau
+	mewnbwn:	dau restr geiriau
+	allbwn:		dosbarth cytseinedd (neu dosbarth bai)
+	sylwadau:
+		mae'r ffwythiant yn traeannu'r ddau restr geiriau: 
+			x_blaen, x_canol, x_cwt
+			y_blaen, y_canol, y_cwt
+		ac yn ceisio darganfod cytseinedd rhwng
+			x_blaen a y_blaen
+			x_canol a y_canol
+		data:
+			parau			parau cytseiniaid rhwng x_blaen a y_blaen
+			parau_canol		parau cytseiniaid rhwng x_canol a y_canol
+			x_pen:			n-wreiddgoll, cytseiniaid pengoll
+			y_pen:			n-ganolgoll, cytseiniaid traws
+			x_cwt:
+			y_cwt:
+			
+	cynghanedd drychben:
+
+	anghytbwys ddisgynedig: rhaid cyfateb x_cwt a y_canol
+		methiant os
+
+		if aceniad == ADI and x_cwt.llinyn in cyfuniadau_trychben:
+			nod = x_cwt.pop()
+			y_blaen.reverse()
+			y_blaen.append( nod )
+			y_blaen.reverse()
+			
+	'''
+	if not x_geiriau or not y_geiriau:
+		return (None, None, None)
+		
+	# type check (rhoi gair unigol mewn rhestr)
+	if type(x_geiriau)==Gair:
+		x_geiriau = [ x_geiriau ]
+	if type(y_geiriau)==Gair:
+		y_geiriau = [ y_geiriau ]
+
+	# if debug:
+	#	print '-------------------------'
+	#	print 'ffwythiant: oes_cytseinedd'
+	#	# print [g.llinyn() for g in x_geiriau]
+	#	# print [g.llinyn() for g in y_geiriau]
+	#	print ' '.join([ g.llinyn() for g in x_geiriau ]) + '/' + ' '.join({ g.llinyn() for g in y_geiriau })
+	
+	# info
+	sx = ' '.join([ g.llinyn() for g in x_geiriau ]) 
+	sy = ' '.join([ g.llinyn() for g in y_geiriau ])
+	out.info('oes_cytseinedd: ' + sx + '/' + sy)
+	if debug:
+		print 'oes_cytseinedd: ' + sx + '/' + sy
 	
 	# rhestri nodau
-	xa, xb, xc = ac.traeannu( xx[-1] )
-	ya, yb, yc = ac.traeannu( yy[-1] )
+	x_blaen, x_canol, x_cwt = x_geiriau[-1].traeannu()
+	y_blaen, y_canol, y_cwt = y_geiriau[-1].traeannu()
 	
-	if len(xx) > 1:	xa = ll.nodau( ' '.join(xx[:-1]) ) + [' '] + xa
-	if len(yy) > 1:	ya = ll.nodau( ' '.join(yy[:-1]) ) + [' '] + ya
+	# print x_blaen
+	# print y_blaen
+	# print '++++++++'
+	# print '|'.join([nod.llinyn for nod in x_blaen])
+	# print '|'.join([nod.llinyn for nod in y_blaen])
+	# print [nod.llinyn for nod in y_blaen]
+	
+	# estyn pen-blaen y ddwy hanner (dim bylchau)
+	# xb = []
+	# for g in x_geiriau[:-1]:
+	#	xb = xb + list(g.nodau)
+	xb = [nod for g in x_geiriau[:-1] for nod in g.nodau]
+	x_blaen = xb + list(x_blaen)
+	# yb = []
+	# for g in y_geiriau[:-1]:
+	#	yb = yb + list(g.nodau)
+	yb = [nod for g in y_geiriau[:-1] for nod in g.nodau]
+	y_blaen = yb + list(y_blaen)
 
+
+	# info
 	if debug:
-		print xa, xb, xc
-		print ya, yb, yc
+		print ([nod.llinyn for nod in x_blaen], [nod.llinyn for nod in x_canol], [nod.llinyn for nod in x_cwt])
+		print ([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
+	
+	out.debug(
+		''.join( [nod.llinyn for nod in x_blaen] ) 
+		+ ':' + ''.join( [nod.llinyn for nod in x_canol] )
+		+ ':' + ''.join( [nod.llinyn for nod in x_cwt] )
+	)
+	out.debug(
+		''.join( [nod.llinyn for nod in y_blaen] ) 
+		+ ':' + ''.join( [nod.llinyn for nod in y_canol] )
+		+ ':' + ''.join( [nod.llinyn for nod in y_cwt] )
+	)
+	# out.debug([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
+
+	# data ar gyfer y view functions
+	data = {'sylwadau': [],}
 	
 	#--------------------
-	# parau
-	cc = cyfatebiaeth(xa,ya,reverse=True)	
-	blaen = cc[0] 		if cc[0] else []
-	pen_x = cc[1] 		if cc[1] else []
-	pen_y = cc[2] 		if cc[2] else []
-	if cc[3]: data['sylwadau'].extend(cc[3])	
+	# paratoi
+	#--------------------
 
 	#--------------------
-	# canol
-	canol = []
-	ccc = None
-	# cytbwys ddiacen: cyfateb xb a yb
-	if xb and yb:
-		cc = cyfatebiaeth(xb,yb)
-		if not cc[1] and not cc[2]:
-			canol = cc[0]
-			ccc = cyfatebiaeth(xc,yc)
+	# parau canol
+	#--------------------
+	trychben = []
+	cysylltben = []
+	parau_canol = []
+
+	# cytbwys ddiacen: cyfateb x_canol a y_canol
+	if x_canol and y_canol:
+		pa, xp, yp, sy = paru_cytseiniaid(x_canol, y_canol)
+		
+		# cyfatebiaeth lawn (dim cytseiniaid yn weddill)
+		if not xp and not yp:
+			parau_canol = pa
 		else:
-			if debug: print 'xb a yb ddim yn cyfateb'
-	# anghytbwys ddisgynedig: cyfateb xc a yb
-	elif yb and not xb:
-		cc = cyfatebiaeth(xc,yb)
-		if not cc[1] and not cc[2]:
-			canol = cc[0]
-			ccc = cyfatebiaeth('',yc)
+			out.debug('oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb') 
+			return (None, 'XXX', None)			
+
+	# anghytbwys ddisgynedig: cyfateb x_cwt a y_canol
+	elif not x_canol and y_canol:
+		cc = RhestrNodau(x_cwt).rhestr_clymau()
+		x_cwt_llinyn = ''.join([ nod.llinyn for nod in cc[-1] ])
+		# print x_cwt_llinyn
+		pa, xp, yp, sy = paru_cytseiniaid(x_cwt, y_canol)
+
+		# cyfatebiaeth lawn (dim cytseiniaid yn weddill)
+		if not xp and not yp:
+			parau_canol = pa
+			x_cwt = []
+		# profi am gynghanedd drychben
+		elif x_cwt_llinyn in cy.cyfuniadau_trychben:
+			if debug:
+				print 'Profi am gynghanedd drychben'
+			nod_trychben = x_cwt.pop()
+			pa2, xp2, yp2, sy2 = paru_cytseiniaid(x_cwt, y_canol)
+			if not xp2 and not yp2:
+				parau_canol = pa2
+				trychben.append(nod_trychben)
+		# profi am gynghanedd gysylltben:
+		elif y_blaen:
+			if debug:
+				print 'Profi am gynghanedd gysylltben'
+			nod_cysylltben = y_blaen[0]
+			# print nod_cysylltben.llinyn
+			x_cwt_newydd = list(x_cwt)
+			x_cwt_newydd.append( nod_cysylltben )
+			# print [nod.llinyn for nod in x_cwt_newydd ]
+			pa3, xp3, yp3, sy3 = paru_cytseiniaid(x_cwt_newydd, y_canol)
+			if not xp3 and not yp3:
+				parau_canol = pa3
+				cysylltben.append( nod_cysylltben )
+			else:
+				out.debug('oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb') 
+				return (None, 'XXX', None)
 		else:
-			if debug: print 'xc a yb ddim yn cyfateb'
-	# anghytbwys ddyrchafedig: cyfateb xb a yc
-	elif xb and not yb:
-		cc = cyfatebiaeth(xb,yc)
-		if not cc[1] or not cc[2]:
-			canol = cc[0]
-			ccc = cyfatebiaeth(xc,'')
-		else:
-			if debug: print 'xb a yc ddim yn cyfateb'
+			pass
+											
+	# anghytbwys ddyrchafedig:
+	elif x_canol and not y_canol:
+		pass
 	# cytbwys acenog
 	else:
-		ccc = cyfatebiaeth(xc,yc)
-
-	blaen = [ (a,1+len(nodau_x)+b) for a,b in blaen ]
-	canol = [ (len(xa)+a,1+len(nodau_x)+len(ya)+b) for a,b in canol ]	
+		pass
 	
-	#--------------------
-	# cynffon
-	cwt_x = [ len(xa+xb)+i for i in ccc[1] ] if ccc else []
-	cwt_y = [ len(nodau_x)+len(ya+yb)+i for i in ccc[2] ] if ccc else []
+	# print trychben[0].llinyn if trychben else 'dim trychben'
+	# print cysylltben[0].llinyn if cysylltben else 'dim cysylltben'
+	# print 'parau_canol: ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in parau_canol ])
+		
+	out.debug('parau_canol: ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in parau_canol ]) )
 
 	#--------------------
-	# casglu data
-	data['pen_x'] = pen_x
-	data['pen_y'] = [ 1+len(nodau_x)+a for a in pen_y ]
-	data['parau'] = blaen + canol
-	data['cwt_x'] = cwt_x
-	data['cwt_y'] = cwt_y
-
+	# parau blaen
 	#--------------------
-	# bai rhy debyg
-	if ccc and ccc[0]:
-		return (None, 'RHY', data)
+	# print '>>>>>>>DING'
+	parau, x_pen, y_pen, syl = paru_cytseiniaid( x_blaen, y_blaen ) 
+	if syl:
+		data['sylwadau'].extend(syl)
+	# print '>>>>>>>DONG'
+	# print x_pen
+	#--------------------
+	# paratoi a chasglu data
+	parau.reverse()
+	parau_canol.reverse()
+	x_cwt = [ nod for nod in x_cwt if nod.iscytsain() ]
+	y_cwt = [ nod for nod in y_cwt if nod.iscytsain() ]
+	
+	data['pengoll_chwith'] = x_pen
+	data['pengoll_dde'] = y_pen
+	data['parau'] = parau + parau_canol 
+	data['cwt_chwith'] = x_cwt
+	data['cwt_dde'] = y_cwt
+	data['trychben'] = trychben
+	data['cysylltben'] = cysylltben
+	
+	out.debug('pen_ch: ' + ' '.join([ nod.llinyn for nod in data['pengoll_chwith'] ]) )
+	out.debug('pen_dd: ' + ' '.join([ nod.llinyn for nod in data['pengoll_dde'] ]) )
+	out.debug('parau  : ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in data['parau'] ]) )
+	out.debug('cwt_ch: ' + ' '.join([ nod.llinyn for nod in data['cwt_chwith'] ]) )
+	out.debug('cwt_dd: ' + ' '.join([ nod.llinyn for nod in data['cwt_dde'] ]) )
+	out.debug('trychben: ' + ' '.join([ nod.llinyn for nod in data['trychben'] ]) )
+	out.debug('cysylltben: ' + ' '.join([ nod.llinyn for nod in data['cysylltben'] ]) )
 
 	#--------------------
 	# dosbarthu
-	# cyfatebiaeth lawn (croes)
-	if blaen and not pen_x and not pen_y:
-		return ('CRO', None, data)
 	
-	# cytseiniaid chwith yn weddill (croes-n-wreiddgoll, croes-o-gyswllt)
-	elif blaen and pen_x and not pen_y:
+	# proest i'r odl
+	# if x_cwt and y_cwt and cyfateb(x_cwt[-1].llinyn, y_cwt[-1].llinyn):
+	#	return (None, 'PRO', data)
+
+	# cyfatebiaeth lawn (croes)
+	if parau and not x_pen and not y_pen:
+		if trychben:
+			return ('CRD', None, data)
+		elif cysylltben:
+			return ('CRG', None, data)
+		else:
+			return ('CRO', None, data)
+	
+	# cytseiniaid chwith yn weddill (n-wreiddgoll, croes-o-gyswllt)
+	elif parau and x_pen and not y_pen:
 
 		# n-wreiddgoll
-		if len(pen_x) == 1 and nodau_x[ pen_x[0] ] == 'n':
-			data['sylwadau'].extend('n-wreiddgoll')
-			return ('CRO', None, data)
+		if len(x_pen) == 1 and x_pen[0].llinyn.lower() == 'n':
+			data['sylwadau'].append('n-wreiddgoll')
+			if trychben:
+				return ('CRD', None, data)
+			elif cysylltben:
+				return ('CRG', None, data)
+			else:
+				return ('CRO', None, data)
 
 		# croes-o-gyswllt
-		cc = cyfatebiaeth(pen_x,x)
-		if cc and not cc[1]:
-			return ('COG', None, data)
+		x_nodau = [nod for g in x_geiriau for nod in g.nodau]
+		pa, xp, yp, sy = paru_cytseiniaid(x_pen,x_nodau)
+		if pa and not xp:
+			if len(pa) > 1:
+				return ('CGG', None, data)
+			else:
+				return ('COG', None, data)
+
+		# sain (os oes o leiaf un par yn cyfateb, mae hynny'n ddigon am gynghanedd sain)
+		if trychben:
+			return ('SAD', None, data)
+		elif cysylltben:
+			return ('SAG', None, data)
+		else:
+			return ('SAI', None, data)
 			
 	# cytseiniaid dde yn weddill (n-ganolgoll, traws)
-	elif blaen and not pen_x and pen_y:
+	elif parau and not x_pen and y_pen:
 
 		# n-ganolgoll
-		if len(pen_y) == 1 and nodau_y[ pen_y[0] ] == 'n':
-			data['n-ganolgoll'] = [ pen_y[0] ]
+		if len(y_pen) == 1 and y_pen[0].llinyn == 'n':
+			data['sylwadau'].append('n-ganolgoll')
 			return ('CRO', None, data)
-
 		# traws
 		else:
-			if len(xx) == 1 or len(xx) == 2 and all(c not in cy.cytseiniaid for c in xx[0]): # hac
-				return ('TRF', None, data)
+			if len(x_geiriau) == 1 or len(x_geiriau) == 2 and not any(nod.iscytsain() for nod in x_geiriau[0].nodau): # hac
+				if trychben:
+					return ('TFD', None, data)
+				elif cysylltben:
+					return ('TFG', None, data)
+				else:
+					return ('TRF', None, data)
 			else:
-				return ('TRA', None, data)
+				if trychben:
+					return ('TRD', None, data)
+				elif cysylltben:
+					return ('TRG', None, data)
+				else:
+					return ('TRA', None, data)
+
+	# os nad oes parau, o leiaf mae popeth yn sain-lafarog!
 	else:
-		return (None, None, None)	
+		# if trychben:
+		# 	return ('SLD', None, data)
+		# elif cysylltben:
+		# 	return ('SLG', None, data)
+		# else:
+		# 	return ('SAL', None, data)
+		return ('LLA', None, data)
 
 
 #------------------------------------------------
@@ -372,81 +568,113 @@ def prawf_cytseinedd(x,y):
 
 def main():
 	print 'cytseinedd.py'
-	
-	# print cyfatebiaeth('och','ir')
-	
-	x = 'affacadash'
-	y = 'ephecedes'
-	# print cyfatebiaeth(x,y)
-	x = 'rstabcd'
-	y = 'rstefgh'
-	# oes_cytseinedd(x,y)
-	# print oes_cytseinedd('pqOchain cloch', 'rsa chanu clir')
-	print cyfatebiaeth('Ni all ll', 'ond ennyn ll', reverse=True),
 
-	return
+	# # x = "Can hardd croyw fardd"
+	# # y = "Caerfyrddin"
+	# x = "ail y carw"
+	# y = "olwg gorwyllt"
+	# x = "y cawn ar lan"
+	# y = "Conwy'r wledd"
+	# x = "wleidyddol"
+	# y = "hirdymor"
+	# # x = 'arolwg'
+	# # y = 'chwaraeon'
+	# # x = "Hen derfyn"
+	# # y = "nad yw'n darfod"
+	# x = 'Hyd y tywyn haul,'
+	# y = 'duw wyt yn hon.'
+	# x = 'wiw'
+	# y = 'wead'
+	# x = 'ieuanc'
+	# y = 'awen'
+	# 
+	# x = "ond hiroes"
+	# y = "yw braint derwen"
+	# 
+	# x = "Nid yn aml"
+	# y = "y down yma"
+	# 
+	# print x + '/' + y
+	# xx = [Gair(s) for s in x.split(' ')]
+	# yy = [Gair(s) for s in y.split(' ')]
+	# zz = oes_cytseinedd(xx,yy)
+	# print zz
+	# data = zz[2]
+	# print data["sylwadau"]
+	# print [x.llinyn for x in data['pengoll_chwith']]
+	# print [x.llinyn for x in data['pengoll_dde']]
+	# # print [(a.llinyn,b.llinyn) for a,b in data['parau_canol']]
+	# print [(a.llinyn,b.llinyn) for a,b in data['parau']]
+	# print [x.llinyn for x in data['cwt_chwith']]
+	# print [x.llinyn for x in data['cwt_dde']]
+	# print [x.llinyn for x in data['trychben']]
+	# return
 	
-	croes = (
-		('Ochain cloch', 'a chanu clir'),
-		('Awdur mad', 'a dramodydd'),
-		('Am eu hawr', 'yn ymaros'),
-	)
-	croes_o_gyswllt = (
-		('Daw geiriau duw', "o'i gaer deg"),
-		('Aderyn llwyd', 'ar un llaw'),
-	)
-	traws = (
-		('Ochain cloch', 'a gwreichion clir'),
-		('Ei awen brudd', 'dan ein bro'),
-	)
-	traws_fantach = (
-		('Y brawd', 'o bellafion bro'),
-		('Brwd', 'yw aderyn brig')
-	)
-	rhy_debyg = (
-		('rhy debyg', "mae'n debyg"),
-	)
-		
-	print '--------------------'
-	print 'Croes'
-	print '--------------------'
-	for s1,s2 in croes:
-		print s1 + ' / ' + s2
-		print prawf_cytseinedd( s1, s2 )
-	print ''
+	llinynnau = {
+		'croes': (
+			('Ochain cloch', 'a chanu clir'),
+			('Awdur mad', 'a dramodydd'),
+			('Am eu hawr', 'yn ymaros'),
+		),
+		'croes_o_gyswllt': (
+			('Daw geiriau duw', "o'i gaer deg"),
+			('Aderyn llwyd', 'ar un llaw'),
+		),
+		'traws': (
+			('Ochain cloch', 'a gwreichion clir'),
+			('Ei awen brudd', 'dan ein bro'),
+		),
+		'traws_fantach': (
+			('Y brawd', 'o bellafion bro'),
+			('Brwd', 'yw aderyn brig')
+		),
+		'proest_ir_odl':  (
+			('dyn a merch', "a dawn a march"),
+		),
+		'trychben': (
+			('Canu mydr', 'cyn ymadael'),
+			('Nid yn aml', 'y down yma'),	
+			('Ond daw gwefr', 'cyn atgofion'),
+			('ei hofn', 'hefyd'),
+			('anabl','anniben'),				# methiant: cam-acennu "anabl"
+		),
+		'cysylltben':  (
+			('Yma bu', "nwyf i'm beunydd"),
+			('Onid bro', 'dy baradwys'),
+			('A ddaw', 'fy mab i Ddyfed'),
+			('gwae', 'nid gweniaith'),
+		),
+	}
 	
-	
-	print '--------------------'
-	print 'Croes o gyswllt'
-	print '--------------------'
-	for s1,s2 in croes_o_gyswllt:
-		print s1 + ' / ' + s2
-		print prawf_cytseinedd( s1, s2 )
-	print ''
-	print '--------------------'
-	print 'Traws'
-	print '--------------------'
-	for s1,s2 in traws:
-		print s1 + ' / ' + s2
-		print prawf_cytseinedd( s1, s2 )
-	print ''
-	print '--------------------'
-	print 'Traws fantach'
-	print '--------------------'
-	for s1,s2 in traws_fantach:
-		print s1 + ' / ' + s2
-		print prawf_cytseinedd( s1, s2 )
-	print ''
-
-	return
-
-	print '--------------------'
-	print 'Rhy debyg'
-	print '--------------------'
-	for s1,s2 in rhy_debyg:
-		print s1 + ' / ' + s2
-		print prawf_cytseinedd( s1, s2 )
-	print ''
+	for key in [
+			# 'croes',
+			# 'croes_o_gyswllt',
+			# 'traws',
+			# 'traws_fantach',
+			# 'proest_ir_odl',
+			# 'trychben',
+			'cysylltben',
+		]:
+		val = llinynnau[key]
+		print '--------------------'
+		print key.upper()
+		print '--------------------'
+		for s1,s2 in val:
+			print s1 + ' / ' + s2
+			xx = [Gair(s) for s in s1.split(' ')]
+			yy = [Gair(s) for s in s2.split(' ')]
+			cy, ba, data = oes_cytseinedd( xx, yy )
+			print cy
+			if data:
+				print [ nod.llinyn for nod in data['pengoll_chwith'] ]
+				print [ nod.llinyn for nod in data['pengoll_dde'] ]
+				print [ (p[0].llinyn, p[1].llinyn) for p in data['parau']]
+				print [ nod.llinyn for nod in data['cwt_chwith'] ]
+				print [ nod.llinyn for nod in data['cwt_dde'] ]
+				print [ nod.llinyn for nod in data['trychben'] ]
+				print [ nod.llinyn for nod in data['cysylltben'] ]
+				print data['sylwadau']
+			print ('==========')
 
 if __name__ == '__main__': 
 	main()

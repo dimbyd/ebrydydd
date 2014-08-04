@@ -2,28 +2,21 @@
 '''
 views.py (ebrydydd app)
 '''
+
 import random
 
 from django import forms
-
-# from django import forms
 from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.template import RequestContext
-
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
-# from ebrydydd.cysonion import LLYTHRENWAU
 from ebrydydd.models import Llinell, Dadansoddiad, Aelod
-from ebrydydd.ffurflenni import LlinellForm, LlinellNewyddForm, LlinellCronfaForm, DadansoddiadForm, UserForm, AelodForm
+from ebrydydd.forms import LlinellForm, LlinellNewyddForm, LlinellCronfaForm, DadansoddiadForm, UserForm, AelodForm
 
-from ebrydydd.peiriant import Adroddiad, oes_cynghanedd
-from ebrydydd.llinyn import rhestr_nodau
-
-from ebrydydd.cysonion import LLYTHRENWAU
-from ebrydydd.acen import llinyn_acenion, pwyslais
+import ebrydydd.peiriant as pe
 #------------------------------
 # Llinellau
 #------------------------------
@@ -31,7 +24,7 @@ class Llinell_ListView(ListView):
 	model = Llinell
 	template_name = 'rhestr_llinellau.html'
 	queryset = Llinell.objects.order_by('llinyn')	
-	paginate_by = 10  #and that's it !!
+	paginate_by = 10  
 	success_url = reverse_lazy('rhestr-llinellau')
 	def get_success_url(self):
 		return reverse(OrderView.plain_view)
@@ -75,7 +68,7 @@ class Llinell_DetailView(DetailView):
 		qset = Dadansoddiad.objects.filter(llinell=self.get_object().id).order_by('dadansoddwr')
 		qset = list(qset)
 		s = self.get_object().llinyn
-		adroddiad = oes_cynghanedd( s )
+		adroddiad = pe.Peiriant().oes_cynghanedd( pe.Llinell(s) )
 		dad = Dadansoddiad(
 			llinell 	= self.get_object(),
 			cynghanedd 	= adroddiad.cynghanedd,
@@ -116,94 +109,94 @@ class Aelod_DetailView(DetailView):
 #------------------------------
 def dad2dict(dad):
 	return {
-		'cynghanedd': 	dict(LLYTHRENWAU['cynghanedd'])[dad.cynghanedd] if dad.cynghanedd else 'Dim',
-		'aceniad': 		dict(LLYTHRENWAU['aceniad'])[dad.aceniad] if dad.aceniad else '',
-		'bai':			dict(LLYTHRENWAU['bai'])[dad.bai] if dad.bai else '',
+		'cynghanedd': 	dict(pe.LLYTHRENWAU['cynghanedd'])[dad.cynghanedd] if dad.cynghanedd else 'DIM',
+		'aceniad': 		dict(pe.LLYTHRENWAU['aceniad'])[dad.aceniad] if dad.aceniad else '',
+		'bai':			dict(pe.LLYTHRENWAU['bai'])[dad.bai] if dad.bai else '',
 		'sylwadau':		dad.sylwadau,
 		'dadansoddwr':	dad.dadansoddwr,
 	
 	}
 
-
-def ebr2html(adroddiad, blanksymbol=' '):
-	'''
-	ffwythiant: trawsnewid adroddiad i linynau html 
-	'''	
-	# init
-	s = adroddiad.llinyn
-	html_strings = {
-		'llinyn': s,
-		'acenion': '',
-		'gorffwysfa': '',
-		'odl': '',
-		'cytseiniaid': '',
-	}
-	# gorffwysfa (mynegrif y gair)
-	if adroddiad.manylion.has_key('gorffwysfa'):
-		gorffwysfa = adroddiad.manylion['gorffwysfa']
-		if gorffwysfa:
-			geiriau = s.split()
-			ss = ''
-			for j in range( len(geiriau) ):
-				ss += blanksymbol*len(geiriau[j])
-				if j in gorffwysfa:
-					ss += '<span class="gorffwysfa">|</span>'
-				else:
-					ss += blanksymbol
-			html_strings['gorffwysfa'] = ss[:-1]	
-	# odl
-	if adroddiad.manylion.has_key('odl'):
-		odl = adroddiad.manylion['odl']
-		if odl:
-			cyntaf = odl[0]
-			ail = odl[1]
-			geiriau = s.split()
-			ss = []
-			for gair in geiriau[ :cyntaf[0] ]:
-				ss.append( blanksymbol*(len(gair)+1) )
-			gair = geiriau[ cyntaf[0] ]
-			nodau = rhestr_nodau(gair)
-			for nod in nodau[:cyntaf[1][0]]:
-				ss.append( blanksymbol*len(nod) )
-			ss.append( '<span class="odl">' + ''.join(nodau[cyntaf[1][0]:cyntaf[1][1]]) + '</span>' )
-			for nod in nodau[cyntaf[1][1]:]:
-				ss.append( blanksymbol*len(nod) )
-			ss.append( blanksymbol )
-			for gair in geiriau[ cyntaf[0]+1:ail[0] ]:
-				ss.append( blanksymbol*(len(gair)+1 ) )
-			gair = geiriau[ ail[0] ]
-			nodau = rhestr_nodau(gair)
-			for nod in nodau[:ail[1][0]]:
-				ss.append( blanksymbol*len(nod) )
-			ss.append( '<span class="odl">' + ''.join(nodau[ ail[1][0]:ail[1][1] ]) + '</span' )
-			for nod in nodau[ail[1][1]:]:
-				ss.append( blanksymbol*len(nod) )
-			for gair in geiriau[ ail[0]+1: ]:
-				ss.append( blanksymbol )
-				ss.append( blanksymbol*len(gair) )
-			html_strings['odl'] = ''.join(ss[:-1])
-	# acenion
-	if adroddiad.manylion.has_key('acenion'):
-		acenion = adroddiad.manylion['acenion']
-		print acenion
-		ss = []
-		geiriau = s.split()
-		for i in range( len(geiriau) ):
-			nodau = rhestr_nodau( geiriau[i] )
-			mynegrifau = acenion[i][0]
-			pw = acenion[i][1]
-			for j in range( len(nodau) ):
-				if j in mynegrifau:
-					if j == mynegrifau[pw]:
-						ss.append('/')
-					else:
-						ss.append('v')
-				else:
-					ss.append( blanksymbol*len( nodau[j] ) )
-			ss.append(blanksymbol)
-		html_strings['acenion'] = ''.join(ss[:-1])			
-	return html_strings
-
+# 
+# def ebr2html(adroddiad, blanksymbol=' '):
+# 	'''
+# 	ffwythiant: trawsnewid adroddiad i linynau html 
+# 	'''	
+# 	# init
+# 	s = adroddiad.llinyn
+# 	html_strings = {
+# 		'llinyn': s,
+# 		'acenion': '',
+# 		'gorffwysfa': '',
+# 		'odl': '',
+# 		'cytseiniaid': '',
+# 	}
+# 	# gorffwysfa (mynegrif y gair)
+# 	if adroddiad.data.has_key('gorffwysfa'):
+# 		gorffwysfa = adroddiad.data['gorffwysfa']
+# 		if gorffwysfa:
+# 			geiriau = s.split()
+# 			ss = ''
+# 			for j in range( len(geiriau) ):
+# 				ss += blanksymbol*len(geiriau[j])
+# 				if j in gorffwysfa:
+# 					ss += '<span class="gorffwysfa">|</span>'
+# 				else:
+# 					ss += blanksymbol
+# 			html_strings['gorffwysfa'] = ss[:-1]	
+# 	# odl
+# 	if adroddiad.data.has_key('odl'):
+# 		odl = adroddiad.data['odl']
+# 		if odl:
+# 			cyntaf = odl[0]
+# 			ail = odl[1]
+# 			geiriau = s.split()
+# 			ss = []
+# 			for gair in geiriau[ :cyntaf[0] ]:
+# 				ss.append( blanksymbol*(len(gair)+1) )
+# 			gair = geiriau[ cyntaf[0] ]
+# 			nodau = rhestr_nodau(gair)
+# 			for nod in nodau[:cyntaf[1][0]]:
+# 				ss.append( blanksymbol*len(nod) )
+# 			ss.append( '<span class="odl">' + ''.join(nodau[cyntaf[1][0]:cyntaf[1][1]]) + '</span>' )
+# 			for nod in nodau[cyntaf[1][1]:]:
+# 				ss.append( blanksymbol*len(nod) )
+# 			ss.append( blanksymbol )
+# 			for gair in geiriau[ cyntaf[0]+1:ail[0] ]:
+# 				ss.append( blanksymbol*(len(gair)+1 ) )
+# 			gair = geiriau[ ail[0] ]
+# 			nodau = rhestr_nodau(gair)
+# 			for nod in nodau[:ail[1][0]]:
+# 				ss.append( blanksymbol*len(nod) )
+# 			ss.append( '<span class="odl">' + ''.join(nodau[ ail[1][0]:ail[1][1] ]) + '</span' )
+# 			for nod in nodau[ail[1][1]:]:
+# 				ss.append( blanksymbol*len(nod) )
+# 			for gair in geiriau[ ail[0]+1: ]:
+# 				ss.append( blanksymbol )
+# 				ss.append( blanksymbol*len(gair) )
+# 			html_strings['odl'] = ''.join(ss[:-1])
+# 	# acenion
+# 	if adroddiad.data.has_key('acenion'):
+# 		acenion = adroddiad.data['acenion']
+# 		print acenion
+# 		ss = []
+# 		geiriau = s.split()
+# 		for i in range( len(geiriau) ):
+# 			nodau = rhestr_nodau( geiriau[i] )
+# 			mynegrifau = acenion[i][0]
+# 			pw = acenion[i][1]
+# 			for j in range( len(nodau) ):
+# 				if j in mynegrifau:
+# 					if j == mynegrifau[pw]:
+# 						ss.append('/')
+# 					else:
+# 						ss.append('v')
+# 				else:
+# 					ss.append( blanksymbol*len( nodau[j] ) )
+# 			ss.append(blanksymbol)
+# 		html_strings['acenion'] = ''.join(ss[:-1])			
+# 	return html_strings
+# 
 
 #------------------------------
 # Prif dudalenau
@@ -261,7 +254,7 @@ def dyfarniad(request):
 				context['dad_defnyddiwr'] = dad2dict(dad_def)
 			
 				#  dadansoddiad y peiriant
-				adroddiad = oes_cynghanedd( llinell.llinyn )
+				adroddiad = pe.Peiriant().oes_cynghanedd( llinell.llinyn )
 				dad_ebr = Dadansoddiad(
 					llinell 	= llinell,
 					cynghanedd 	= adroddiad.cynghanedd,
@@ -271,7 +264,7 @@ def dyfarniad(request):
 					dadansoddwr	= 'EBR'
 					)
 				context['dad_peiriant'] = dad2dict(dad_ebr)
-				context['manylion'] = adroddiad.manylion
+				context['data'] = adroddiad.data
 				
 				# dyfarnu os ydy'r defnyddiwr yn gywir (angen helaethu yma)
 				s = ''
@@ -316,31 +309,31 @@ def dadansoddiad(request):
 				llinyn = llinell_ddewis.llinyn
 			context['llinyn'] = llinyn
 			# cyfrifiannu dadansoddiad y peiriant
-			adroddiad = oes_cynghanedd( llinyn )
-			cy = dict(LLYTHRENWAU['cynghanedd'])[adroddiad.cynghanedd] if adroddiad.cynghanedd else '-'
-			ac = dict(LLYTHRENWAU['aceniad'])[adroddiad.aceniad] if adroddiad.aceniad else '-'
-			ba = dict(LLYTHRENWAU['bai'])[adroddiad.bai] if adroddiad.bai else '-'
+			adroddiad = pe.Peiriant().oes_cynghanedd( pe.Llinell(llinyn) )
+			cy = dict(pe.LLYTHRENWAU['cynghanedd'])[adroddiad.cynghanedd] if adroddiad.cynghanedd else '-'
+			ac = dict(pe.LLYTHRENWAU['aceniad'])[adroddiad.aceniad] if adroddiad.aceniad else '-'
+			ba = dict(pe.LLYTHRENWAU['bai'])[adroddiad.bai] if adroddiad.bai else '-'
 			dad_yr_ebr = {
 				'dadansoddwr':	'EBR',
 				'cynghanedd': 	cy,
 				'aceniad': 		ac,
 				'bai':			ba,
 				'sylwadau':		adroddiad.sylwadau,
-				'manylion': 	adroddiad.manylion
+				'data': 	adroddiad.data
 			}
 			context['dad'] = dad_yr_ebr
 			
 			# llinynau html
-			context['html_strings'] = ebr2html(adroddiad)
+			# context['html_strings'] = ebr2html(adroddiad)
 			
 			# cyrchu dadansoddiadau o'r gronfa
 			dadansoddiadau = list()
 			if llinell_ddewis:
 				dads = Dadansoddiad.objects.filter(llinell=llinell_ddewis).order_by('dadansoddwr')
 				for dad in list(dads):
-					cy = dict(LLYTHRENWAU['cynghanedd'])[dad.cynghanedd] if dad.cynghanedd else '-'
-					ac = dict(LLYTHRENWAU['aceniad'])[dad.aceniad] if dad.aceniad else '-'
-					ba = dict(LLYTHRENWAU['bai'])[dad.bai] if dad.bai else '-'
+					cy = dict(pe.LLYTHRENWAU['cynghanedd'])[dad.cynghanedd] if dad.cynghanedd else '-'
+					ac = dict(pe.LLYTHRENWAU['aceniad'])[dad.aceniad] if dad.aceniad else '-'
+					ba = dict(pe.LLYTHRENWAU['bai'])[dad.bai] if dad.bai else '-'
 					dadansoddiadau.append({
 						'dadansoddwr':	dad.dadansoddwr,
 						'cynghanedd': 	cy,
