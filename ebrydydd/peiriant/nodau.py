@@ -14,10 +14,7 @@ import cysonion as cy
 import lliwiau as lliw
 
 import logging
-out = logging.getLogger(__name__)
-
-global debug 
-debug = False
+log = logging.getLogger(__name__)
 
 #------------------------------------------------
 class Nod(object):
@@ -178,6 +175,8 @@ class RhestrClymau(list):
 	def __init__(self, nodau, trwsio=True):
 		super(RhestrClymau, self).__init__()
 		
+		log.info("Creu rhestr clymau ar gyfer '%s'" % unicode(nodau))
+		
 		cwlwm_llafariaid = True
 		c = []
 		for nod in nodau:
@@ -243,15 +242,14 @@ class RhestrClymau(list):
 				if len( self[j] ) == 3:
 					ds1 = ''.join([ self[j][0].hir2byr() + self[j][1].hir2byr() ])
 					if not cy.dosbarth_deusain.has_key(ds1):
-						out.debug('methu adnabod y ddeusain %s', ds1)
+						log.error('methu adnabod y ddeusain %s', ds1)
 						break
 					ds2 = ''.join([ self[j][1].hir2byr() + self[j][2].hir2byr() ])
 					if not cy.dosbarth_deusain.has_key(ds2):
-						out.debug('methu adnabod y ddeusain %s', ds2)
+						log.error('methu adnabod y ddeusain %s', ds2)
 						break
 					
-					if debug:
-						print cy.dosbarth_deusain[ds1] + '/' + cy.dosbarth_deusain[ds2]
+					log.debug( 'Triawd o lafariaid: %s/%s' % (cy.dosbarth_deusain[ds1], cy.dosbarth_deusain[ds2]) )
 					
 					# T-T: dim on dau posib: wiw neu iwi
 					# wiw - tebyg i T-LL  (un sill)
@@ -355,9 +353,6 @@ class RhestrClymau(list):
 			#		self.pop()
 
 			
-			if debug:
-				print self
-
 					
 	def __getitem__(self, offset):
 		return list.__getitem__(self, offset)
@@ -374,7 +369,7 @@ class RhestrClymau(list):
 #------------------------------------------------
 def main():
 	print 'nodau.py'
-	
+		
 	rhestr_llinynau = (
 		# cyffredin
 		'prydferth',
@@ -383,7 +378,7 @@ def main():
 		'duon',
 		'eos',
 		'suo',
-		# lluosill acenog
+		# lluosill acennog
 		'dyfalbarhau',
 		'dyfalbarhad',
 		'cymraeg',
@@ -420,18 +415,18 @@ def main():
 		'glawio',
 		'ieuanc',
 		'gloywi',
+		'yw',
 
 	)
 	for s in rhestr_llinynau:
 		print '-------------------'
-		# print ''
-		# print s
 		nodau = RhestrNodau(s)
 		print nodau
-		print nodau.rhestr_clymau(trwsio=False)
 		print nodau.rhestr_clymau(trwsio=True)
 		
 if __name__ == '__main__': 
+	import logging.config
+	logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 	main()
 
 

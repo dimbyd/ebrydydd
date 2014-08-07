@@ -9,7 +9,7 @@
 	<style type='text/css' media="all">
 		table.aelodau {
 			border:1px solid #000;
-			width:80%;
+			width:50%;
 			text-align:left;
 			border-collapse:collapse;
 		}
@@ -32,33 +32,25 @@
 <br/>
 <table class="aelodau">
 	<tr>
-		<th class="aelod">enw defnyddiwr</th>
-		<th class="aelod">ffugenw</th>
+		<th class="aelod">enw</th>
 		<th class="aelod">statws</th>
-		<th class="aelod">rhagenw</th>
-		<th class="aelod">cyfenw</th>
+		<!--th class="aelod">rhagenw</th>
+		<th class="aelod">cyfenw</th-->
 	</tr>
 	{% for object in object_list %}
 		<tr>
-			<td class="aelod"><a href="{{ object.get_absolute_url }}">{{ object.user.username }}</a></td>
+			<!--td class="aelod"><a href="{{ object.get_absolute_url }}">{{ object.user.username }}</a></td-->
 			<!--td class="aelod">{{ object.user.username }}</td-->
 			<td class="aelod">{{ object.ffugenw }}</td>
 			<td class="aelod">{{ object.statws }}</td>
-			<td class="aelod">{{ object.user.first_name }}</td>
-			<td class="aelod">{{ object.user.last_name }}</td>
+			<!--td class="aelod">{{ object.user.first_name }}</td>
+			<td class="aelod">{{ object.user.last_name }}</td-->
 		</tr>
 	{% endfor %}
 </table>
 
 {% endblock %}
 
-{% block sidebar %}
-
-<h2>Cymorth</h2>
-<ul>
-    <li>Cliciwch ar yr enw defnyddiwr ... </li>
-</ul>
-{% endblock %}
 
 
 

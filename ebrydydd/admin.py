@@ -1,5 +1,5 @@
 '''
-admin.py (sylfaen app)
+ebrydydd: admin.py
 '''
 from django.contrib import admin
 from ebrydydd.models import Llinell, Dadansoddiad, Aelod

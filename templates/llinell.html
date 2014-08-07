@@ -1,15 +1,17 @@
 {% extends "rhestr_llinellau.html" %}
 
 {% block title %} 
-	Llinell
+	{{ object.llinyn }}
 {% endblock %}
 
 {% block content-main %}
 
-<h1>Llinellau</h1>
-
-<h1 align="center">{{ object.llinyn }}
-	{% if object.awdur %} &nbsp;&nbsp;&nbsp;&nbsp;<small>[ {{ object.awdur }} ]</small> {% endif %}</h1>
+<!--h1>Llinellau</h1-->
+<br>
+<h1 align="center">{{ object.llinyn }}</h1>
+	{% comment %}
+		{% if object.awdur %} &nbsp;&nbsp;&nbsp;&nbsp;<small>[ {{ object.awdur }} ]</small> {% endif %}
+	{% endcomment %}
 
 <br>
 
@@ -27,21 +29,11 @@
 <br/>
 <!--p style="position: absolute; bottom: 0; right: 0;"><a href="{% url "rhestr-llinellau" %}">Nol i'r rhestr llinellau</a></p-->
 
-<a href="{% url "rhestr-llinellau" %}">Nol i'r rhestr llinellau</a>
+<a href="{% url "rhestr-llinellau" %}">&larr; Nôl i'r rhestr llinellau</a>
 
-{% endblock %}
-
-{% block sidebar %}
 {% endblock %}
 
 {% block browse-horizontal %}
-<!--table style="width:100%; table-layout:fixed; vertical-align:middle;">
-<tr>
-	<td style="text-align:left">{% if prev %}<a href="{{ prev.get_absolute_url }}">&larr; {{ prev.llinyn }}</a>{% endif %}</td>
-	<td style="text-align:center"><a href="{% url "rhestr-llinellau" %}">&uarr; rhestr llinellau</a></td>
-	<td style="text-align:right">{% if next %}<p class="right"><a href="{{ next.get_absolute_url }}">{{ next.llinyn }} &rarr;</a>{% endif %}</td>
-</tr>
-</table-->
 <p class="left">{% if prev %}<a href="{{ prev.get_absolute_url }}">&larr; {{ prev.llinyn }}</a>{% endif %}</p>
 <p class="right">{% if next %}<a href="{{ next.get_absolute_url }}">{{ next.llinyn }} &rarr;</a>{% endif %}</p>
 {% endblock %}

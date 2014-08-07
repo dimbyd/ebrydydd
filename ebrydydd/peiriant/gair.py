@@ -7,14 +7,13 @@ gair.py
 		AYG: dyn, cur:o, cel:wydd:og (mae'r acen yn disgyn yn naturiol ar gwlwm llafariaid)
 '''
 
-global debug
-debug = True
-
 import re
 
 import cysonion as cy
 from nodau import RhestrNodau, RhestrClymau
 
+import logging
+log = logging.getLogger(__name__)
 
 #------------------------------------------------
 # Gair class
@@ -37,10 +36,10 @@ class Gair(object):
 	def __str__(self):
 		return self.__unicode__().encode('utf-8')		
 		
-	def nodau_acenog(self):
+	def nodau_acennog(self):
 		'''
 		ffwythiant:	darganfod y nodau sy'n cario'r acenion
-		allbwn:		rhestr nodau (llafariaid) sy'n cario'r acenion
+		allbwn:		rhestr y nodau (llafariaid) sy'n cario'r acenion
 		'''
 		ace = list()
 		for cwlwm in self.clymau[::2]:	# clymau llafariaid yn unig
@@ -49,10 +48,17 @@ class Gair(object):
 				if len(cwlwm) == 1:			
 					ace.append( cwlwm[0] )
 				# llafariaid dwbl (deusain)
-				elif len(cwlwm) == 2:	
-					ds = ''.join(nod.hir2byr() for nod in cwlwm)
-					if cy.deuseiniaid.has_key(ds):
-						dd = cy.dosbarth_deusain[ds.lower()]
+				elif len(cwlwm) == 2:
+					# -------------------------
+					# dydy hyn ddim yn gweithio ers newid nodau.rhestr_clymau(wgytsain=True)
+					# i nodau.rhestr_clymau(trwsio=True). Mi fydd yn rhaid mynd nol i gael
+					# dau restr clymau, un ar gyfer cytseinedd (y method "wgystain" gwreiddiol)
+					# ac un ar gyfer odli (y method "trwsio")
+					# -------------------------
+					"""
+					ds = ''.join(nod.hir2byr() for nod in cwlwm).lower()
+					if cy.dosbarth_deusain(ds):
+						dd = cy.dosbarth_deusain[ds]
 						# deusain talgron (acen ar yr ail lafariad)
 						if ds in cy.deuseiniaid['talgron']:				
 							ace.append( cwlwm[1] )
@@ -62,9 +68,12 @@ class Gair(object):
 							ace.append( cwlwm[1] ) 
 					# deusain lleddf (acen ar y llafariad cyntaf)
 					else:
-						ace.append( cwlwm[0] )	
+						ace.append( cwlwm[0] )
+					"""
+					ace.append( cwlwm[0] )
 		
 				# tri neu fwy o lafariaid: defnyddio'r ail lafariad yn y cwlwm
+				# nid yw hyn yn berthnasol ers defnyddio'r method "trwsio"
 				else:
 					ace.append( cwlwm[1] )			
 		return tuple(ace)
@@ -98,8 +107,8 @@ class Gair(object):
 		# gwirio am ae o flaen y cwlwm cytseiniaid olaf (e.e. cymraeg)
 		# ond dyw hyn ddim yn gweithio gyda 'ymadael'
 		# if olaf and olaf_ond_un and olaf_ond_un.llinyn() == u'ae':
-		# 	# print 'ding 1'
 		# 	return -1	
+
 		# gwirio am h o flaen y cwlwm llafariaid olaf (e.e. dyfalbarhau)
 		if olaf_ond_dau and olaf_ond_dau[-1].llinyn in ['h','rh']:
 			# print 'ding 2'
@@ -164,7 +173,7 @@ class Gair(object):
 		return ''.join(ss)
 
 	def llinyn_acenion(self, blanksymbol=' '):
-		ace = self.nodau_acenog()
+		ace = self.nodau_acennog()
 
 		if self.pwyslais() == 0:
 			return ''.join([ blanksymbol*len(nod.llinyn) for nod in self.nodau ])
@@ -180,7 +189,7 @@ class Gair(object):
 		return ''.join(ss)
 
 	def llinyn_acenion_colon(self, blanksymbol=' '):
-		ace = self.nodau_acenog()
+		ace = self.nodau_acennog()
 		ss = [blanksymbol*len(nod.llinyn) for nod in self.nodau ]
 		ss[ self.nodau.index(ace[-1]) ] = ':'
 		if self.pwyslais() == -2:
@@ -189,7 +198,7 @@ class Gair(object):
 
 	# man ffwythiannau
 	def nifer_sillau(self):
-		return len( self.nodau_acenog() )
+		return len( self.nodau_acennog() )
 	
 
 #------------------------------------------------
@@ -221,7 +230,7 @@ def main():
 		'duon',			
 		'eos',			
 		'suo',			
-		# geiriau lluosill acenog
+		# geiriau lluosill acennog
 		'cymraeg',
 		u'cangarŵ',		
 		'dramodydd',
@@ -248,7 +257,8 @@ def main():
 		'dedwydd',
 		'daear',
 		'ffiniau',
-		'ymadael',		
+		'ymadael',
+		'ieuanc',		
 	)
 	# llinynnau = ('anifeiliaid',)
 	for s in llinynnau:
@@ -258,6 +268,8 @@ def main():
 		print g.llinyn_acenion()
 		print g.llinyn()
 		print g.clymau
+		# print g.nodau_acennog()
+		# print g.pwyslais()
 
 		# pe, ca, cw = g.traeannu(cytseiniaid=True)
 		# print
@@ -267,6 +279,8 @@ def main():
 
 
 if __name__ == '__main__': 
+	import logging.config
+	logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 	main()
 
 		

@@ -1,21 +1,37 @@
 {% if html_strings %} 
 	<table style="border:2px solid #000; padding:10px; width:90%; table-layout:fixed;">
 		<tr>
-			<td style="width:70%"><div id="llinyn_acenion" class='mono' style="visibility:visible">{{ html_strings.acenion }}</div></td>
-			<td><input type="checkbox" id="checkbox_llinyn_acenion" onclick="showhide('llinyn_acenion');" checked/> Acenion</td>
-		</tr>
-		<tr>
-			<td style="width:50%">
-					<div id="llinyn" class="mono">{{ llinyn }}</div>
-					<div id="llinyn_gorffwysfa" class="mono" style="visibility:hidden">{{ html_strings.gorffwysfa | safe }}</div>
-					<div id="llinyn_odl" class="mono" style="visibility:hidden">{{ html_strings.odl | safe }}</div>
+			<td style="width:75%">
+				<div id="llinyn_acenion" class='mono' style="visibility:visible">{{ html_strings.acenion }}</div>
 			</td>
-			<td><input type="checkbox" id="checkbox_llinyn_gorffwysfa" onclick="showhide('llinyn_gorffwysfa');"/> Gorffwysfa</td>
-			<td><input type="checkbox" id="checkbox_llinyn_odl" onclick="showhide('llinyn_odl');"/> Odl</td>
+			<td>
+				<input type="checkbox" id="checkbox_llinyn_acenion" onclick="showhide('llinyn_acenion');" checked/> Acenion
+			</td>
 		</tr>
 		<tr>
-			<td style="width:50%"><div id="llinyn_cyfatebiaeth" class='mono' style="visibility:hidden">{{ dad.manylion.llinyn_cytseiniaid }}</div></td>
-			<td><input type="checkbox" id="checkbox_llinyn_cytfatebiaeth" onclick="showhide('llinyn_cyfatebiaeth');"/> Cyfatebiaeth</td>
+			<td style="width:75%">
+				<div id="llinyn" class="mono">{{ html_strings.llinyn }}</div>
+				<div id="llinyn_toriadau" class="mono" style="visibility:visible">{{ html_strings.toriadau | safe }}</div>
+				<div id="llinyn_odlau" class="mono" style="visibility:visible">{{ html_strings.odlau | safe }}</div>
+			</td>
+			<td>
+				<input type="checkbox" id="checkbox_llinyn_odlau" onclick="showhide('llinyn_odlau');" checked/> Odlau
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="llinyn_cytseinedd" class="mono" style="visibility:visible">{{ html_strings.cytseinedd | safe }}</div>
+				<!--div id="llinyn_cytseiniaid_cyfatebol" class='mono' style="visibility:visible">{{ html_strings.cytseiniaid_cyfatebol | safe }}</div>
+				<div id="llinyn_cytseiniaid_traws" class='mono' style="visibility:visible">{{ html_strings.cytseiniaid_traws | safe }}</div>
+				<div id="llinyn_cytseiniaid_cwt" class='mono' style="visibility:visible">{{ html_strings.cytseiniaid_cwt | safe }}</div-->
+			</td>
+			<td>
+				<input type="checkbox" id="checkbox_llinyn_cytseinedd" onclick="showhide('llinyn_cytseinedd');" checked/> Cytseinedd
+			</td>
+		</tr>
+		<tr>
+			<td></td>		
+			<td><input type="checkbox" id="checkbox_llinyn_toriadau" onclick="showhide('llinyn_toriadau');" checked/> Toriadau</td>
 		</tr>
 	</table>
 {% endif %}

@@ -34,14 +34,14 @@ template: dyfarniad.html
 
 {% if llinyn %}
 	<h1><u>Cwis</u></h1>
-	<h2 align="center"> {{ llinyn }}</h2>
+	<h1 align="center"> {{ llinyn }}</h2>
 {% endif %}	
 
 <br/>
 <table class="atebion">
 {% if dad_defnyddiwr %}
 <tr>
-	<td><u>Gosodwyd</u>:</td>
+	<td><u>Ateb a roddwyd:</u>:</td>
 	<td>{{ dad_defnyddiwr.cynghanedd }}</td>
 	<!--td>{{ dad_defnyddiwr.aceniad }}<td>
 	<td>{{ dad_defnyddiwr.bai }}</td>
@@ -51,7 +51,7 @@ template: dyfarniad.html
 {% endif %}
 {% if dad_peiriant %}
 <tr>
-	<td><u>Ateb y peiriant</u>:&nbsp;</td>
+	<td><u>Dadansoddiad y peiriant:</u>:&nbsp;</td>
 	<td>{{ dad_peiriant.cynghanedd }}</td>
 	<!--td>{{ dad_peiriant.aceniad }}</td>
 	<td>{{ dad_peiriant.bai }}</td>
@@ -66,27 +66,12 @@ template: dyfarniad.html
 {% endif %}
 
 {% if html_strings %}
-	<!--
-	angen: 
-	dad.manylion.acenion
-	html_strings.acenion 
-	llinyn }}</div>
-				<div id="llinyn_gorffwysfa" class="mono" style="visibility:hidden">{{ html_strings.gorffwysfa | safe }}</div>
-				<div id="llinyn_odl" class="mono" style="visibility:hidden">{{ html_strings.odl | safe }}</div>
-		</td>
-		<td><input type="checkbox" id="checkbox_llinyn_gorffwysfa" onclick="showhide('llinyn_gorffwysfa');"/> Gorffwysfa</td>
-		<td><input type="checkbox" id="checkbox_llinyn_odl" onclick="showhide('llinyn_odl');"/> Odl</td>
-	</tr>
-	{% if dad.manylion.llinyn_cytseiniaid %} 
-	<tr>
-		<td style="width:50%"><div id="llinyn_cyfatebiaeth" class='mono' style="visibility:hidden">{{ dad.manylion.llinyn_cytseiniaid }}</div></td>
-		<td><input type="checkbox" id="checkbox_llinyn_cytfatebiaeth" onclick="showhide('llinyn_cyfatebiaeth');"/> Cyfatebiaeth</td>
-	</tr>
-	{% endif %}
-</table>
-	-->
+	<br>
 	{% include "bloc_dadansoddiad.html" %}
 {% endif %}
+
+<br>
+<a href="{% url "cwis" %}">&larr; Cynnig arall?</a>
 
 {% if neges %}
 	<p>{{ neges }}</p>

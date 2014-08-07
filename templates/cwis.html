@@ -10,11 +10,11 @@
 
 {% block content-main %}
 
-<h1>Cwis</h1>
+<h2><u>Cwis</u></h2>
 
 {% if llinell_cwestiwn %}
 	<p>Dadansoddwch:</p>
-	<div style="width=80%;margin-left:100px;"><span style="font-family: monospace; font-size: 150%;">{{ llinell_cwestiwn }}</span></div>
+	<div style="width=80%;margin-left:100px;"><span style="font-family: monospace; font-size: 175%;">{{ llinell_cwestiwn }}</span></div>
 	<br/>
 	<br/>
 	<div style="border:1px solid #000; width:75%">
@@ -27,11 +27,11 @@
 				<td> Cynghanedd:</td>
 				<td> {{ dadansoddiad_form.cynghanedd }} </td>
 			</tr>
-			<tr>
+			<!--tr>
 				<td> Aceniad:</td>
 				<td> {{ dadansoddiad_form.aceniad }} </td>
 			</tr>
-			<!--tr>
+			<tr>
 				<td> Enw:</td>
 				<td> {{ dadansoddiad_form.dadansoddwr }} </td>
 			</tr>

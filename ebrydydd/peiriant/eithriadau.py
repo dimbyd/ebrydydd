@@ -8,24 +8,18 @@ eithriadau.py
  	Geiriau lluosill sydd a'r pwyslais ar y sill olaf
 		Nid oes angen cynnwys geiriau sydd yn dangos acen: caniatâu, nesáu
 
-2. ia_deusill 
-	Geiriau yn cynnwys 'ia' deusill (yn hytrach na 'ia' talgron)
+2. deusill 
+	Geiriau yn cynnwys parau o lafariaid sydd fel arfer yn ddeuseiniaid (unsill)
+	ond sydd yn ddeusill mewn gwirionedd
 
-3. ie_deusill 
-	Geiriau yn cynnwys 'ie' deusill (yn hytrach na 'ie' talgron)
-
-4. llafariaid_hir
-	Geiriau yn cynnwys llafariaid hir ond heb acen grom
-
-4. llafariaid_hir
-	Geiriau yn cynnwys llafariaid hir ond heb acen grom
+3. llafariaid_hir
+	Geiriau yn cynnwys llafariaid hir ond heb acen grom echblyg
 
 '''
 
-lletya
 
-# rhestri eithriadau
-lluosill_acenog = (
+# geiriau lluosill acennog
+lluosill_acennog = (
 	'caniatâu',
 	'mawrhad',
 	'nesáu',
@@ -34,19 +28,28 @@ lluosill_acenog = (
 	'cymraeg',
 	'anabl',
 )
-deusain_deusill = (
-	'dianc',
-)
-ia_deusill = (
-	'dianc',
-	'diadell',
-	'rhiant',
-	'Rhian'
-)
-ie_deusill = (
-	'rhieni',
-)
 
+# deuseiniaid deusill
+deusill = {
+	'ia': (
+		'dianc',
+		'diadell',
+		'rhiant',
+		'Rhian'
+	),
+	'ie': (
+		'rhieni',
+	),
+	'iw': (
+		'diwair',
+		'diwyd',
+	),
+	'ya': (
+		'lletya',
+	),
+}
+
+# llafariaid hir heb acen grom echblyg
 llafariad_hir = (
 	'mud',
 	'mab',

@@ -5,11 +5,7 @@ llinell.py
 	Llinell class: rhestr o wrthrychau Gair
 '''
 
-import sys
 from gair import Gair
-
-global debug
-debug = False
 
 class Llinell(object):
 	'''
@@ -22,6 +18,7 @@ class Llinell(object):
 			self.geiriau = s
 		# gwirio am linyn unicode
 		elif type(s) == str or type(s) == unicode:
+			s = s.strip()
 			if type(s) != unicode:
 				s = s.decode('utf-8')
 			self.geiriau = [Gair(ss) for ss in s.split(' ')]
@@ -53,8 +50,8 @@ class Llinell(object):
 	def clymau(self):
 		return [g.nodau.rhestr_clymau() for g in self.geiriau]
 	
-	def nodau_acenog(self):
-		return [nod for g in self.geiriau for nod in g.nodau_acenog()]
+	def nodau_acennog(self):
+		return [nod for g in self.geiriau for nod in g.nodau_acennog()]
 		
 	# allbwn
 	def llinyn(self):
@@ -105,10 +102,8 @@ def main():
 		print ll.llinyn_cytseiniaid()
 		print ll.nifer_geiriau()
 		print ll.nifer_sillau()
-		nac = ll.nodau_acenog()
+		nac = ll.nodau_acennog()
 		print [nod.llinyn for nod in nac]
-
-#	 cwpled = Cwpled(s1,s2)
 
 if __name__ == '__main__': main()
 

@@ -33,7 +33,7 @@ from gair import Gair
 # from odl import oes_odl
 
 import logging
-out = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 global debug
 debug = False
@@ -143,13 +143,13 @@ def paru_cytseiniaid(x_nodau, y_nodau):
 		x_dosb = None
 		if x_prev and all(nod.isspace() for nod in x_inter) and cy.dosbarth_ceseiliad.has_key( (x_prev.llinyn, x_curr.llinyn) ):
 			x_dosb = cy.dosbarth_ceseiliad[ (x_prev.llinyn, x_curr.llinyn) ]
-			out.debug('paru_cytseiniaid: x_dosb: ' + str(x_dosb))
+			log.debug('paru_cytseiniaid: x_dosb: ' + str(x_dosb))
 
 		# ceseiliad yn y nodau dde
 		y_dosb = None
 		if y_prev and all(nod.isspace() for nod in y_inter) and cy.dosbarth_ceseiliad.has_key( (y_prev.llinyn, y_curr.llinyn) ):
 			y_dosb = cy.dosbarth_ceseiliad[ (y_prev.llinyn, y_curr.llinyn) ]
-			out.debug('paru_cytseiniaid: y_ces: ' + str(y_dosb))
+			log.debug('paru_cytseiniaid: y_ces: ' + str(y_dosb))
 		
 		# ceseiliad ar y chwith a'r dde
 		if x_dosb and y_dosb and not any(nod.iscytsain() for nod in x_inter) and not any(nod.iscytsain() for nod in y_inter):
@@ -225,9 +225,8 @@ def paru_cytseiniaid(x_nodau, y_nodau):
 					y_prev, y_inter = y_list.pop() if y_list else (None, None)
 					continue
 				else:
-					if debug:
-						print 'dim cyfatebiaeth lawn'
-					# hack: pan nad yw'r ddwy gytsain gyntaf yn cyfateb
+					log.debug('dim cyfatebiaeth lawn')
+					# hack: am achosion pan nad yw'r ddwy gytsain gyntaf yn cyfateb
 					x_prev = x_curr
 					y_prev = y_curr
 					break
@@ -250,11 +249,6 @@ def paru_cytseiniaid(x_nodau, y_nodau):
 		x_curr = x_prev
 		y_curr = y_prev
 	
-	
-	# info
-	out.debug( 'x_list:' + str(x_list) )
-	out.debug( 'y_list:' + str(y_list) )
-	
 	# casglu'r gweddill (heb anghofio'r x_prev neu y_prev sydd heb eu prosesu)
 	x_pen = [x_prev] if x_prev and x_prev.llinyn not in ['h','H'] else []
 	while x_list: 
@@ -262,18 +256,12 @@ def paru_cytseiniaid(x_nodau, y_nodau):
 		if par[0].llinyn not in ['h','H']:
 			x_pen.append( par[0] )
 
-	# if debug:
-	#	print [nod.llinyn for nod in x_pen]
-	# 
 	y_pen = [y_prev] if y_prev and y_prev.llinyn not in ['h','H'] else []
 	while y_list: 
 		par = y_list.pop()
 		if par[0].llinyn not in ['h','H']:
 			y_pen.append( par[0] )
 
-	# if debug:
-	#	print [nod.llinyn for nod in y_pen]
-	# 
 	return parau, x_pen, y_pen, sylwadau
 
 		
@@ -318,17 +306,10 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 	if type(y_geiriau)==Gair:
 		y_geiriau = [ y_geiriau ]
 
-	# if debug:
-	#	print '-------------------------'
-	#	print 'ffwythiant: oes_cytseinedd'
-	#	# print [g.llinyn() for g in x_geiriau]
-	#	# print [g.llinyn() for g in y_geiriau]
-	#	print ' '.join([ g.llinyn() for g in x_geiriau ]) + '/' + ' '.join({ g.llinyn() for g in y_geiriau })
-	
 	# info
 	sx = ' '.join([ g.llinyn() for g in x_geiriau ]) 
 	sy = ' '.join([ g.llinyn() for g in y_geiriau ])
-	out.info('oes_cytseinedd: ' + sx + '/' + sy)
+	log.info('oes_cytseinedd: ' + sx + '/' + sy)
 	if debug:
 		print 'oes_cytseinedd: ' + sx + '/' + sy
 	
@@ -336,42 +317,26 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 	x_blaen, x_canol, x_cwt = x_geiriau[-1].traeannu()
 	y_blaen, y_canol, y_cwt = y_geiriau[-1].traeannu()
 	
-	# print x_blaen
-	# print y_blaen
-	# print '++++++++'
-	# print '|'.join([nod.llinyn for nod in x_blaen])
-	# print '|'.join([nod.llinyn for nod in y_blaen])
-	# print [nod.llinyn for nod in y_blaen]
-	
-	# estyn pen-blaen y ddwy hanner (dim bylchau)
-	# xb = []
-	# for g in x_geiriau[:-1]:
-	#	xb = xb + list(g.nodau)
+	# estyn blaen y ddwy hanner (dim bylchau)
 	xb = [nod for g in x_geiriau[:-1] for nod in g.nodau]
 	x_blaen = xb + list(x_blaen)
-	# yb = []
-	# for g in y_geiriau[:-1]:
-	#	yb = yb + list(g.nodau)
 	yb = [nod for g in y_geiriau[:-1] for nod in g.nodau]
 	y_blaen = yb + list(y_blaen)
 
-
 	# info
-	if debug:
-		print ([nod.llinyn for nod in x_blaen], [nod.llinyn for nod in x_canol], [nod.llinyn for nod in x_cwt])
-		print ([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
-	
-	out.debug(
+	# log.debug([nod.llinyn for nod in x_blaen], [nod.llinyn for nod in x_canol], [nod.llinyn for nod in x_cwt])
+	# log.debug([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
+	log.debug(
 		''.join( [nod.llinyn for nod in x_blaen] ) 
 		+ ':' + ''.join( [nod.llinyn for nod in x_canol] )
 		+ ':' + ''.join( [nod.llinyn for nod in x_cwt] )
 	)
-	out.debug(
+	log.debug(
 		''.join( [nod.llinyn for nod in y_blaen] ) 
 		+ ':' + ''.join( [nod.llinyn for nod in y_canol] )
 		+ ':' + ''.join( [nod.llinyn for nod in y_cwt] )
 	)
-	# out.debug([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
+	# log.debug([nod.llinyn for nod in y_blaen], [nod.llinyn for nod in y_canol], [nod.llinyn for nod in y_cwt])
 
 	# data ar gyfer y view functions
 	data = {'sylwadau': [],}
@@ -395,14 +360,13 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 		if not xp and not yp:
 			parau_canol = pa
 		else:
-			out.debug('oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb') 
+			log.debug('oes_cytseinedd: cytbwys ddiacen: x_canol a y_canol heb gyfateb') 
 			return (None, 'XXX', None)			
 
 	# anghytbwys ddisgynedig: cyfateb x_cwt a y_canol
 	elif not x_canol and y_canol:
 		cc = RhestrNodau(x_cwt).rhestr_clymau()
 		x_cwt_llinyn = ''.join([ nod.llinyn for nod in cc[-1] ])
-		# print x_cwt_llinyn
 		pa, xp, yp, sy = paru_cytseiniaid(x_cwt, y_canol)
 
 		# cyfatebiaeth lawn (dim cytseiniaid yn weddill)
@@ -411,8 +375,7 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 			x_cwt = []
 		# profi am gynghanedd drychben
 		elif x_cwt_llinyn in cy.cyfuniadau_trychben:
-			if debug:
-				print 'Profi am gynghanedd drychben'
+			log.debug('Profi am gynghanedd drychben')
 			nod_trychben = x_cwt.pop()
 			pa2, xp2, yp2, sy2 = paru_cytseiniaid(x_cwt, y_canol)
 			if not xp2 and not yp2:
@@ -420,19 +383,16 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 				trychben.append(nod_trychben)
 		# profi am gynghanedd gysylltben:
 		elif y_blaen:
-			if debug:
-				print 'Profi am gynghanedd gysylltben'
+			log.debug('Profi am gynghanedd gysylltben')
 			nod_cysylltben = y_blaen[0]
-			# print nod_cysylltben.llinyn
 			x_cwt_newydd = list(x_cwt)
 			x_cwt_newydd.append( nod_cysylltben )
-			# print [nod.llinyn for nod in x_cwt_newydd ]
 			pa3, xp3, yp3, sy3 = paru_cytseiniaid(x_cwt_newydd, y_canol)
 			if not xp3 and not yp3:
 				parau_canol = pa3
 				cysylltben.append( nod_cysylltben )
 			else:
-				out.debug('oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb') 
+				log.debug('oes_cytseinedd: anghytbwys ddisgynedig: x_cwt a y_canol ddim yn cyfateb') 
 				return (None, 'XXX', None)
 		else:
 			pass
@@ -440,27 +400,21 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 	# anghytbwys ddyrchafedig:
 	elif x_canol and not y_canol:
 		pass
-	# cytbwys acenog
+	# cytbwys acennog
 	else:
 		pass
 	
-	# print trychben[0].llinyn if trychben else 'dim trychben'
-	# print cysylltben[0].llinyn if cysylltben else 'dim cysylltben'
-	# print 'parau_canol: ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in parau_canol ])
-		
-	out.debug('parau_canol: ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in parau_canol ]) )
+	log.debug('parau_canol: ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in parau_canol ]) )
 
 	#--------------------
 	# parau blaen
 	#--------------------
-	# print '>>>>>>>DING'
 	parau, x_pen, y_pen, syl = paru_cytseiniaid( x_blaen, y_blaen ) 
 	if syl:
 		data['sylwadau'].extend(syl)
-	# print '>>>>>>>DONG'
-	# print x_pen
+
 	#--------------------
-	# paratoi a chasglu data
+	# paratoi a recordio'r rhestri
 	parau.reverse()
 	parau_canol.reverse()
 	x_cwt = [ nod for nod in x_cwt if nod.iscytsain() ]
@@ -474,13 +428,13 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 	data['trychben'] = trychben
 	data['cysylltben'] = cysylltben
 	
-	out.debug('pen_ch: ' + ' '.join([ nod.llinyn for nod in data['pengoll_chwith'] ]) )
-	out.debug('pen_dd: ' + ' '.join([ nod.llinyn for nod in data['pengoll_dde'] ]) )
-	out.debug('parau  : ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in data['parau'] ]) )
-	out.debug('cwt_ch: ' + ' '.join([ nod.llinyn for nod in data['cwt_chwith'] ]) )
-	out.debug('cwt_dd: ' + ' '.join([ nod.llinyn for nod in data['cwt_dde'] ]) )
-	out.debug('trychben: ' + ' '.join([ nod.llinyn for nod in data['trychben'] ]) )
-	out.debug('cysylltben: ' + ' '.join([ nod.llinyn for nod in data['cysylltben'] ]) )
+	log.debug('pen_ch: ' + ' '.join([ nod.llinyn for nod in data['pengoll_chwith'] ]) )
+	log.debug('pen_dd: ' + ' '.join([ nod.llinyn for nod in data['pengoll_dde'] ]) )
+	log.debug('parau  : ' + ' '.join([ a.llinyn + '/' + b.llinyn for a,b in data['parau'] ]) )
+	log.debug('cwt_ch: ' + ' '.join([ nod.llinyn for nod in data['cwt_chwith'] ]) )
+	log.debug('cwt_dd: ' + ' '.join([ nod.llinyn for nod in data['cwt_dde'] ]) )
+	log.debug('trychben: ' + ' '.join([ nod.llinyn for nod in data['trychben'] ]) )
+	log.debug('cysylltben: ' + ' '.join([ nod.llinyn for nod in data['cysylltben'] ]) )
 
 	#--------------------
 	# dosbarthu
@@ -569,46 +523,62 @@ def oes_cytseinedd( x_geiriau, y_geiriau ):
 def main():
 	print 'cytseinedd.py'
 
-	# # x = "Can hardd croyw fardd"
-	# # y = "Caerfyrddin"
+	x = ''
+	y = ''
+	
+	# x = "Can hardd croyw fardd"
+	# y = "Caerfyrddin"
+
 	# x = "ail y carw"
 	# y = "olwg gorwyllt"
+
 	# x = "y cawn ar lan"
 	# y = "Conwy'r wledd"
+
 	# x = "wleidyddol"
 	# y = "hirdymor"
-	# # x = 'arolwg'
-	# # y = 'chwaraeon'
-	# # x = "Hen derfyn"
-	# # y = "nad yw'n darfod"
+
+	# x = 'arolwg'
+	# y = 'chwaraeon'
+
+	# x = "Hen derfyn"
+	# y = "nad yw'n darfod"
+
 	# x = 'Hyd y tywyn haul,'
 	# y = 'duw wyt yn hon.'
+
 	# x = 'wiw'
 	# y = 'wead'
+
 	# x = 'ieuanc'
 	# y = 'awen'
-	# 
+
 	# x = "ond hiroes"
 	# y = "yw braint derwen"
-	# 
+
 	# x = "Nid yn aml"
 	# y = "y down yma"
-	# 
-	# print x + '/' + y
-	# xx = [Gair(s) for s in x.split(' ')]
-	# yy = [Gair(s) for s in y.split(' ')]
-	# zz = oes_cytseinedd(xx,yy)
-	# print zz
-	# data = zz[2]
-	# print data["sylwadau"]
-	# print [x.llinyn for x in data['pengoll_chwith']]
-	# print [x.llinyn for x in data['pengoll_dde']]
-	# # print [(a.llinyn,b.llinyn) for a,b in data['parau_canol']]
-	# print [(a.llinyn,b.llinyn) for a,b in data['parau']]
-	# print [x.llinyn for x in data['cwt_chwith']]
-	# print [x.llinyn for x in data['cwt_dde']]
-	# print [x.llinyn for x in data['trychben']]
-	# return
+	
+	x = "o'n cwmpas"
+	y = "campwaith"
+
+	if x and y:
+		print x + '/' + y
+		xx = [Gair(s) for s in x.split(' ')]
+		yy = [Gair(s) for s in y.split(' ')]
+		cy, ba, data = oes_cytseinedd(xx,yy)
+		print cy
+		if data:
+			print [ nod.llinyn for nod in data['pengoll_chwith'] ]
+			print [ nod.llinyn for nod in data['pengoll_dde'] ]
+			print [ (p[0].llinyn, p[1].llinyn) for p in data['parau']]
+			print [ nod.llinyn for nod in data['cwt_chwith'] ]
+			print [ nod.llinyn for nod in data['cwt_dde'] ]
+			print [ nod.llinyn for nod in data['trychben'] ]
+			print [ nod.llinyn for nod in data['cysylltben'] ]
+			print data['sylwadau']
+		return
+
 	
 	llinynnau = {
 		'croes': (
@@ -647,25 +617,25 @@ def main():
 	}
 	
 	for key in [
-			# 'croes',
-			# 'croes_o_gyswllt',
-			# 'traws',
-			# 'traws_fantach',
-			# 'proest_ir_odl',
-			# 'trychben',
+			'croes',
+			'croes_o_gyswllt',
+			'traws',
+			'traws_fantach',
+			'proest_ir_odl',
+			'trychben',
 			'cysylltben',
 		]:
 		val = llinynnau[key]
-		print '--------------------'
+		print '===================='
 		print key.upper()
-		print '--------------------'
+		print '===================='
 		for s1,s2 in val:
 			print s1 + ' / ' + s2
 			xx = [Gair(s) for s in s1.split(' ')]
 			yy = [Gair(s) for s in s2.split(' ')]
 			cy, ba, data = oes_cytseinedd( xx, yy )
 			print cy
-			if data:
+			if data and False:
 				print [ nod.llinyn for nod in data['pengoll_chwith'] ]
 				print [ nod.llinyn for nod in data['pengoll_dde'] ]
 				print [ (p[0].llinyn, p[1].llinyn) for p in data['parau']]
@@ -674,7 +644,9 @@ def main():
 				print [ nod.llinyn for nod in data['trychben'] ]
 				print [ nod.llinyn for nod in data['cysylltben'] ]
 				print data['sylwadau']
-			print ('==========')
+			print ('----------')
 
 if __name__ == '__main__': 
+	import logging.config
+	logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 	main()

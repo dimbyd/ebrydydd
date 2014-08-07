@@ -1,11 +1,14 @@
+# peiriant/__init__.py
 
-# make some classes available at package-level
-# this lets us use "from peiriant import Llinell"
-# instead of "from peiriant.llinell import Llinell"
+#----------------------------------------
+# mae hyn yn caniatau "from peiriant import Llinell"
+# yn hytrach na "from peiriant.llinell import Llinell"
 
 from cysonion import LLYTHRENWAU
 from gair import Gair
 from llinell import Llinell
 from mesur import Cwpled, Cerdd
-from peiriant import Peiriant
+from dadansoddwr import Dadansoddwr
+from dadansoddwr_pennill import DadansoddwrPennill
 from adroddiad import Adroddiad
+

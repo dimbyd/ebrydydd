@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
-cysonion.py (ebrydydd)
+ebrydydd: cysonion.py
 '''
 
 LLYTHRENWAU = {

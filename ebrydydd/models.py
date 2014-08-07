@@ -1,14 +1,13 @@
+# -*- coding: utf-8 -*-
 '''
-models.py (ebrydydd app)
+ebrydydd: models.py
 '''
 
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-# from peiriant.cysonion import LLYTHRENWAU
-
-import peiriant.cysonion as pc
+import ebrydydd.peiriant.cysonion as pc
 import ebrydydd.cysonion as ec
 
 class Awdur(models.Model):
@@ -35,27 +34,36 @@ class Llinell(models.Model):
 			return prev[0]
 		return False
 
-class Cwpled(models.Model):
-	cyntaf = models.ForeignKey(Llinell, related_name="llinell_cyntaf")
-	ail = models.ForeignKey(Llinell, related_name="ail_linell")
-	awdur = models.ForeignKey(Awdur, null=True)	   
-	def __unicode__(self):
-		return self.cyntaf.llinyn + '\n' + self.ail.llinyn 
+# Implement one-to-many by having a ForeignKey in each Llinell, pointing to the Pennill
 
-class ToddaidByr(models.Model):
-	cyntaf = models.CharField(max_length=140)
-	cyrch = models.CharField(max_length=140)
-	ail = models.CharField(max_length=140)
-	awdur = models.ForeignKey(Awdur, null=True)	   
-	def __unicode__(self):
-		return self.cyntaf + ' - ' + cyrch  + '\n' + self.ail
-
-class Englyn(models.Model):
-	paladr = models.ForeignKey(ToddaidByr)
-	esgyll = models.ForeignKey(Cwpled)
-	awdur = models.ForeignKey(Awdur, null=True)	   
-	def __unicode__(self):
-		return str(paladr) + '\n' + str(esgyll)
+# class Pennill(models.Model):
+# 	cyntaf = models.ForeignKey(Llinell, related_name="llinell_cyntaf")
+# 	ail = models.ForeignKey(Llinell, related_name="ail_linell")
+# 	awdur = models.ForeignKey(Awdur, null=True)	   
+# 	def __unicode__(self):
+# 		return self.cyntaf.llinyn + '\n' + self.ail.llinyn 
+# 
+# class Cwpled(models.Model):
+# 	cyntaf = models.ForeignKey(Llinell, related_name="llinell_cyntaf")
+# 	ail = models.ForeignKey(Llinell, related_name="ail_linell")
+# 	awdur = models.ForeignKey(Awdur, null=True)	   
+# 	def __unicode__(self):
+# 		return self.cyntaf.llinyn + '\n' + self.ail.llinyn 
+# 
+# class ToddaidByr(models.Model):
+# 	cyntaf = models.CharField(max_length=140)
+# 	cyrch = models.CharField(max_length=140)
+# 	ail = models.CharField(max_length=140)
+# 	awdur = models.ForeignKey(Awdur, null=True)	   
+# 	def __unicode__(self):
+# 		return self.cyntaf + ' - ' + cyrch  + '\n' + self.ail
+# 
+# class Englyn(models.Model):
+# 	paladr = models.ForeignKey(ToddaidByr)
+# 	esgyll = models.ForeignKey(Cwpled)
+# 	awdur = models.ForeignKey(Awdur, null=True)	   
+# 	def __unicode__(self):
+# 		return str(paladr) + '\n' + str(esgyll)
 
 
 class Dadansoddiad(models.Model):

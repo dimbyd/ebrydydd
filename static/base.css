@@ -2,25 +2,43 @@
 base.css for ebrydydd project
 */
 
+/* manylion dadansoddiad y peiriant */
 .mono {
 	text-align:		left;
   		font-family: 	monospace;
   		white-space: 	pre;
   		font-size: 		125%;
-	letter-spacing:	4px;
+	letter-spacing:	2px;
 	visibility: 	visible;
     position: absolute;
 }
-.gorffwysfa {
-	color:red;
+/* mae'r "class names" ganlynol yn cael eu gosod gan y peiriant */
+.toriadau {
+	color:green;
 }
-.odl {
+.odlau {
+	color:magenta;
+}
+.cytseiniaid_cyfatebol {
 	color:blue;
 }
+.cytseiniaid_traws {
+	color:red;
+}
+.cytseiniaid_cwt {
+	color:green;
+}
 
+/* llyfryddiaeth */
 
 ul.llyfr {
     list-style-type: none;
+}
+li.teitl {
+	font-style: italic;
+}
+li.awdur {
+	text-decoration: underline;
 }
 
 /* tabl dadansoddiadau */
@@ -31,7 +49,6 @@ table.dad {
 	border-collapse:collapse;
 	table-layout:fixed;
 }
-
 th.dad {
 	font-weight:bold;
  	border: solid 1px black;
@@ -145,7 +162,7 @@ body, th, td {
 
 /* column: content-main */
 #content-main {
-    width:75%;
+    width:90%;
     float:left;
     padding-bottom:10px;
     border-bottom:1px solid #000;
@@ -164,7 +181,7 @@ body, th, td {
 
 /* column: content-related */
 #content-related {
-    width:25%;
+    width:10%;
     float:right;
 }
 

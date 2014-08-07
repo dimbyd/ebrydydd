@@ -17,7 +17,7 @@ odl.py : adnoddau er mwyn darganfod a dosbarthu odl
 		odl lafarog
 		proest lafarog
 
-	RHEOLAU:
+	PATRYMAU:
 		aa - cwlwm llafariad
 		bb - cwlwm cytseiniaid
 		ds - deusain
@@ -45,34 +45,21 @@ odl.py : adnoddau er mwyn darganfod a dosbarthu odl
 		odl:	gyda'r un ddeusain
 		proest: gyda deusain o'r un dosbarth	(e.e. tew/byw, llawn/mewn, dewr/awr)
 					
-	TODO:
-		odlau cudd
-		odlau ewinog
-
 '''
 
-import re
 import cysonion as cy
-# import llinyn as ll
-# import acen as ac
 from nodau import Nod, RhestrNodau, Cwlwm
-
 from gair import Gair
 
 import logging
-out = logging.getLogger(__name__)
-
-global debug
-debug = False
-
+log = logging.getLogger(__name__)
 
 def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 	'''
 	ffwythiant: oes_odl_sengl
 	'''
 	
-	# if debug:
-	# 	print 'oes_odl_sengl: ' + str(nodau1) + '/' + str(nodau2)
+	# log.info('oes_odl_sengl: %s/%s' % ( str(nodau1), str(nodau2) ))
 
 	# dim whitespace!
 	if any([nod.isspace() for nod in nodau1]) or any([nod.isspace() for nod in nodau2]):
@@ -80,10 +67,6 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 
 	clymau1 = nodau1.rhestr_clymau(trwsio=True)
 	clymau2 = nodau2.rhestr_clymau(trwsio=True)
-	if debug:
-		print '**********'
-		print clymau1
-		print clymau2
 	
 	# problem fan hyn: da ni'n gofyn am bwysau deusain isod (proest)
 	def pwysau(nod):
@@ -106,8 +89,7 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 	
 	# gwirio os ydyw'r clymau olaf yn cyfateb (clymau cytseiniaid, efallai byddant yn wag)
 	if clymau1[-1] == clymau2[-1]:	
-		if debug:
-			print '>> cytseiniaid terfynnol yn cyfateb: ' + clymau1[-1].llinyn() + '/' + clymau2[-1].llinyn()
+		log.debug('cytseiniaid terfynnol yn cyfateb: ' + clymau1[-1].llinyn() + '/' + clymau2[-1].llinyn())
 	
 		c1 = clymau1[-2]
 		c2 = clymau2[-2]
@@ -115,29 +97,24 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 		s1 = c1.llinyn()
 		s2 = c2.llinyn()
 		
-		# if debug:
-		# 	print '>> ceisio cyfateb: ' + s1 + '/' + s2
-			
 		# archwilio deuseiniaid
 		if len(c1) > 1:		
 			ds1 = c1.llinyn()
 			if not cy.dosbarth_deusain.has_key(ds1):
-				out.debug('methu adnabod y ddeusain %s', ds1)
+				log.error('methu adnabod y ddeusain %s', ds1)
 		if len(c2) > 1:
 			ds2 = c2.llinyn()
 			if not cy.dosbarth_deusain.has_key(ds2):
-				out.debug('methu adnabod y ddeusain %s', ds2)
+				log.error('methu adnabod y ddeusain %s', ds2)
 								
 		# llafariaid sengl
 		if len(c1) == 1 and len(c2) == 1:
 			if (trwm_ac_ysgafn and c1[0].llinyn == c2[0].llinyn) or (not trwm_ac_ysgafn and c1[0].hir2byr() == c2[0].hir2byr()):
 				mae_odl = True
-				if debug:
-					print '>> llafariad+llafariad yn cyfateb: odl >>> ' + s1 + '/' + s2
+				log.debug('llafariad+llafariad yn cyfateb: odl >>> ' + s1 + '/' + s2)
 			elif c1[0] != c2[0] and pwysau(c1[0]) == pwysau(c2[0]):
 				mae_proest = True
-				if debug:
-					print '>> llafariad+llafariad o\'r un pwysau: proest >>> ' + s1 + '/' + s2
+				log.debug('llafariad+llafariad o\'r un pwysau: proest >>> ' + s1 + '/' + s2)
 			else:
 				pass
 		
@@ -145,12 +122,10 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 		if len( c1 ) == 1 and len( c2 ) > 1 and ds2 and ds2 in cy.deuseiniaid['talgron']:
 			if c1[0].hir2byr() == c2[1].hir2byr():
 				mae_odl = True
-				if debug:
-					print '>> llafariad+deusain-talgron yn cyfateb: odl >>> ' + s1 + '/' + s2
+				log.debug('llafariad+deusain-talgron yn cyfateb: odl >>> ' + s1 + '/' + s2)
 			elif pwysau( c1[0] ) == pwysau( c2[1] ):
 				mae_proest = True
-				if debug:
-					print '>> llafariad+deusain-talgron o\'r un pwysau: proest >>> ' + s1 + '/' + s2
+				log.debug('llafariad+deusain-talgron o\'r un pwysau: proest >>> ' + s1 + '/' + s2)
 			else:
 				pass
 		
@@ -158,12 +133,10 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 		if len( c1 ) > 1 and len( c2 ) == 1 and ds1 and ds1 in cy.deuseiniaid['talgron']:
 			if c1[1].hir2byr() == c2[0].hir2byr():
 				mae_odl = True
-				if debug:
-					print '>> deusain-talgron+llafariad yn cyfateb: odl >>> ' + s1 + '/' + s2
+				log.debug('deusain-talgron+llafariad yn cyfateb: odl >>> ' + s1 + '/' + s2)
 			elif pwysau( c1[1] ) == pwysau( c2[0] ):
 				mae_proest = True
-				if debug:
-					print '>> deusain+llafariad o\'r un pwysau: proest >>> ' + s1 + '/' + s2
+				log.debug('deusain+llafariad o\'r un pwysau: proest >>> ' + s1 + '/' + s2)
 			else:
 				pass
 		
@@ -174,25 +147,17 @@ def oes_odl_sengl(nodau1, nodau2, proest=False, trwm_ac_ysgafn=True):
 			if ds1 and ds1 in cy.deuseiniaid['talgron']	and ds2 and ds2 in cy.deuseiniaid['talgron']:
 				if c1[1].llinyn == c2[1].llinyn:
 					mae_odl = True
-					if debug:
-						print '>> deusain-talgron+deusain-talgron yn cyfatb: odl >>>' + s1 + '/' + s2
+					log.debug('deusain-talgron+deusain-talgron yn cyfatb: odl >>>' + s1 + '/' + s2)
 
 			elif ds1 and ds1 in cy.deuseiniaid['lleddf'] and ds2 and ds2 in cy.deuseiniaid['lleddf']:
 				if c1 == c2:
 					mae_odl = True
-					if debug:
-						print '>> deusain-lleddf+deusain-lleddf yn cyfatb: odl >>>' + s1 + '/' + s2
+					log.debug('deusain-lleddf+deusain-lleddf yn cyfatb: odl >>>' + s1 + '/' + s2)
 				elif c1 != c2 and cy.dosbarth_deusain[ds1] == cy.dosbarth_deusain[ds2]:
 					mae_proest = True
-					if debug:
-						print '>> deusain-lleddf+deusain-lleddf o\'r un dosbarth: proest >>> ' + s1 + '/' + s2
+					log.debug('deusain-lleddf+deusain-lleddf o\'r un dosbarth: proest >>> ' + s1 + '/' + s2)
 				else: 
 					pass
-	if debug:
-		if mae_odl:			print 'odl'
-		elif mae_proest:	print 'proest'
-		else:				pass
-		
 	# diweddeb
 	if (mae_odl and not proest) or (mae_proest and proest):
 		nodau_odl1 = [nod for nod in c1+clymau1[-1]]
@@ -233,10 +198,9 @@ def oes_odl(cyntaf, ail, olynydd=None, trwm_ac_ysgafn=True):
 	nodau1 = RhestrNodau([ nod for nod in cyntaf ])
 	nodau2 = RhestrNodau([ nod for nod in ail ])
 	if not nodau1 or not nodau2:
-		return None
+		return None, None
 
-	if debug:
-		print 'oes_odl: ' + str(nodau1) + '/' + str(nodau2)
+	log.info('oes_odl: ' + str(nodau1) + '/' + str(nodau2))
 
 	syl = []
 
@@ -247,16 +211,14 @@ def oes_odl(cyntaf, ail, olynydd=None, trwm_ac_ysgafn=True):
 
 	# --------------------------------
 	# profi am odl gudd neu odl ewinog 
-	# angen atal y peiriant rhag odli nod gyda'i hun.
+	# TODO: rhaid atal y dadansoddwr rhag odli nod gyda'i hun.
 	# hac: edrych ond ar eiriau olynol sy'n dechrau â chytsain
 	if type(olynydd)==Gair and len(olynydd.nodau) > 0 and olynydd.nodau[0].iscytsain():
 
 		# profi am odl gudd
 		nodau3 = list(nodau1)	
 		meddalu = False
-		# print nodau1[-1].llinyn
-		# print olynydd.nodau[0].llinyn.lower()
-		# print cy.cytseiniaid_meddalu
+
 		if nodau1[-1].llinyn in cy.cytseiniaid_meddalu and olynydd.nodau[0].llinyn.lower() == 'd':
 			meddalu = True
 			nodau3.append(Nod('t'))
@@ -264,19 +226,6 @@ def oes_odl(cyntaf, ail, olynydd=None, trwm_ac_ysgafn=True):
 			nodau3.append(olynydd.nodau[0])
 			
 		nodau3 = RhestrNodau(nodau3)
-
-		# if debug:
-			# print '++++++++++'
-			# n3 = list(nodau1)
-			# print [nod.llinyn for nod in n3]
-			# n3.append( olynydd.nodau[0] )
-			# print [nod.llinyn for nod in n3]
-			# 
-			# print olynydd.nodau[0].llinyn
-			# print nodau1
-			# print nodau2
-			# print nodau3
-			# print RhestrNodau(n3)
 
 		cudd = oes_odl_sengl(nodau3, nodau2, trwm_ac_ysgafn=trwm_ac_ysgafn)
 		dau_gytsain = False
@@ -307,8 +256,7 @@ def oes_odl(cyntaf, ail, olynydd=None, trwm_ac_ysgafn=True):
 		c2 = olynydd.nodau[0].llinyn
 		if cy.dosbarth_ceseiliad.has_key( (c1,c2) ):
 			llinyn_cyfwerth = cy.dosbarth_ceseiliad[ (c1,c2) ]
-			if debug:
-				print('oes_odl: paru_cytseiniaid: ' + c1 + '+' + c2 +  '=' + llinyn_cyfwerth )
+			log.debug('oes_odl: paru_cytseiniaid: ' + c1 + '+' + c2 +  '=' + llinyn_cyfwerth )
 			nod_newydd = Nod( llinyn_cyfwerth )
 			nodau3 = RhestrNodau(list(nodau1[:-1])+[nod_newydd] )
 			ewi = oes_odl_sengl( nodau3, nodau2, trwm_ac_ysgafn=trwm_ac_ysgafn )
@@ -346,9 +294,6 @@ def oes_odl_lusg(cyntaf, ail, olynydd=None):
 	# tocio cynffon yr ail air (y ddau gwlwm olaf)
 	clymau2.pop()
 	clymau2.pop()
-	if debug:
-		print clymau1
-		print clymau2
 
 	# nodau'r gair cyntaf
 	nodau1 = cyntaf.nodau
@@ -361,9 +306,6 @@ def oes_odl_lusg(cyntaf, ail, olynydd=None):
 
 
 def llinyn_odl( g1, g2, olynydd=None, llusg=False, proest=False, blanksymbol='.'):
-	if debug:
-		print g1.clymau
-		print g2.clymau
 	if proest:
 		odl = oes_proest(g1,g2)
 	elif llusg:
@@ -376,12 +318,14 @@ def llinyn_odl( g1, g2, olynydd=None, llusg=False, proest=False, blanksymbol='.'
 	else:
 		od = None
 		sy = None
+	
 	ss1 = []
 	for nod in g1.nodau:
 		if od and any([ nod is nod_odl for nod_odl in od[0] ]):
 			ss1.append(nod.llinyn)
 		else:
 			ss1.append( blanksymbol*len( nod.llinyn ) )
+	
 	ss2 = []
 	for nod in g2.nodau:
 		if od and any([ nod is nod_odl for nod_odl in od[1] ]):
@@ -479,8 +423,8 @@ def main():
 			('wele','lid','gelyn'),
 			('ddifa','lawer','calon'),
 			('wiw','dyfiant','liwdeg'),
-			('wele','wychder','Dewi'),
 			('ddinas','draw','wastraff'),
+			('wele','wychder','Dewi'),
 		),
 		'odlau_llusg_ewinog': (
 			('wyneb','haul','Epynt'),
@@ -494,22 +438,30 @@ def main():
 	}
 
 	for key in [
-			# 'odlau_cyflawn', 
-			# 'odlau_llafarog', 
-			# 'proestau_cyflawn', 
-			# 'proestau_llafarog', 
-			# 'odlau_llusg', 
-			# 'odlau_llusg_ewinog', 
+			'odlau_cyflawn', 
+			'odlau_llafarog', 
+			'proestau_cyflawn', 
+			'proestau_llafarog', 
+			'odlau_llusg', 
+			'odlau_llusg_ewinog', 
 			'odlau_llusg_cudd', 
-			# 'dim_odlau', 
+			'dim_odlau', 
 		]:
 		val = odlau[key]
 		print '=============================='
 		print key.upper()
 		print '=============================='
-		for s1,s2 in val:
+		for dau_neu_dri in val:
 			print '--------------------'
-			print s1 + '/' + s2
+			if len(dau_neu_dri) == 2:
+				s1 = dau_neu_dri[0]
+				s2 = dau_neu_dri[1]
+				# print s1 + '/' + s2
+			else:
+				s1 = dau_neu_dri[0]
+				s2 = dau_neu_dri[1]
+				s3 = dau_neu_dri[2]
+				# print s1 + '+' + s2 + '/' + s3
 			
 			if key == 'odlau_llusg':
 				print llinyn_odl( Gair(s1), Gair(s2), llusg=True )
@@ -561,5 +513,7 @@ def main():
 	return
 
 if __name__ == '__main__': 
+	import logging.config
+	logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 	main()
 	

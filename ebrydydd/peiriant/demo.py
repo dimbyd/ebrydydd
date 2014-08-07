@@ -4,11 +4,12 @@
 demo.py - showan off
 '''
 
-from llinell import Llinell
-from peiriant import Peiriant
+from subprocess import call
 
-global debug
-debug = True
+from llinell import Llinell
+from dadansoddwr import Dadansoddwr
+
+import lliwiau as lliw
 
 # data
 llinellau = {
@@ -16,20 +17,21 @@ llinellau = {
 		"Ochain cloch a chanu clir",
 		"Si'r oerwynt a sêr araul",
 		"Awdur mad a dramodydd",
-		"Ei awen gref yn ei grym",	  		
+		"Ei awen gref yn ei grym",			
+		"Onid teg yw ein tud",				
 	),
 	'croes_o_gyswllt': (
 		"Aderyn llwyd ar un llaw",
 		"Daw geiriau Duw o'i gaer deg",		
+		"Rhwydd gamwr, hawdd ei gymell",
 		"Gwr enwog yw o ran gwaith",		# methiant
 	),
 	'traws': (
 		"Ochain cloch a gwreichion clir",
-		"Ei awen brudd dros ein bro",		
 		"Si'r oerwynt dan sêr araul",
 		"Awdur mad yw'r dramodydd",
+		"Ei awen brudd dros ein bro",		
 		"Ni all lladd ond ennyn llid",		
-		"Onid teg yw ein tud",				
 	),
 	'traws_fantach': (
 		"Y gŵr aruchel ei gân",
@@ -39,9 +41,9 @@ llinellau = {
 	),
 	'llusg': (
 		"Beiddgar yw geiriau cariad",
-		"Y mae arogl yn goglais",
+		# "Y mae arogl yn goglais",
 		"Pell ydyw coed yr ellyll",
-		"Y mae Morfudd yn cuddio",
+		# "Y mae Morfudd yn cuddio",
 		"Yr haul ar dawel heli",				
 		"Taw â'th sôn, gad fi'n llonydd",
 		"Ymysg y bedw yn ddedwydd",			# methiant
@@ -52,32 +54,32 @@ llinellau = {
 	),
 	'llusg_odl_gudd': (
 		"Ac yma bu cydnabod",
-		"Ac wedi d'awr godidog",
-		"Ac wele lid y gelyn",
+		# "Ac wedi d'awr godidog",
+		# "Ac wele lid y gelyn",
 		"Gwn ddifa lawer calon",
+		"Eto dring lethr Carn Ingli",
+		"Y ddinas draw yn wastraff",
+		# "Esgor mae llid ar ormes",
+		# "Bu llawer ddoe yn cerdded",
 		"Dacw wiw dyfiant liwdeg",
 		"Ac wele wychder Dewi",
-		"Y ddinas draw yn wastraff",
-		"Esgor mae llid ar ormes",
-		"Bu llawer ddoe yn cerdded",
-		"Eto dring lethr Carn Ingli",
 	),
 	'llusg_odl_ewinog': (
 		"Yn wyneb haul ar Epynt",
 		"Yr esgob biau popeth",
-		"Aeth fy nghariad hyd ato",
+		# "Aeth fy nghariad hyd ato",
 		"O'r garreg hon daeth eco",
 		"I'r esgob pur rhoed popeth",
-		"Fy nghariad troaf atat",
+		# "Fy nghariad troaf atat",
 		"O'r garreg clywaid eco",
 	),
 	'sain': (
 		"Cân ddiddig ar frig y fron",
 		"Gŵr amhur yn sur ei sen",
-		"Bydd y dolydd yn deilio",
+		# "Bydd y dolydd yn deilio",
 		"Canlyniad cariad yw cosb",
 		"Cân hardd croyw fardd Caerfyrddin",
-		"Mae'n gas gennyf dras y dref",	  
+		# "Mae'n gas gennyf dras y dref",	  
 		"Heddychwr gwr rhagorol",		  
 	),
 	'sain_odl_ewinog': (
@@ -103,41 +105,68 @@ llinellau = {
 		"Bydd sug i'r grug a'r egin",
 		"Dy fab rhad O! Dad yw ef",			# methiant
 	),
+	'sain_gadwynog': (
+		"Dringo bryn a rhodio bro",
+		"Trydar mwyn adar y mynydd",
+		"Un dydd gwelais brydydd gwiw",
+	),
+	'trychben': (
+		"Canu mydr cyn ymadael",
+		"Nid yn aml y down yma",	
+		"Ond daw gwefr cyn atgofion",
+		"Calon ddofn ei hofn hefyd",
+		"Parabl anabl anniben",				# methiant: cam-acennu "anabl"
+	),
+	'cysylltben':  (
+		"Onid bro dy baradwys",
+		"Yma bu nwyf i'm beunydd",
+		"Mawl ar daen gwae nid gweniaith",
+		"A ddaw fy mab i Ddyfed",
+	),
 	'seingroes': (
-		"Lleuad fad lleuad fedi",
 		"Y cawr mawr yn curo myrdd",
-		"Eos dlos yn deilio ir",
+		"Lleuad fad lleuad fedi",
 		"Gweled cur o glywed can",
+		"Eos dlos yn deilio ir",
 	),
 	'trawsgroes': (
 		"Enaid unig a dinam",
 		"Geiriau gwrol gor-gywrain",
 	),
 	'seindraws': (
-		"Gwrol gwrol frawdgarwch",
 		"Y feinwen fwynwen fanwallt",
+		"Gwrol gwrol frawdgarwch",
 	),
 	'croeslusg': (
 		"Duw ei hun a'u dihunodd",
 		"Ein ceidwad eon cadarn",
 	),
 	'seinlusg': (
-		"Gŵr o forwr a fwriwyd",
 		"Gwyraf, yfaf o'r afon",
+		"Gŵr o forwr a fwriwyd",
 	),
 	'trawslusg': (
-		"Yr arwr mewn arwriaeth",
 		"Y feinwen a gâr f'enaid",
+		"Yr arwr mewn arwriaeth",
+	),
+	'misc': (
+		"Eithin aur a hithau'n haf",
+		"Arian ac aur yn ei god",
+		"A phur yw pob offeren",
+		"Deued dydd o wrando taer",
+		"Ym mhob byw y mae pawen",
+		"Ac ar ffin y gorffenol",
 	),
 }
 
 def run_demo(verbose=True):
-	pe = Peiriant()
+
+	dad = Dadansoddwr()
 	for key in [
-			# 'croes', 
-			# 'croes_o_gyswllt', 
-			# 'traws', 
-			# 'traws_fantach', 
+			'croes', 
+			'croes_o_gyswllt', 
+			'traws', 
+			'traws_fantach', 
 			'llusg', 
 			'llusg_lafarog',
 			'llusg_odl_gudd',
@@ -146,30 +175,36 @@ def run_demo(verbose=True):
 			'sain_odl_gudd',
 			'sain_odl_ewinog',
 			'sain_lafarog',
-			# 'sain_o_gyswllt',
-			# 'seingroes',
+			'sain_o_gyswllt',
+			'sain_gadwynog',
+			'trychben',
+			'cysylltben',
+			'seingroes',
 			# 'trawsgroes',
-			# 'seindraws',
-			# 'croeslusg',
-			# 'seinlusg',
-			# 'trawslusg',
+			'seindraws',
+			'croeslusg',
+			'seinlusg',
+			'trawslusg',
 		]:
+		call(["clear"])
 		val = llinellau[key]
 		print '=============================='
 		print key.upper()
 		print '=============================='
 		for s in val:
-			# if debug:
-			# 	print '++++++++++++++++++++++++++++++'
-			# 	print s
-			# 	print '++++++++++++++++++++++++++++++'
-			# print s
-			ad = pe.oes_cynghanedd( Llinell(s) )
+			ad = dad.oes_cynghanedd( Llinell(s) )
 			if verbose:
 				print ad
 			else:
-				print ad.cynghanedd + ': ' + s.strip()
-		print
+				print lliw.magenta(ad.cynghanedd) + ': ' + s.strip()
+			print
+		try:
+			aros = raw_input(">> bwrwch y dychwelwr i barhau ...")
+		except KeyboardInterrupt:
+			print
+			return
+
+
 
 #------------------------------------------------
 def main():

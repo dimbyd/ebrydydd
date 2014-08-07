@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 '''
-urls.py (ebrydydd app) 
+ebrydydd: urls.py
 '''
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
@@ -29,7 +30,4 @@ urlpatterns = patterns('',
 	url(r'aelodau/(?P<pk>\d+)/$', ebrydydd.views.Aelod_DetailView.as_view(), name='aelod'),
     url(r'^cofrestru/$', ebrydydd.views.cofrestru, name='cofrestru',),
 
-    # url(r'cyfansoddiad/$', ebrydydd.views.cyfansoddiad, name='cyfansoddiad'),
-	# url(r'dadansoddwr/$', include('ebrydydd.dadansoddwr.urls', namespace='dadansoddwr')),
-    # url(r'^cyfansoddwr/', include('ebrydydd.cyfansoddwr.urls', namespace="cyfansoddwr")),
 )

@@ -24,37 +24,43 @@ llafariaid = llafariaid_byr + llafariaid_hir
 llythrennau = cytseiniaid + llafariaid
 
 #------------------------------------------------
-# llythrenwau (yn cynrhychioli amryw ddosbarthiadau)
+# llythrenwau (dosbarthiadau)
 # llinell: cynghanedd, aceniad, bai
 # pennill: mesur
 #------------------------------------------------
 LLYTHRENWAU = {
 	'cynghanedd': (
-		('COG', 'Croes o gyswllt'),
-		('CRL', 'Croeslusg'),
+		('DIM', 'Dim cynghanedd'),
 		('CRO', 'Croes'),
+		('COG', 'Croes o gyswllt'),
 		('CRD', 'Croes drychben'),
 		('CRG', 'Croes gysylltben'),
-		('DIM', 'Dim cynghanedd'),
-		('LLU', 'Llusg'),
-		('LLA', 'Llusg lafarog'),
-		('SAG', 'Sain gadwynog'),
-		('SAI', 'Sain'),
-		('SAL', 'Sain lafarog'),
-		('SED', 'Seindraws'),
-		('SEG', 'Seingroes'),
-		('SEL', 'Seinlusg'),
-		('SOG', 'Sain o gyswllt'),
+		('CRL', 'Croeslusg'),
 		('TRA', 'Traws'),
+		('TRD', 'Traws drychben'),
+		('TRG', 'Traws gysylltben'),
 		('TRF', 'Traws fantach'),
-		('TRG', 'Trawsgroes'),
+		('TFD', 'Traws fantach drychben'),
+		('TFG', 'Traws fantach gysylltben'),
+		('TGR', 'Trawsgroes'),
 		('TRL', 'Trawslusg'),
+		('LLU', 'Llusg'),
+		('LLL', 'Llusg lafarog'),
+		('SAI', 'Sain'),
+		('SAD', 'Traws drychben'),
+		('SAG', 'Traws gysylltben'),
+		('SOG', 'Sain o gyswllt'),
+		('SAG', 'Sain gadwynog'),
+		('SAL', 'Sain lafarog'),
+		('SEG', 'Seingroes'),
+		('SED', 'Seindraws'),
+		('SEL', 'Seinlusg'),
 	),
 	'aceniad': (
-		('CAC', 'Cytbwys Acenog'),
-		('CDI', 'Cytbwys Ddiacen'),
-		('ADI', 'Anghytbwys Ddisgynedig'),
-		('ADY', 'Anghytbwys Ddyrchafedig'),
+		('CAC', 'cytbwys acennog'),
+		('CDI', 'cytbwys ddiacen'),
+		('ADI', 'anghytbwys ddisgynedig'),
+		('ADY', 'anghytbwys ddyrchafedig'),
 	),
 	'bai': (
 		('GOR',	'Gormod o odl'),
@@ -72,6 +78,7 @@ LLYTHRENWAU = {
 		('TOD', 'Toddaid'),
 		('TOH', 'Toddaid hir'),
 		('CYH', 'Cyhydedd nawban'),
+		('HAT', 'Hir-a-thoddaid'),
 	),
 
 }
@@ -92,7 +99,7 @@ geiriau_gwan = [
 
 
 #------------------------------------------------
-# ceseiliad
+# ceseilio
 #------------------------------------------------
 ceseiliaid = {
 	'p': [ ('b','h'), ('b','b'), ('b','p'), ('p','b') ],
