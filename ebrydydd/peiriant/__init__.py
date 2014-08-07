@@ -7,7 +7,7 @@
 from cysonion import LLYTHRENWAU
 from gair import Gair
 from llinell import Llinell
-from mesur import Cwpled, Cerdd
+from pennill import Cwpled, Pennill
 from dadansoddwr import Dadansoddwr
 from dadansoddwr_pennill import DadansoddwrPennill
 from adroddiad import Adroddiad

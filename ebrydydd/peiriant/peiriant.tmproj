@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>odl.py</string>
+	<string>__init__.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,19 +21,33 @@
 	<integer>305</integer>
 	<key>metaData</key>
 	<dict>
+		<key>__init__.py</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>35</integer>
+				<key>line</key>
+				<integer>9</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>adroddiad.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>43</integer>
+				<integer>9</integer>
 				<key>line</key>
-				<integer>43</integer>
+				<integer>170</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>32</integer>
+			<integer>26</integer>
 		</dict>
 		<key>cerddi/englyn_y_gorwel.txt</key>
 		<dict>
@@ -70,95 +84,65 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>49</integer>
+				<integer>50</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>43</integer>
-		</dict>
-		<key>cytseinedd.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>562</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>519</integer>
+			<integer>31</integer>
 		</dict>
 		<key>dadansoddwr.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>396</integer>
+				<integer>246</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>358</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>394</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>396</integer>
-			</dict>
+			<integer>292</integer>
 		</dict>
 		<key>dadansoddwr_pennill.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>96</integer>
 				<key>line</key>
-				<integer>215</integer>
+				<integer>156</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>118</integer>
 		</dict>
 		<key>demo.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>34</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>25</integer>
+				<integer>137</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>108</integer>
 		</dict>
 		<key>demo_penillion.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>36</integer>
 				<key>line</key>
-				<integer>8</integer>
+				<integer>3</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -195,19 +179,19 @@
 				<integer>22</integer>
 			</dict>
 		</dict>
-		<key>llinell.py</key>
+		<key>gair.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>12</integer>
+				<integer>61</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>75</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>52</integer>
 		</dict>
 		<key>nodau.py</key>
 		<dict>
@@ -216,74 +200,29 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>428</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>311</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
 				<integer>0</integer>
-				<key>line</key>
-				<integer>426</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>428</integer>
-			</dict>
-		</dict>
-		<key>odl.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>19</integer>
-				<key>line</key>
-				<integer>200</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>186</integer>
-		</dict>
-		<key>peiriant.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>87</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>67</integer>
+			<integer>134</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>cytseinedd.py</string>
+		<string>__init__.py</string>
+		<string>cysonion.py</string>
 		<string>dadansoddwr.py</string>
-		<string>dadansoddwr_pennill.py</string>
-		<string>demo.py</string>
-		<string>demo_penillion.py</string>
-		<string>odl.py</string>
 		<string>adroddiad.py</string>
-		<string>peiriant.py</string>
-		<string>erthyglau/john_griffiths.txt</string>
-		<string>cerddi/englyn_y_gorwel.txt</string>
+		<string>nodau.py</string>
+		<string>gair.py</string>
+		<string>demo_penillion.py</string>
+		<string>demo.py</string>
+		<string>dadansoddwr_pennill.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
-	<true/>
+	<false/>
 	<key>windowFrame</key>
-	<string>{{740, 39}, {931, 989}}</string>
+	<string>{{690, 4}, {940, 1024}}</string>
 </dict>
 </plist>
