@@ -63,20 +63,36 @@ class Llinell_DetailView(DetailView):
 		return reverse('rhestr-llinellau')
 	def get_context_data(self, **kwargs):
 		context = super(Llinell_DetailView, self).get_context_data(**kwargs)
+		# qset = Dadansoddiad.objects.filter(llinell=self.get_object().id).order_by('dadansoddwr')
+		# qset = list(qset)
 		qset = Dadansoddiad.objects.filter(llinell=self.get_object().id).order_by('dadansoddwr')
-		qset = list(qset)
+		dadansoddiadau = list()
+		for dad in list(qset):
+			cy = dict(pe.LLYTHRENWAU['cynghanedd'])[dad.cynghanedd] if dad.cynghanedd else '-'
+			ac = dict(pe.LLYTHRENWAU['aceniad'])[dad.aceniad] if dad.aceniad else '-'
+			ba = dict(pe.LLYTHRENWAU['bai'])[dad.bai] if dad.bai else '-'
+			dadansoddiadau.append({
+				'dadansoddwr':	dad.dadansoddwr,
+				'cynghanedd': 	cy,
+				'aceniad': 		ac,
+				'bai':			ba,
+				'sylwadau':		dad.sylwadau,
+			})
 		s = self.get_object().llinyn
 		adroddiad = pe.Dadansoddwr().oes_cynghanedd( pe.Llinell(s) )
+		cy = dict(pe.LLYTHRENWAU['cynghanedd'])[adroddiad.cynghanedd] if adroddiad.cynghanedd else '-'
+		ac = dict(pe.LLYTHRENWAU['aceniad'])[adroddiad.aceniad] if adroddiad.aceniad else '-'
+		ba = dict(pe.LLYTHRENWAU['bai'])[adroddiad.bai] if adroddiad.bai else '-'
 		dad = Dadansoddiad(
 			llinell 	= self.get_object(),
-			cynghanedd 	= adroddiad.cynghanedd,
-			aceniad 	= adroddiad.aceniad,
-			bai 		= adroddiad.bai,
+			cynghanedd 	= cy,
+			aceniad 	= ac,
+			bai 		= ba,
 			sylwadau 	= adroddiad.sylwadau,
 			dadansoddwr	= 'EBR'
 			)
-		qset.append(dad)
-		context['dads']  = qset
+		dadansoddiadau.append(dad)
+		context['dads']  = dadansoddiadau
 		context['html_strings'] = adroddiad.html_strings()
 		context['next'] = self.get_object().get_next()
 		context['prev'] = self.get_object().get_prev()

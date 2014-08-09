@@ -560,7 +560,7 @@ def main():
 	# y = "y down yma"
 	
 	x = "o'n cwmpas"
-	y = "campwaith"
+	y = "campwaith§§§"
 
 	if x and y:
 		print x + '/' + y

@@ -25,8 +25,9 @@
 
 ## Jobs technegol
 
-* postgresql (yn lle sqlite)
-* nginx/gunicorn (yn lle "development server" django)
-* supervisord (monitro ac ail-ddechrau'r server os ydyw'n cwympo)
+* helaethu dadansodiadau penillion (cywydd, englyn, ayb)
+* cynnwys dadansoddiadau penillion ar y wefan
+* gorffen y gwaith ar y ditectif cynghanedd anfwriadol
+* cynnwys y ditectif cynghanedd anfwriadol ar y wefan
 * ... a llawer mwy.
 

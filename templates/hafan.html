@@ -13,12 +13,11 @@
 {% endblock %}
 
 {% block content-main %}
-<h1>Peiriant Dadansoddi Cynghanedd</h1>
+<h1>Meddalwedd Cynganeddol</h1>
 <br/>
 <form action="{% url 'dadansoddiad' %}" method="POST"> {% csrf_token %}
 <h3>Teipiwch linell yn y bocs ...</h3>
 	<p>	{{ llinell_form.llinyn }} </p>
-<br/>
 <h3>... neu dewiswch linell o'r gronfa:</h3> 
 	<p>	{{ llinell_form.llinell_ddewis }} </p>
 	<br/>
@@ -26,58 +25,47 @@
 </form>
 {% endblock %}
 
-{% block content-secondary %}
-
-<h3>Cysylltiadau</h3>
-<ul>
-    <li>ebost:  deuo@ebrydydd.org</li>
-    <li>trydar: @ebrydydd</li>
-</ul>
-
+{% block sidebar %}
+<br/>
 <h3>Gwefannau</h3>
 <ul>
     <li><a href="http://www.barddas.com">Barddas</a></li>
     <li><a href="http://www.cynghanedd.com/">yr Annedd</a></li>
 </ul>
-
+<br/>
 <h3>Llyfryddiaeth</h3>
-<table><tr><td>	
+
 <ul class="llyfr">
     <li class="awdur">Alan Llwyd</li>
     <li class="teitl">Anghenion y Gynghanedd</li>
     <li class="cyhoeddwr">Cyhoeddiadau Barddas</li>
     <li class="blwyddyn">2007</li>
 </ul>
-</td><td>
-<ul class="llyfr">
-    <li class="awdur">Myrddin ap Dafydd</li>
-    <li class="teitl">Clywed Cynghanedd</li>
-    <li class="cyhoeddwr">Gwasg Carreg Gwalch</li>
-    <li class="blwyddyn">1994</li>
-</ul>
-</td></tr><tr><td>
-<ul class="llyfr">
-    <li class="awdur">Roy Stephens</li>
-    <li class="teitl">Yr Odliadur</li>
-    <li class="cyhoeddwr">Gwasg Gomer, Llandysul</li>
-    <li class="blwyddyn">1978</li>
-</ul>
-</td><td>
+
 <ul class="llyfr">
     <li class="awdur">John Morris-Jones</li>
     <li class="teitl">Cerdd Dafod</li>
     <li class="cyhoeddwr">Gwasg Clarendon, Rhydychen</li>
     <li class="blwyddyn">1925</li>
 </ul>
-</td></tr></table>
 
+{% endblock %}
+
+{% block content-secondary %}
+
+<h3>Cysylltiadau</h3>
+<ul>
+    <li>ebost:  deuo@ebrydydd.org</li>
+</ul>
 <h3>Cyfrannwyr</h3>
 <ul>
     <li>Elen Thomas, Pontarddulais.</li>
     <li>Dafydd Evans, Caerdydd.</li>
 </ul>
-
 {% endblock %}
+
+
+
 
 
 
